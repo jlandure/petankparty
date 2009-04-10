@@ -5,7 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 
 import org.petank.client.GreetingService;
-import org.petank.client.PetankUser;
+import org.petank.client.model.PetankUser;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
