@@ -3,7 +3,7 @@
     PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
 
   <!-- Default page to serve -->
   <welcome-file-list>
@@ -21,6 +21,12 @@
     <servlet-class>org.petank.server.IdentificationServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+	<servlet-name>GroovyServlet</servlet-name>
+	<servlet-class>groovy.servlet.GroovyServlet</servlet-class>
+  </servlet>
+  
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/petankparty/greet</url-pattern>
@@ -30,5 +36,11 @@
     <servlet-name>identifyServlet</servlet-name>
     <url-pattern>/petankparty/identify</url-pattern>
   </servlet-mapping>  
+  
+  <servlet-mapping>
+        <servlet-name>GroovyServlet</servlet-name>
+        <url-pattern>*.groovy</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>

@@ -2,6 +2,8 @@ package org.petank.client;
 
 
 
+import org.petank.client.model.PetankUser;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**

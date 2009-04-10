@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 
 import org.petank.client.IdentificationService;
-import org.petank.client.PetankUser;
+import org.petank.client.model.PetankUser;
 import org.petank.server.bareme.Points;
 
 import com.google.appengine.api.users.User;
