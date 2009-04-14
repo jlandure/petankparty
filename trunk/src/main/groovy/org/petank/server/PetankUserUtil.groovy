@@ -27,10 +27,10 @@ private static def listUsers = new ArrayList<PetankUser>(11)
 		listUsers << new PetankUser(id:11, name:"CBO", points:650);
 	}
 
-	static PetankUser getUser(na) {
+	static PetankUser getUser(name) {
 		def c
 		listUsers.each {
-			if(na == it.name) {
+			if(name == it.name) {
 				c = it
 			}
 		}
@@ -46,7 +46,7 @@ private static def listUsers = new ArrayList<PetankUser>(11)
 	}
 	
 	static List<PetankUser> sortByPoint(players) {
-		def mc= [compare:{a,b-> a.points>b.points? -1: a.points<b.points? 1: 0}] as Comparator
+		def mc= [compare:{a,b-> a.points>b.points? -1: a.points<b.points? 1: a.name.compareTo(b.name)}] as Comparator
 		players.sort(mc)
 		return players
 	}

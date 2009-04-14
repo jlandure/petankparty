@@ -2,14 +2,20 @@ package org.petank.client.model;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Bareme implements Serializable {
 
 	private static final long serialVersionUID = -8984845986760026206L;
+	
+	@PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Long id;
 	
 	@Persistent
     private Float minimum;
