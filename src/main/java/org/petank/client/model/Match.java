@@ -9,6 +9,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Transient;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Match implements Serializable {
@@ -22,10 +23,10 @@ public class Match implements Serializable {
 	@Persistent
     private String player1;
 	
-	@Persistent
+	@Transient
     private List lstplayer1;
 	
-	@Persistent
+	@Transient
     private List lstplayer2;
 	
 	@Persistent

@@ -70,33 +70,33 @@ public class MatchUtil{
 		if(match.point1 >= match.point2) {
 			if(victory == 1) {
 				player1.each {
-					it.points += bareme.victoireNormale
+					it.points += bareme.victoireNormale * match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteNormale
+					it.points += bareme.defaiteNormale * match.coefficient
 				}
 			} else {
 				player1.each {
-					it.points += bareme.victoireAnormale
+					it.points += bareme.victoireAnormale * match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteAnormale
+					it.points += bareme.defaiteAnormale * match.coefficient
 				}
 			}
 		} else {
 			if(victory == 1) {
 				player1.each {
-					it.points += bareme.victoireAnormale
+					it.points += bareme.victoireAnormale * match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteAnormale
+					it.points += bareme.defaiteAnormale * match.coefficient
 				}
 			} else {
 				player1.each {
-					it.points += bareme.victoireNormale
+					it.points += bareme.victoireNormale * match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteNormale
+					it.points += bareme.defaiteNormale * match.coefficient
 				}
 			}
 		}
