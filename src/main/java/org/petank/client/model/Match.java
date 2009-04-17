@@ -23,12 +23,6 @@ public class Match implements Serializable {
 	@Persistent
     private String player1;
 	
-	@Transient
-    private List lstplayer1;
-	
-	@Transient
-    private List lstplayer2;
-	
 	@Persistent
     private String player2;
 	
@@ -49,23 +43,6 @@ public class Match implements Serializable {
 	
 	@Persistent
     private Float point2;
-
-	
-	public List getLstplayer1() {
-		return lstplayer1;
-	}
-
-	public void setLstplayer1(List lstplayer1) {
-		this.lstplayer1 = lstplayer1;
-	}
-
-	public List getLstplayer2() {
-		return lstplayer2;
-	}
-
-	public void setLstplayer2(List lstplayer2) {
-		this.lstplayer2 = lstplayer2;
-	}
 
 	public Long getId() {
 		return id;

@@ -72,7 +72,9 @@ public class TestAlgo extends TestCase {
 		listBaremes = BaremeUtil.populate();
 		for(Match match : listMatchs) {
 			bareme = BaremeUtil.chooseBareme(MatchUtil.getBetween(match));
-			MatchUtil.applyBareme(match, bareme, match.getLstplayer1(), match.getLstplayer2());
+			MatchUtil.applyBareme(match, bareme);
+			//MatchUtil.getPlayers(match.getPlayer1());
+			//MatchUtil.getPlayersWithPoints(match.getPlayer1());
 		}
 		
 		listUsers = PetankUserUtil.sortByPoint(listUsers);
@@ -82,8 +84,6 @@ public class TestAlgo extends TestCase {
 			i++;
 		}
 		
-		
-		
-		
 	}
+
 }
