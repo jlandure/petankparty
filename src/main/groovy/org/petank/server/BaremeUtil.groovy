@@ -12,9 +12,10 @@ import org.petank.client.model.Bareme;
 @Singleton
 class BaremeUtil {
 
-	private static def listBaremes = new ArrayList<Bareme>(9)
+	private static def listBaremes
 	
 	static List<Bareme> populate() {
+		listBaremes = new ArrayList<Bareme>(9)
 		listBaremes << new Bareme(minimum:0  ,maximum:24 ,victoireNormale:6  ,defaiteNormale:-5  ,victoireAnormale:6 ,defaiteAnormale:-5);
 		listBaremes << new Bareme(minimum:25 ,maximum:49 ,victoireNormale:5.5,defaiteNormale:-4.5,victoireAnormale:7 ,defaiteAnormale:-6);
 		listBaremes << new Bareme(minimum:50 ,maximum:99 ,victoireNormale:5  ,defaiteNormale:-4  ,victoireAnormale:8 ,defaiteAnormale:-7);
@@ -27,7 +28,7 @@ class BaremeUtil {
 		return listBaremes
 	}
 	
-	static Bareme chooseBareme(Float between) {
+	static Bareme chooseBareme(between) {
 		def c
 		listBaremes.each {
 			if(between >= it.minimum && between <= it.maximum) {

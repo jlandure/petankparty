@@ -37,6 +37,9 @@ public class TestAlgo extends TestCase {
 //	
 //	public void testAddMatch() {
 //		listUsers = PetankUserUtil.populate();
+//		listMatchs = MatchUtil.populate();
+//		listBaremes = BaremeUtil.populate();
+//		
 //		
 //		Match match = MatchUtil.createMatch(PetankUserUtil.getTest1(), PetankUserUtil.getTest2(), 13F, 12F, 1);
 //		System.out.println(PetankUserUtil.getTest1());
@@ -54,7 +57,7 @@ public class TestAlgo extends TestCase {
 //		System.out.println(bareme.getDefaiteNormale());
 //		System.out.println(bareme.getVictoireAnormale());
 //		System.out.println(bareme.getDefaiteAnormale());
-//		MatchUtil.applyBareme(match, bareme, PetankUserUtil.getTest1(), PetankUserUtil.getTest2());
+//		MatchUtil.applyMatch(match);
 //		System.out.println(PetankUserUtil.getTest1()[0].getName() +" - "+PetankUserUtil.getTest1()[0].getPoints());
 //		System.out.println(PetankUserUtil.getTest1()[1].getName() +" - "+PetankUserUtil.getTest1()[1].getPoints());
 //		System.out.println(PetankUserUtil.getTest2()[0].getName() +" - "+PetankUserUtil.getTest2()[0].getPoints());
@@ -68,11 +71,10 @@ public class TestAlgo extends TestCase {
 	public void testAll() {
 		listUsers = PetankUserUtil.populate();
 		listMatchs = MatchUtil.populate();
-		Bareme bareme;
 		listBaremes = BaremeUtil.populate();
 		for(Match match : listMatchs) {
-			bareme = BaremeUtil.chooseBareme(MatchUtil.getBetween(match));
-			MatchUtil.applyBareme(match, bareme);
+			
+			MatchUtil.applyMatch(match);
 			//MatchUtil.getPlayers(match.getPlayer1());
 			//MatchUtil.getPlayersWithPoints(match.getPlayer1());
 		}
@@ -84,6 +86,11 @@ public class TestAlgo extends TestCase {
 			i++;
 		}
 		
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JLE"));
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("GBE"));
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("RST"));
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
 	}
 
 }

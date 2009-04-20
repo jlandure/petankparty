@@ -20,9 +20,15 @@ public class Match implements Serializable {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
 	
+	/**
+	 * tous les joueurs de l'équipe 1 concaténé
+	 */
 	@Persistent
     private String player1;
 	
+	/**
+	 * tous les joueurs de l'équipe 1 concaténé
+	 */
 	@Persistent
     private String player2;
 	
@@ -43,6 +49,12 @@ public class Match implements Serializable {
 	
 	@Persistent
     private Float point2;
+	
+	/**
+	 * tous les joueurs de l'équipe concaténé avec leurs points
+	 */
+	@Persistent
+    private String playersWithPoints;
 
 	public Long getId() {
 		return id;
@@ -115,5 +127,13 @@ public class Match implements Serializable {
 	public void setPoint2(Float point2) {
 		this.point2 = point2;
 	}
-	
+
+	public String getPlayersWithPoints() {
+		return playersWithPoints;
+	}
+
+	public void setPlayersWithPoints(String playersWithPoints) {
+		this.playersWithPoints = playersWithPoints;
+	}
+
 }
