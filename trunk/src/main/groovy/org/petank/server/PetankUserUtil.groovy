@@ -12,9 +12,10 @@ import org.petank.client.model.PetankUser;
 @Singleton
 class PetankUserUtil{
 
-private static def listUsers = new ArrayList<PetankUser>(11)
+	private static def listUsers
 	
 	static List<PetankUser> populate() {
+		listUsers = new ArrayList<PetankUser>(11)
 		listUsers << new PetankUser(id:1 , name:"GBE", points:650)
 		listUsers << new PetankUser(id:2 , name:"ADE", points:650)
 		listUsers << new PetankUser(id:3 , name:"SHS", points:650)
