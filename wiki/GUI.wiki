@@ -1,0 +1,13 @@
+== GUI ==
+
+#gui + screenshots
+GUI
+Main page
+
+We show :
+
+    * icons to directly access the scores and the player's ranks
+    * last game saved in petankparty 
+
+Scores
+Player Ranks
