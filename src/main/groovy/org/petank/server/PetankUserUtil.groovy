@@ -27,6 +27,9 @@ class PetankUserUtil{
 		listUsers << new PetankUser(id:9 , name:"BPT", points:650)
 		listUsers << new PetankUser(id:10, name:"HDG", points:650)
 		listUsers << new PetankUser(id:11, name:"CBO", points:650)
+		listUsers << new PetankUser(id:12, name:"GHT", points:650)
+		listUsers << new PetankUser(id:13, name:"JAY", points:650)
+		listUsers << new PetankUser(id:14, name:"FEE", points:650)
 	}
 
 	static PetankUser getUser(name) {
