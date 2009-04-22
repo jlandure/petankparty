@@ -89,8 +89,8 @@ public class TestAlgo extends TestCase {
 		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JLE"));
 		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("GBE"));
 		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("RST"));
-		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));
-		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
+		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));
+		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
 	}
 
 }
