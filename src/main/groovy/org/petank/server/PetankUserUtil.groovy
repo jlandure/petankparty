@@ -30,6 +30,7 @@ class PetankUserUtil{
 		listUsers << new PetankUser(id:12, name:"GHT", points:650)
 		listUsers << new PetankUser(id:13, name:"JAY", points:650)
 		listUsers << new PetankUser(id:14, name:"FEE", points:650)
+		listUsers << new PetankUser(id:15, name:"FRT", points:650)
 	}
 
 	static PetankUser getUser(name) {

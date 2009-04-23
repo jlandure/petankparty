@@ -45,6 +45,9 @@ class MatchUtil{
 		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 13, 8, 1, "22/04/2009")
 		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 13, 4, 1, "22/04/2009")
 		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 9, 13, 1, "22/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("JND"),PetankUserUtil.getUser("JAY")], [PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("EBT"),PetankUserUtil.getUser("CLC")], 0, 13, 1, "23/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("JND"),PetankUserUtil.getUser("JAY")], [PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("EBT"),PetankUserUtil.getUser("CLC")], 8, 13, 1, "23/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("FRT"),PetankUserUtil.getUser("SHS")], [PetankUserUtil.getUser("FEE"),PetankUserUtil.getUser("ADE")], 9, 13, 1, "23/04/2009")
 	}
 	
 	static def makeDate(event) {
@@ -223,7 +226,7 @@ class MatchUtil{
 		//return 0;
 	}
 	
-	static void getPlayerEvolution(player) {
+	static def getPlayerEvolution(player) {
 		def point
 		def points = []
 		//println player.id
@@ -236,7 +239,7 @@ class MatchUtil{
 		def allpoints = points.join(",")
 		def pointmin = points.min()
 		def pointmax = points.max()
-		println allpoints 
+		//println allpoints 
 		
 		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=${pointmin},${pointmax}&cht=lc"
 		//couleur bleuté : &chco=76A4FB
@@ -269,7 +272,8 @@ class MatchUtil{
 		//	http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&chd=s:cEAELFJHHHKUju9uuXUc&chco=76A4FB&chls=2.0&chs=400x150&chxs=0,0000dd,10|1,0000dd,12,0
 		//	http://chart.apis.google.com/chart?chd=s:cEAELFJHHHKUju9uuXUc&chxs=0,0000dd,10|1,0000dd,12,0
 		// http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&
-		println a;
+		//println a;
+		return a;
 	}
 	
 }
