@@ -30,7 +30,7 @@ class BaremeUtil {
 		listBaremes << new Bareme(minimum:30 ,maximum:59 ,victoireNormale:5  ,defaiteNormale:-4  ,victoireAnormale:8 ,defaiteAnormale:-7);
 		listBaremes << new Bareme(minimum:60,maximum:79,victoireNormale:4  ,defaiteNormale:-3  ,victoireAnormale:10,defaiteAnormale:-8);
 		listBaremes << new Bareme(minimum:80,maximum:99,victoireNormale:3  ,defaiteNormale:-2  ,victoireAnormale:13,defaiteAnormale:-10);
-		listBaremes << new Bareme(minimum:200,maximum:299,victoireNormale:2  ,defaiteNormale:-1  ,victoireAnormale:17,defaiteAnormale:-12.5);
+		listBaremes << new Bareme(minimum:100,maximum:299,victoireNormale:2  ,defaiteNormale:-1  ,victoireAnormale:17,defaiteAnormale:-12.5);
 		listBaremes << new Bareme(minimum:300,maximum:399,victoireNormale:1  ,defaiteNormale:-0.5,victoireAnormale:22,defaiteAnormale:-16);
 		listBaremes << new Bareme(minimum:400,maximum:499,victoireNormale:0.5,defaiteNormale:0   ,victoireAnormale:28,defaiteAnormale:-20);
 		listBaremes << new Bareme(minimum:500,maximum:100000,victoireNormale:0   ,defaiteNormale:0   ,victoireAnormale:40,defaiteAnormale:-29);
