@@ -47,6 +47,24 @@ public class PetankUser implements Serializable {
     @Transient
     private String evolution;
     
+    @Transient
+    private Integer partiesJoues = 0;
+    
+    @Transient
+    private Integer partiesGagnes = 0;
+    
+    @Transient
+    private Integer partiesPerdus = 0;
+    
+    @Transient
+    private Integer totalPoints = 0;
+    
+    @Transient
+    private Integer fannyGagnes = 0;
+    
+    @Transient
+    private Integer fannyPerdus = 0;
+    
 	public Long getId() {
 		return id;
 	}
@@ -126,5 +144,53 @@ public class PetankUser implements Serializable {
 	public void setEvolution(String evolution) {
 		this.evolution = evolution;
 	}
-    
+
+	public Integer getPartiesJoues() {
+		return partiesJoues;
+	}
+
+	public void setPartiesJoues(Integer partiesJoues) {
+		this.partiesJoues = partiesJoues;
+	}
+
+	public Integer getPartiesGagnes() {
+		return partiesGagnes;
+	}
+
+	public void setPartiesGagnes(Integer partiesGagnes) {
+		this.partiesGagnes = partiesGagnes;
+	}
+
+	public Integer getPartiesPerdus() {
+		return partiesPerdus;
+	}
+
+	public void setPartiesPerdus(Integer partiesPerdus) {
+		this.partiesPerdus = partiesPerdus;
+	}
+
+	public Integer getTotalPoints() {
+		return totalPoints;
+	}
+
+	public void setTotalPoints(Integer totalPoints) {
+		this.totalPoints = totalPoints;
+	}
+
+	public Integer getFannyGagnes() {
+		return fannyGagnes;
+	}
+
+	public void setFannyGagnes(Integer fannyGagnes) {
+		this.fannyGagnes = fannyGagnes;
+	}
+
+	public Integer getFannyPerdus() {
+		return fannyPerdus;
+	}
+
+	public void setFannyPerdus(Integer fannyPerdus) {
+		this.fannyPerdus = fannyPerdus;
+	}
+
 }
