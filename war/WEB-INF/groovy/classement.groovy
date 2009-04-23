@@ -30,12 +30,12 @@ html.html {
     				td(class:"special", "Place")
         			td(class:"special", "Nom")
         			td(class:"special", "Points")
-        			td(class:"special", "Joués")
-        			td(class:"special", "Gagnés")
+        			td(class:"special", "Jou\u00E9s")
+        			td(class:"special", "Gagn\u00E9s")
         			td(class:"special", "Perdus")
         			td(class:"special", "Total points")
-        			td(class:"special", "Fanny gagnés")
-        			td(class:"special", "Fanny encaissés")
+        			td(class:"special", "Fanny gagn\u00E9s")
+        			td(class:"special", "Fanny encaiss\u00E9s")
     			}
     		}
     		tbody {
