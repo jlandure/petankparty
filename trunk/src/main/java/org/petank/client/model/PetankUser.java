@@ -8,6 +8,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Transient;
 
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -42,6 +43,9 @@ public class PetankUser implements Serializable {
     
     @Persistent
     private String commentaire;
+    
+    @Transient
+    private String evolution;
     
 	public Long getId() {
 		return id;
@@ -115,5 +119,12 @@ public class PetankUser implements Serializable {
 		this.commentaire = commentaire;
 	}
 
+	public String getEvolution() {
+		return evolution;
+	}
+
+	public void setEvolution(String evolution) {
+		this.evolution = evolution;
+	}
     
 }
