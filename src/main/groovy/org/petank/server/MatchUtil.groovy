@@ -183,8 +183,8 @@ class MatchUtil{
 			match.playersWithPoints += it.id+ " ["+it.points+"];"
 			match.point2 += it.points
 			it.partiesJoues++;
-			it.totalPoints += match.score1
-			if(victory) {
+			it.totalPoints += match.score2
+			if(!victory) {
 				it.partiesGagnes++
 			} else {
 				it.partiesPerdus++
