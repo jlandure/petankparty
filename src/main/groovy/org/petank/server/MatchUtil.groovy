@@ -42,6 +42,9 @@ class MatchUtil{
 		listMatchs << createMatch([PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("JAY")], [PetankUserUtil.getUser("GBE"),PetankUserUtil.getUser("ADE")], 13, 12, 1, "22/04/2009")
 		listMatchs << createMatch([PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("JAY")], [PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("JLE")], 6, 13, 1, "22/04/2009")
 		listMatchs << createMatch([PetankUserUtil.getUser("EBT"),PetankUserUtil.getUser("FEE")], [PetankUserUtil.getUser("GBE"),PetankUserUtil.getUser("ADE")], 13, 12, 1, "22/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 13, 8, 1, "22/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 13, 4, 1, "22/04/2009")
+		listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("GBE")], [PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST")], 9, 13, 1, "22/04/2009")
 	}
 	
 	static def makeDate(event) {
@@ -59,7 +62,6 @@ class MatchUtil{
 		//le nouveau est mieux car c'est ordonné niveau temps
 		return String.format('%tY/%<tm/%<td', date)
 	}
-
 	
 	static Match createMatch(play1, play2, sc1, sc2, coef, dateString=null) {
 		def date = makeDate(dateString)
@@ -172,40 +174,40 @@ class MatchUtil{
 		
 		//récupération du bareme à appliquer
 		Bareme bareme = BaremeUtil.chooseBareme(MatchUtil.getBetween(match))
-		def victory = match.score1 > match.score2;
+		def victory = match.score1 > match.score2
 		//def difference = (match.score1 - match.score2).abs()
-		//println match.player1 +" // "+match.score1 +" - "+match.score2+" >>"+difference
+		//println match.player1 + match.playersWithPoints +" // "+match.score1 +" - "+match.score2+" >>"+difference + " off>>"+match.coefficient
 		
 		if(match.point1 >= match.point2) {
 			if(victory) {
 				player1.each {
-					it.points += bareme.victoireNormale * match.coefficient
+					it.points += bareme.victoireNormale *match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteNormale * match.coefficient
+					it.points += bareme.defaiteNormale *match.coefficient
 				}
 			} else {
 				player1.each {
-					it.points += bareme.defaiteAnormale * match.coefficient
+					it.points += bareme.defaiteAnormale *match.coefficient
 				}
 				player2.each {
-					it.points += bareme.victoireAnormale * match.coefficient
+					it.points += bareme.victoireAnormale *match.coefficient
 				}
 			}
 		} else {
 			if(victory) {
 				player1.each {
-					it.points += bareme.victoireAnormale * match.coefficient
+					it.points += bareme.victoireAnormale *match.coefficient
 				}
 				player2.each {
-					it.points += bareme.defaiteAnormale * match.coefficient
+					it.points += bareme.defaiteAnormale *match.coefficient
 				}
 			} else {
 				player1.each {
-					it.points += bareme.defaiteNormale * match.coefficient
+					it.points += bareme.defaiteNormale *match.coefficient
 				}
 				player2.each {
-					it.points += bareme.victoireNormale * match.coefficient
+					it.points += bareme.victoireNormale *match.coefficient
 				}
 			}
 		}
@@ -236,7 +238,37 @@ class MatchUtil{
 		def pointmax = points.max()
 		println allpoints 
 		
-		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=${pointmin},${pointmax}"
+		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=${pointmin},${pointmax}&cht=lc"
+		//couleur bleuté : &chco=76A4FB
+		//style : &cht=lc
+		//label sur x : chxt=x,x
+		//deux labels sur x donc valeurs indexés : chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st
+		//taille du graphe : &chs=400x150
+		//?? : &chls=2.0
+		//min max en ordonnées pour la taille : &chds=647.5,680.5
+				
+//		def debut = getDateMonth(listMatchs[0].jour)
+//		println debut
+//		def diffDates = listMatchs[-1].jour - debut
+//	    println diffDates
+	    
+//	    def info = ""
+//	    def i = 0;
+//	    diffDates.times{
+//			debut++
+//			println getDateToString(debut)
+//			if(i == 1 || i == 15) {
+//			info += "300,"
+//				
+//			} else {
+//				info += "650,"
+//			}
+//			i++
+//		}
+//		println info
+		//	http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&chd=s:cEAELFJHHHKUju9uuXUc&chco=76A4FB&chls=2.0&chs=400x150&chxs=0,0000dd,10|1,0000dd,12,0
+		//	http://chart.apis.google.com/chart?chd=s:cEAELFJHHHKUju9uuXUc&chxs=0,0000dd,10|1,0000dd,12,0
+		// http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&
 		println a;
 	}
 	
