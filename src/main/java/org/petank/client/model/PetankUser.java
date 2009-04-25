@@ -65,6 +65,21 @@ public class PetankUser implements Serializable {
     @Transient
     private Integer fannyPerdus = 0;
     
+    @Transient
+    private Integer victoireNormale = 0;
+    
+    @Transient
+    private Integer victoireAnormale = 0;
+    
+    @Transient
+    private Integer defaiteNormale = 0;
+    
+    @Transient
+    private Integer defaiteAnormale = 0;
+    
+    @Transient
+    private Integer nbMatchOfficiel = 0;
+    
 	public Long getId() {
 		return id;
 	}
@@ -191,6 +206,46 @@ public class PetankUser implements Serializable {
 
 	public void setFannyPerdus(Integer fannyPerdus) {
 		this.fannyPerdus = fannyPerdus;
+	}
+
+	public Integer getVictoireNormale() {
+		return victoireNormale;
+	}
+
+	public void setVictoireNormale(Integer victoireNormale) {
+		this.victoireNormale = victoireNormale;
+	}
+
+	public Integer getVictoireAnormale() {
+		return victoireAnormale;
+	}
+
+	public void setVictoireAnormale(Integer victoireAnormale) {
+		this.victoireAnormale = victoireAnormale;
+	}
+
+	public Integer getDefaiteNormale() {
+		return defaiteNormale;
+	}
+
+	public void setDefaiteNormale(Integer defaiteNormale) {
+		this.defaiteNormale = defaiteNormale;
+	}
+
+	public Integer getDefaiteAnormale() {
+		return defaiteAnormale;
+	}
+
+	public void setDefaiteAnormale(Integer defaiteAnormale) {
+		this.defaiteAnormale = defaiteAnormale;
+	}
+
+	public Integer getNbMatchOfficiel() {
+		return nbMatchOfficiel;
+	}
+
+	public void setNbMatchOfficiel(Integer nbMatchOfficiel) {
+		this.nbMatchOfficiel = nbMatchOfficiel;
 	}
 
 }
