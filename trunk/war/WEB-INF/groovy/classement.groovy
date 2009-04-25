@@ -21,8 +21,10 @@ html.html {
     }
     body {
     	h1 "Classement"
-        p "v0.1-beta"
-        p "23/04/09 14h00"
+        p "v0.2-beta"
+        p {
+    		a(href:"/match.groovy",  "Matchs")
+    	}
         
         table(border:1, cellpadding:"15px", bordercolor:"black") {
     		thead {
@@ -36,6 +38,11 @@ html.html {
         			td(class:"special", "Total points")
         			td(class:"special", "Fanny gagn\u00E9s")
         			td(class:"special", "Fanny encaiss\u00E9s")
+        			td(class:"special", "Nb victoire normale")
+        			td(class:"special", "Nb victoire anormale")
+        			td(class:"special", "Nb d\u00E9faite normale")
+        			td(class:"special", "Nb d\u00E9faite anormale")
+        			td(class:"special", "Nb Match officiel")
     			}
     		}
     		tbody {
@@ -53,6 +60,11 @@ html.html {
 		    			td(class:"special", "${user.totalPoints}")
 		    			td(class:"special", "${user.fannyGagnes}")
 		    			td(class:"special", "${user.fannyPerdus}")
+		    			td(class:"special", "${user.victoireNormale}")
+		    			td(class:"special", "${user.victoireAnormale}")
+		    			td(class:"special", "${user.defaiteNormale}")
+		    			td(class:"special", "${user.defaiteAnormale}")
+		    			td(class:"special", "${user.nbMatchOfficiel}")
 		    		}
     				i++
     			}

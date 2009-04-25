@@ -6,6 +6,7 @@ package org.petank.server
 import org.petank.client.model.Match;
 import java.util.Date;
 import org.petank.client.model.PetankUser;
+import org.petank.client.model.TypeVictoire;
 import org.petank.client.model.Bareme;
 import org.petank.server.PetankUserUtil;
 
@@ -68,6 +69,12 @@ class MatchUtil{
 		//return String.format('%td/%<tm/%<tY', date)
 		//le nouveau est mieux car c'est ordonné niveau temps
 		return String.format('%tY/%<tm/%<td', date)
+	}
+	
+	static def getDateToFrString(date) {
+		//return String.format('%td/%<tm/%<tY', date)
+		//le nouveau est mieux car c'est ordonné niveau temps
+		return String.format('%td/%<tm/%<tY', date)
 	}
 	
 	static Match createMatch(play1, play2, sc1, sc2, coef, dateString=null) {
@@ -180,6 +187,7 @@ class MatchUtil{
 			}
 			if(fanny1) it.fannyGagnes++
 			if(fanny2) it.fannyPerdus++
+			if(match.coefficient == 1) it.nbMatchOfficiel++
 		}
 		player2.each{
 			match.playersWithPoints += it.id+ " ["+it.points+"];"
@@ -193,6 +201,7 @@ class MatchUtil{
 			}
 			if(fanny2) it.fannyGagnes++
 			if(fanny1) it.fannyPerdus++
+			if(match.coefficient == 1) it.nbMatchOfficiel++
 		}
 		match.playersWithPoints = match.playersWithPoints[0..-2]
 		//calcul des points moyens
@@ -209,34 +218,46 @@ class MatchUtil{
 		
 		if(match.point1 >= match.point2) {
 			if(victory) {
+				match.typeVictoire = TypeVictoire.NORMAL 
 				player1.each {
-					it.points += bareme.victoireNormale *match.coefficient
+					it.points += bareme.victoireNormale * match.coefficient
+					it.victoireNormale++
 				}
 				player2.each {
-					it.points += bareme.defaiteNormale *match.coefficient
+					it.points += bareme.defaiteNormale * match.coefficient
+					it.defaiteNormale++
 				}
 			} else {
+				match.typeVictoire = TypeVictoire.ANORMAL 
 				player1.each {
-					it.points += bareme.defaiteAnormale *match.coefficient
+					it.points += bareme.defaiteAnormale * match.coefficient
+					it.defaiteAnormale++
 				}
 				player2.each {
-					it.points += bareme.victoireAnormale *match.coefficient
+					it.points += bareme.victoireAnormale * match.coefficient
+					it.victoireAnormale++
 				}
 			}
 		} else {
 			if(victory) {
+				match.typeVictoire = TypeVictoire.ANORMAL
 				player1.each {
-					it.points += bareme.victoireAnormale *match.coefficient
+					it.points += bareme.victoireAnormale * match.coefficient
+					it.victoireAnormale++
 				}
 				player2.each {
-					it.points += bareme.defaiteAnormale *match.coefficient
+					it.points += bareme.defaiteAnormale * match.coefficient
+					it.defaiteAnormale++
 				}
 			} else {
+				match.typeVictoire = TypeVictoire.NORMAL
 				player1.each {
-					it.points += bareme.defaiteNormale *match.coefficient
+					it.points += bareme.defaiteNormale * match.coefficient
+					it.defaiteNormale++
 				}
 				player2.each {
-					it.points += bareme.victoireNormale *match.coefficient
+					it.points += bareme.victoireNormale * match.coefficient
+					it.victoireNormale++
 				}
 			}
 		}

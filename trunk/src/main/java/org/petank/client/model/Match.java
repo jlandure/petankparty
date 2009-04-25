@@ -55,6 +55,12 @@ public class Match implements Serializable {
 	 */
 	@Persistent
     private String playersWithPoints;
+	
+	/**
+	 * normal / anormal
+	 */
+	@Transient
+    private TypeVictoire typeVictoire;
 
 	public Long getId() {
 		return id;
@@ -134,6 +140,14 @@ public class Match implements Serializable {
 
 	public void setPlayersWithPoints(String playersWithPoints) {
 		this.playersWithPoints = playersWithPoints;
+	}
+
+	public TypeVictoire getTypeVictoire() {
+		return typeVictoire;
+	}
+
+	public void setTypeVictoire(TypeVictoire typeVictoire) {
+		this.typeVictoire = typeVictoire;
 	}
 
 }
