@@ -20,8 +20,10 @@ class MatchUtil{
 	private static def listMatchs
 	private static String JOIN_PLAYER = ";"
 	
+		private static def APPLIED = false
+	
 	static List<Match> populate() {
-		//if(listMatchs == null) {
+		if(listMatchs == null) {
 			listMatchs = new ArrayList<Match>()
 			listMatchs << createMatch([PetankUserUtil.getUser("SHS"),PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("EBT")], [PetankUserUtil.getUser("GBE"),PetankUserUtil.getUser("CLC"),PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("JND")], 13, 4, 0.5, "26/03/2009")
 			listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("JND"),PetankUserUtil.getUser("BPT")], [PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("EBT"),PetankUserUtil.getUser("CBO")], 13, 4, 1, "30/03/2009")
@@ -52,7 +54,8 @@ class MatchUtil{
 			listMatchs << createMatch([PetankUserUtil.getUser("FRT"),PetankUserUtil.getUser("SHS")], [PetankUserUtil.getUser("FEE"),PetankUserUtil.getUser("ADE")], 9, 13, 1, "23/04/2009")
 			listMatchs << createMatch([PetankUserUtil.getUser("JND"),PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("SEN")], [PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("FRT"),PetankUserUtil.getUser("JAY")], 9, 13, 1, "24/04/2009")
 			listMatchs << createMatch([PetankUserUtil.getUser("FRT"),PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("SEN")], [PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("JND"),PetankUserUtil.getUser("JAY")], 9, 13, 1, "24/04/2009")
-		//}
+		}
+		return listMatchs
 	}
 	
 	static def makeDate(event) {
@@ -212,6 +215,7 @@ class MatchUtil{
 		
 		//récupération du bareme à appliquer
 		Bareme bareme = BaremeUtil.chooseBareme(MatchUtil.getBetween(match))
+		match.bareme = bareme
 		//def victory = match.score1 > match.score2
 		//def difference = (match.score1 - match.score2).abs()
 		//println match.player1 + match.playersWithPoints +" // "+match.score1 +" - "+match.score2+" >>"+difference + " off>>"+match.coefficient
