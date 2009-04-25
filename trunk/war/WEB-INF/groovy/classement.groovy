@@ -9,9 +9,14 @@ import groovy.xml.MarkupBuilder;
 def listUsers = PetankUserUtil.populate();
 def listMatchs = MatchUtil.populate();
 def listBaremes = BaremeUtil.populate();
-listMatchs.each{MatchUtil.applyMatch(it)}
-listUsers.each{it.evolution = MatchUtil.getPlayerEvolution(it)}
-listUsers = PetankUserUtil.sortByPoint(listUsers);
+
+if(!MatchUtil.APPLIED) {
+	listMatchs.each{MatchUtil.applyMatch(it)}
+	listUsers.each{it.evolution = MatchUtil.getPlayerEvolution(it)}
+	listUsers = PetankUserUtil.sortByPoint(listUsers);
+	MatchUtil.APPLIED = true;
+}
+
 int i = 1;
 def user 
 html.setDoubleQuotes(true)
@@ -24,6 +29,8 @@ html.html {
         p "v0.2-beta"
         p {
     		a(href:"/match.groovy",  "Matchs")
+    		yield " / " 
+    		a(href:"/bareme.groovy",  "Bareme")
     	}
         
         table(border:1, cellpadding:"15px", bordercolor:"black") {

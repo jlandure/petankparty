@@ -61,6 +61,9 @@ public class Match implements Serializable {
 	 */
 	@Transient
     private TypeVictoire typeVictoire;
+	
+	@Persistent
+    private Bareme bareme;
 
 	public Long getId() {
 		return id;
@@ -148,6 +151,14 @@ public class Match implements Serializable {
 
 	public void setTypeVictoire(TypeVictoire typeVictoire) {
 		this.typeVictoire = typeVictoire;
+	}
+
+	public Bareme getBareme() {
+		return bareme;
+	}
+
+	public void setBareme(Bareme bareme) {
+		this.bareme = bareme;
 	}
 
 }

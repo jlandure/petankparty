@@ -15,7 +15,7 @@ class PetankUserUtil{
 	private static def listUsers
 	
 	static List<PetankUser> populate() {
-		//if(listUsers == null) {
+		if(listUsers == null) {
 			listUsers = new ArrayList<PetankUser>(15)
 			listUsers << new PetankUser(id:1 , name:"GBE", points:650)
 			listUsers << new PetankUser(id:2 , name:"ADE", points:650)
@@ -33,7 +33,8 @@ class PetankUserUtil{
 			listUsers << new PetankUser(id:14, name:"FEE", points:650)
 			listUsers << new PetankUser(id:15, name:"FRT", points:650)
 			listUsers << new PetankUser(id:16, name:"SEN", points:650)
-		//}
+		}
+		return listUsers
 	}
 
 	static PetankUser getUser(name) {

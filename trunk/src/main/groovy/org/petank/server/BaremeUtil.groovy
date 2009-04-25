@@ -50,6 +50,15 @@ class BaremeUtil {
 		return c
 	}
 	
+	static Bareme getBaremeById(idt) {
+		def c
+		listBaremes.each {
+			if(idt == it.id) {
+				c = it
+			}
+		}
+		return c
+	}
 	
 	
 }
