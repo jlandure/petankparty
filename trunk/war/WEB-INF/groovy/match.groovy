@@ -68,8 +68,8 @@ html.html {
 		    			td(class:"special", "${match.score2 as Integer}")
 		    			td(class:"special", "${match.typeMatch}")
 		    			td(class:"special", "${match.typeVictoire}")
-		    			td(class:"special", "${match.point1}")
-		    			td(class:"special", "${match.point2}")
+		    			td(class:"special", "${String.format('%.2f', match.point1)}")
+		    			td(class:"special", "${String.format('%.2f', match.point2)}")
 		    			td(class:"special") {
 		    				a(href:"/bareme.groovy", "${match.bareme.minimum} - ${match.bareme.maximum}")
 		    			}
