@@ -42,7 +42,7 @@ html.html {
         			td(class:"special", "Jou\u00E9s")
         			td(class:"special", "Gagn\u00E9s")
         			td(class:"special", "Perdus")
-        			td(class:"special", "Total points")
+        			td(class:"special", "Points par match")
         			td(class:"special", "Fanny gagn\u00E9s")
         			td(class:"special", "Fanny encaiss\u00E9s")
         			td(class:"special", "Nb victoire normale")
@@ -58,13 +58,13 @@ html.html {
 		    		tr {
 		    			td(class:"special", "$i")
 		    			td(class:"special2") {
-		    				a(href:"${user.evolution}", target:"_blank", "${user.name}")
+		    				a(href:"${user.evolution}", target:"_blank", "${user.petankName}")
 		    			}
 		    			td(class:"special", "${user.points}")
 		    			td(class:"special", "${user.partiesJoues}")
 		    			td(class:"special", "${user.partiesGagnes}")
 		    			td(class:"special", "${user.partiesPerdus}")
-		    			td(class:"special", "${user.totalPoints}")
+		    			td(class:"special", "${String.format('%.2f', (user.totalPoints / user.partiesJoues))}")
 		    			td(class:"special", "${user.fannyGagnes}")
 		    			td(class:"special", "${user.fannyPerdus}")
 		    			td(class:"special", "${user.victoireNormale}")

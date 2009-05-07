@@ -39,9 +39,6 @@ public class Match implements Serializable {
     private Float score2;
 	
 	@Persistent
-    private Float coefficient;
-	
-	@Persistent
     private Date jour;
 	
 	@Persistent
@@ -61,6 +58,12 @@ public class Match implements Serializable {
 	 */
 	@Transient
     private TypeVictoire typeVictoire;
+	
+	/**
+	 * officiel / non officiel
+	 */
+	@Transient
+    private TypeMatch typeMatch;
 	
 	@Persistent
     private Bareme bareme;
@@ -103,14 +106,6 @@ public class Match implements Serializable {
 
 	public void setScore2(Float score2) {
 		this.score2 = score2;
-	}
-
-	public Float getCoefficient() {
-		return coefficient;
-	}
-
-	public void setCoefficient(Float coefficient) {
-		this.coefficient = coefficient;
 	}
 
 	public Date getJour() {
@@ -159,6 +154,18 @@ public class Match implements Serializable {
 
 	public void setBareme(Bareme bareme) {
 		this.bareme = bareme;
+	}
+
+	public TypeMatch getTypeMatch() {
+		return typeMatch;
+	}
+
+	public void setTypeMatch(TypeMatch typeMatch) {
+		this.typeMatch = typeMatch;
+	}
+	
+	public boolean isOfficiel() {
+		return this.typeMatch.equals(TypeMatch.OFFICIEL);
 	}
 
 }
