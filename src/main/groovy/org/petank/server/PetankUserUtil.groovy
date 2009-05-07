@@ -34,6 +34,7 @@ class PetankUserUtil{
 			listUsers << new PetankUser(id:15, name:"FRT", petankName:"Florian Robert", points:650)
 			listUsers << new PetankUser(id:16, name:"SEN", petankName:"Stanislav Emelin", points:650)
 			listUsers << new PetankUser(id:17, name:"PSR", petankName:"Pierre Sehier", points:650)
+			listUsers << new PetankUser(id:18, name:"MSI", petankName:"Marouane Skouri", points:650)
 		}
 		return listUsers
 	}
