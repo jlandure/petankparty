@@ -24,7 +24,7 @@ html.html {
     body {
     	h1 "Match"
         p "v0.2-beta"
-        p {
+        p { 
     		a(href:"/classement.groovy",  "Classement")
     		yield " / " 
     		a(href:"/bareme.groovy",  "Bareme")
@@ -46,7 +46,7 @@ html.html {
     			}
     		}
     		tbody {
-    			listMatchs.each{
+    			listMatchs[-1..0].each{
     				match = it
 		    		tr {
 		    			td(class:"special", "${MatchUtil.getDateToFrString(match.jour)}")
