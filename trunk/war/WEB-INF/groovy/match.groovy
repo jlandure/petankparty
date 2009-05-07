@@ -66,13 +66,7 @@ html.html {
 		    			}
 		    			td(class:"special", "${match.score1 as Integer}")
 		    			td(class:"special", "${match.score2 as Integer}")
-		    			td(class:"special") {
-		    				if(match.coefficient == 1) {
-		    					p "Officiel"
-		    				} else {
-		    					p "Non Officiel"
-		    				}
-		    			}
+		    			td(class:"special", "${match.typeMatch}")
 		    			td(class:"special", "${match.typeVictoire}")
 		    			td(class:"special", "${match.point1}")
 		    			td(class:"special", "${match.point2}")
