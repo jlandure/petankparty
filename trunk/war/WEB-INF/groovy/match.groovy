@@ -22,7 +22,7 @@ html.html {
         title "Matchs P\u00E9tank Party"
     }
     body {
-    	h1 "Match"
+    	h1 "Matchs"
         p "v0.2-beta"
         p { 
     		a(href:"/classement.groovy",  "Classement")
