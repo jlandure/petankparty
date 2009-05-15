@@ -79,6 +79,13 @@ class MatchUtil{
 			listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("EBT")], [PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("ADE")], 13, 11, "14/05/2009")
 			listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("EBT")], [PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("ADE")], 6, 13, "14/05/2009")
 			listMatchs << createMatch([PetankUserUtil.getUser("JLE"),PetankUserUtil.getUser("EBT")], [PetankUserUtil.getUser("RST"),PetankUserUtil.getUser("ADE")], 13, 11, "14/05/2009")
+			listMatchs << createMatch([PetankUserUtil.getUser("JLE")], [PetankUserUtil.getUser("FRT")], 9, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch([PetankUserUtil.getUser("EBT")], [PetankUserUtil.getUser("FRT")], 5, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch([PetankUserUtil.getUser("FEE"),PetankUserUtil.getUser("RST")], [PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("BPT")], 13, 1, "15/05/2009")
+			listMatchs << createMatch([PetankUserUtil.getUser("FEE"),PetankUserUtil.getUser("RST")], [PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("BPT")], 13, 3, "15/05/2009")
+			listMatchs << createMatch([PetankUserUtil.getUser("FEE")], [PetankUserUtil.getUser("RST")], 13, 11, "07/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch([PetankUserUtil.getUser("FEE")], [PetankUserUtil.getUser("BPT")], 13, 5, "07/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch([PetankUserUtil.getUser("FRT"),PetankUserUtil.getUser("JLE")], [PetankUserUtil.getUser("ADE"),PetankUserUtil.getUser("EBT")], 10, 13, "15/05/2009")
 		}
 		return listMatchs
 	}
