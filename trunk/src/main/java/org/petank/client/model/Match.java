@@ -20,6 +20,9 @@ public class Match implements Serializable {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
 	
+	@Persistent
+    private PetankGroup group;
+	
 	/**
 	 * tous les joueurs de l'équipe 1 concaténé
 	 */
@@ -166,6 +169,14 @@ public class Match implements Serializable {
 	
 	public boolean isOfficiel() {
 		return this.typeMatch.equals(TypeMatch.OFFICIEL);
+	}
+
+	public PetankGroup getGroup() {
+		return group;
+	}
+
+	public void setGroup(PetankGroup group) {
+		this.group = group;
 	}
 
 }

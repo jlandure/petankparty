@@ -24,6 +24,9 @@ public class PetankUser implements Serializable {
     private String name;
 	
 	@Persistent
+    private PetankGroup group;
+	
+	@Persistent
     private String petankName;
 	
 	@Persistent
@@ -246,6 +249,14 @@ public class PetankUser implements Serializable {
 
 	public void setNbMatchOfficiel(Integer nbMatchOfficiel) {
 		this.nbMatchOfficiel = nbMatchOfficiel;
+	}
+
+	public PetankGroup getGroup() {
+		return group;
+	}
+
+	public void setGroup(PetankGroup group) {
+		this.group = group;
 	}
 
 }

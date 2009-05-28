@@ -18,23 +18,13 @@ import org.petank.server.PetankUserUtil;
  * @author jlandure
  *
  */
-public class MatchResource extends DefaultResource {
+public class MatchResource extends DefaultGroupResource {
 
 	def MatchResource(Context context, Request request, Response response) {
 		super(context, request, response)
 	}
 	
     def toXML() {
-    	def listUsers = PetankUserUtil.populate();
-		def listMatchs = MatchUtil.populate();
-		def listBaremes = BaremeUtil.populate();
-
-		if(!MatchUtil.APPLIED) {
-			listMatchs.each{MatchUtil.applyMatch(it)}
-			listUsers.each{it.evolution = MatchUtil.getPlayerEvolution(it)}
-			listUsers = PetankUserUtil.sortByPoint(listUsers);
-			MatchUtil.APPLIED = true;
-		}
 
 		int i = 1;
     	def writer = new StringWriter()
@@ -51,16 +41,6 @@ public class MatchResource extends DefaultResource {
     }
 
 	def toHTML() {
-		def listUsers = PetankUserUtil.populate();
-		def listMatchs = MatchUtil.populate();
-		def listBaremes = BaremeUtil.populate();
-
-		if(!MatchUtil.APPLIED) {
-			listMatchs.each{MatchUtil.applyMatch(it)}
-			listUsers.each{it.evolution = MatchUtil.getPlayerEvolution(it)}
-			listUsers = PetankUserUtil.sortByPoint(listUsers);
-			MatchUtil.APPLIED = true;
-		}
 
 		int i = 1;
 		def match
@@ -75,7 +55,7 @@ public class MatchResource extends DefaultResource {
 		    	h1 "Matchs"
 		        p "v0.3-beta"
 		        p { 
-		    		a(href:"/classement",  "Classement")
+		    		a(href:"/${groupName}/classement",  "Classement")
 		    		yield " / " 
 		    		a(href:"/bareme",  "Bareme")
 		    	}

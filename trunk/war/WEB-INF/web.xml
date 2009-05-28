@@ -7,7 +7,7 @@
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>classement</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
   
   <!-- Servlets -->

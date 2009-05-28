@@ -61,9 +61,9 @@ public class BaremeResource extends DefaultResource {
 		    	h1 "Bareme"
 		        p "v0.3-beta"
 		        p {
-		    		a(href:"/classement",  "Classement")
+		    		a(href:"/euriware/classement",  "Classement")
 		    		yield " / " 
-		    		a(href:"/match",  "Matchs")
+		    		a(href:"/euriware/match",  "Matchs")
 		    	}
 		        
 		        table(border:1, cellpadding:"15px", bordercolor:"black") {
