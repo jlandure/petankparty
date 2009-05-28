@@ -324,7 +324,7 @@ class MatchUtil{
 		def pointmin = points.min()
 		def pointmax = points.max()
 		
-		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=${pointmin},${pointmax}&cht=lc"
+		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=600,750&cht=lc&chxt=y&chxl=0:|600|650|700|750&chxp=600,650,700,750|&chtt=${player.petankName}"
 		//couleur bleuté : &chco=76A4FB
 		//style : &cht=lc
 		//label sur x : chxt=x,x
