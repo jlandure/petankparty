@@ -21,94 +21,105 @@ class MatchUtil{
 	private static def listMatchs
 	private static String JOIN_PLAYER = ";"
 	
-		private static def APPLIED = false
-	
 	static List<Match> populate() {
 		if(listMatchs == null) {
 			listMatchs = new ArrayList<Match>()
-			listMatchs << createMatch(["SHS","RST","EBT"], ["GBE","CLC","JLE","JND"], 13, 4, "26/03/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 4, "30/03/2009")
-			listMatchs << createMatch(["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 8, "30/03/2009")
-			listMatchs << createMatch(["JLE","BPT","CBO"], ["GBE","ADE","JND"], 13, 11, "31/03/2009")
-			listMatchs << createMatch(["GBE","ADE","JND"], ["JLE","BPT","CBO"], 13, 6, "31/03/2009")
-			listMatchs << createMatch(["GBE","JLE","EBT"], ["ADE","JND","BPT"], 13, 3, "01/04/2009")
-			listMatchs << createMatch(["GBE","JLE","EBT"], ["ADE","JND","BPT"], 13, 4, "01/04/2009")
-			listMatchs << createMatch(["GBE","JLE","EBT"], ["ADE","JND","BPT"], 9, 13, "01/04/2009")
-			listMatchs << createMatch(["GBE","ADE"], ["JLE","JND"], 13, 12, "02/04/2009")
-			listMatchs << createMatch(["GBE","ADE"], ["JLE","JND"], 13, 7, "02/04/2009")
-			listMatchs << createMatch(["GBE","ADE"], ["JLE","JND"], 5, 13, "02/04/2009")
-			listMatchs << createMatch(["SHS","RST","EBT","JLE"], ["GBE","ADE","CLC","HDG"], 13, 1, "06/04/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["SHS","RST"], ["GBE","ADE"], 13, 5, "07/04/2009")
-			listMatchs << createMatch(["SHS","RST"], ["GBE","ADE"], 4, 13, "07/04/2009")
-			listMatchs << createMatch(["SHS","RST","CLC"], ["GBE","ADE","JLE"], 6, 13, "09/04/2009")
-			listMatchs << createMatch(["SHS","RST","CLC"], ["GBE","ADE","JLE"], 13, 3, "09/04/2009")
-			listMatchs << createMatch(["SHS","GHT","JND"], ["GBE","RST","JLE"], 2, 13, "21/04/2009")
-			listMatchs << createMatch(["RST","JLE"], ["EBT","FEE"], 13, 9, "22/04/2009")
-			listMatchs << createMatch(["SHS","JAY"], ["GBE","ADE"], 13, 12, "22/04/2009")
-			listMatchs << createMatch(["SHS","JAY"], ["RST","JLE"], 6, 13, "22/04/2009")
-			listMatchs << createMatch(["EBT","FEE"], ["GBE","ADE"], 13, 12, "22/04/2009")
-			listMatchs << createMatch(["JLE","GBE"], ["SHS","RST"], 13, 8, "22/04/2009")
-			listMatchs << createMatch(["JLE","GBE"], ["SHS","RST"], 13, 4, "22/04/2009")
-			listMatchs << createMatch(["JLE","GBE"], ["SHS","RST"], 9, 13, "22/04/2009")
-			listMatchs << createMatch(["RST","JND","JAY"], ["JLE","EBT","CLC"], 0, 13, "23/04/2009")
-			listMatchs << createMatch(["RST","JND","JAY"], ["JLE","EBT","CLC"], 8, 13, "23/04/2009")
-			listMatchs << createMatch(["FRT","SHS"], ["FEE","ADE"], 9, 13, "23/04/2009")
-			listMatchs << createMatch(["JND","ADE","SEN"], ["JLE","FRT","JAY"], 9, 13, "24/04/2009")
-			listMatchs << createMatch(["FRT","ADE","SEN"], ["JLE","JND","JAY"], 9, 13, "24/04/2009")
-			listMatchs << createMatch(["FRT","GBE","JLE"], ["EBT","RST","JAY"], 6, 13, "29/04/2009")
-			listMatchs << createMatch(["FRT","GBE","JLE"], ["EBT","RST","JAY"], 13, 6, "29/04/2009")
-			listMatchs << createMatch(["FRT","GBE","JLE"], ["EBT","RST","JAY"], 13, 4, "29/04/2009")
-			listMatchs << createMatch(["FRT","GBE"], ["EBT","JND"], 10, 13, "04/05/2009")
-			listMatchs << createMatch(["RST","SHS"], ["JAY","ADE"], 13, 10, "04/05/2009")
-			listMatchs << createMatch(["ADE","JLE"], ["FEE","FRT"], 5, 13, "06/05/2009")
-			listMatchs << createMatch(["ADE","JLE"], ["FEE","FRT"], 13, 9, "06/05/2009")
-			listMatchs << createMatch(["SHS","BPT"], ["JND","PSR"], 13, 10, "06/05/2009")
-			listMatchs << createMatch(["GBE"], ["RST"], 13, 7, "06/05/2009")
-			listMatchs << createMatch(["GBE"], ["RST"], 13, 9, "06/05/2009")
-			listMatchs << createMatch(["GBE"], ["RST"], 13, 8, "06/05/2009")
-			listMatchs << createMatch(["GBE","PSR"], ["RST","JLE"], 11, 13, "07/05/2009")
-			listMatchs << createMatch(["GBE","PSR"], ["RST","JLE"], 12, 13, "07/05/2009")
-			listMatchs << createMatch(["JND","MSI","BPT"], ["FEE","FRT","ADE"], 3, 13, "07/05/2009")
-			listMatchs << createMatch(["JND","MSI","BPT"], ["FEE","FRT","ADE"], 13, 10, "07/05/2009")
-			listMatchs << createMatch(["RST"], ["JLE"], 11, 13, "07/05/2009")
-			listMatchs << createMatch(["RST","JLE"], ["JND","ADE"], 13, 4, "07/05/2009")
-			listMatchs << createMatch(["RST","JND"], ["JLE","ADE"], 13, 0, "07/05/2009")
-			listMatchs << createMatch(["JND"], ["ADE"], 4, 13, "07/05/2009")
-			listMatchs << createMatch(["JND"], ["ADE"], 9, 13, "07/05/2009")
-			listMatchs << createMatch(["JND"], ["ADE"], 8, 13, "07/05/2009")
-			listMatchs << createMatch(["JLE","EBT"], ["RST","ADE"], 13, 11, "14/05/2009")
-			listMatchs << createMatch(["JLE","EBT"], ["RST","ADE"], 6, 13, "14/05/2009")
-			listMatchs << createMatch(["JLE","EBT"], ["RST","ADE"], 13, 11, "14/05/2009")
-			listMatchs << createMatch(["JLE"], ["FRT"], 9, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["EBT"], ["FRT"], 5, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["FEE","RST"], ["ADE","BPT"], 13, 1, "15/05/2009")
-			listMatchs << createMatch(["FEE","RST"], ["ADE","BPT"], 13, 3, "15/05/2009")
-			listMatchs << createMatch(["FEE"], ["RST"], 13, 11, "15/05/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["FEE"], ["BPT"], 13, 5, "15/05/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["FRT","JLE"], ["ADE","EBT"], 10, 13, "15/05/2009")
-			listMatchs << createMatch(["JND","RST","BPT"], ["EBT","FRT","ADE"], 7, 13, "19/05/2009")
-			listMatchs << createMatch(["PSR","JLE"], ["ADE","RST"], 4, 13, "19/05/2009")
-			listMatchs << createMatch(["EBT","BPT"], ["GBE","JND"], 13, 2, "19/05/2009")
-			listMatchs << createMatch(["PSR","JLE"], ["GBE","JND"], 11, 13, "19/05/2009")
-			listMatchs << createMatch(["EBT","BPT"], ["ADE","RST"], 9, 13, "19/05/2009")
-			listMatchs << createMatch(["RST","ADE"], ["GBE","JND"], 11, 13, "19/05/2009")
-			listMatchs << createMatch(["PSR","JLE"], ["EBT","BPT"], 12, 13, "19/05/2009")
-			listMatchs << createMatch(["FRT","JLE"], ["EBT","GBE"], 13, 9, "20/05/2009")
-			listMatchs << createMatch(["ADE","BPT"], ["MSI","RST"], 12, 13, "20/05/2009")
-			listMatchs << createMatch(["FRT","JLE"], ["MSI","RST"], 13, 9, "20/05/2009")
-			listMatchs << createMatch(["ADE","BPT"], ["EBT","GBE"], 6, 13, "20/05/2009")
-			listMatchs << createMatch(["ADE","FRT","GBE"], ["JLE","RST","EBT"], 1, 13, "20/05/2009")
-			listMatchs << createMatch(["ADE","FRT","EBT"], ["JLE","RST","GBE"], 2, 13, "20/05/2009")
-			listMatchs << createMatch(["ADE","GBE","EBT"], ["JLE","RST","FRT"], 5, 13, "20/05/2009")
-			listMatchs << createMatch(["ADE","EBT"], ["JLE","RST"], 13, 10, "20/05/2009")
-			listMatchs << createMatch(["JLE","PSR"], ["BPT","FRT"], 13, 10, "27/05/2009")
-			listMatchs << createMatch(["EBT","FEE"], ["GBE","JND"], 10, 13, "27/05/2009")
-			listMatchs << createMatch(["JLE","PSR"], ["GBE","JND"], 6, 13, "27/05/2009")
-			listMatchs << createMatch(["EBT","FEE"], ["BPT","FRT"], 11, 13, "27/05/2009")
-			listMatchs << createMatch(["JLE","PSR","FEE"], ["JAY","EBT"], 13, 10, "28/05/2009", TypeMatch.NON_OFFICIEL)
-			listMatchs << createMatch(["JLE","PSR","FEE"], ["JAY","EBT"], 13, 9, "28/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["SHS","RST","EBT"], ["GBE","CLC","JLE","JND"], 13, 4, "26/03/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 4, "30/03/2009")
+			listMatchs << createMatch("euriware", ["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 8, "30/03/2009")
+			listMatchs << createMatch("euriware", ["JLE","BPT","CBO"], ["GBE","ADE","JND"], 13, 11, "31/03/2009")
+			listMatchs << createMatch("euriware", ["GBE","ADE","JND"], ["JLE","BPT","CBO"], 13, 6, "31/03/2009")
+			listMatchs << createMatch("euriware", ["GBE","JLE","EBT"], ["ADE","JND","BPT"], 13, 3, "01/04/2009")
+			listMatchs << createMatch("euriware", ["GBE","JLE","EBT"], ["ADE","JND","BPT"], 13, 4, "01/04/2009")
+			listMatchs << createMatch("euriware", ["GBE","JLE","EBT"], ["ADE","JND","BPT"], 9, 13, "01/04/2009")
+			listMatchs << createMatch("euriware", ["GBE","ADE"], ["JLE","JND"], 13, 12, "02/04/2009")
+			listMatchs << createMatch("euriware", ["GBE","ADE"], ["JLE","JND"], 13, 7, "02/04/2009")
+			listMatchs << createMatch("euriware", ["GBE","ADE"], ["JLE","JND"], 5, 13, "02/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","RST","EBT","JLE"], ["GBE","ADE","CLC","HDG"], 13, 1, "06/04/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["SHS","RST"], ["GBE","ADE"], 13, 5, "07/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","RST"], ["GBE","ADE"], 4, 13, "07/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","RST","CLC"], ["GBE","ADE","JLE"], 6, 13, "09/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","RST","CLC"], ["GBE","ADE","JLE"], 13, 3, "09/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","GHT","JND"], ["GBE","RST","JLE"], 2, 13, "21/04/2009")
+			listMatchs << createMatch("euriware", ["RST","JLE"], ["EBT","FEE"], 13, 9, "22/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","JAY"], ["GBE","ADE"], 13, 12, "22/04/2009")
+			listMatchs << createMatch("euriware", ["SHS","JAY"], ["RST","JLE"], 6, 13, "22/04/2009")
+			listMatchs << createMatch("euriware", ["EBT","FEE"], ["GBE","ADE"], 13, 12, "22/04/2009")
+			listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 13, 8, "22/04/2009")
+			listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 13, 4, "22/04/2009")
+			listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 9, 13, "22/04/2009")
+			listMatchs << createMatch("euriware", ["RST","JND","JAY"], ["JLE","EBT","CLC"], 0, 13, "23/04/2009")
+			listMatchs << createMatch("euriware", ["RST","JND","JAY"], ["JLE","EBT","CLC"], 8, 13, "23/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","SHS"], ["FEE","ADE"], 9, 13, "23/04/2009")
+			listMatchs << createMatch("euriware", ["JND","ADE","SEN"], ["JLE","FRT","JAY"], 9, 13, "24/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","ADE","SEN"], ["JLE","JND","JAY"], 9, 13, "24/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","GBE","JLE"], ["EBT","RST","JAY"], 6, 13, "29/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","GBE","JLE"], ["EBT","RST","JAY"], 13, 6, "29/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","GBE","JLE"], ["EBT","RST","JAY"], 13, 4, "29/04/2009")
+			listMatchs << createMatch("euriware", ["FRT","GBE"], ["EBT","JND"], 10, 13, "04/05/2009")
+			listMatchs << createMatch("euriware", ["RST","SHS"], ["JAY","ADE"], 13, 10, "04/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","JLE"], ["FEE","FRT"], 5, 13, "06/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","JLE"], ["FEE","FRT"], 13, 9, "06/05/2009")
+			listMatchs << createMatch("euriware", ["SHS","BPT"], ["JND","PSR"], 13, 10, "06/05/2009")
+			listMatchs << createMatch("euriware", ["GBE"], ["RST"], 13, 7, "06/05/2009")
+			listMatchs << createMatch("euriware", ["GBE"], ["RST"], 13, 9, "06/05/2009")
+			listMatchs << createMatch("euriware", ["GBE"], ["RST"], 13, 8, "06/05/2009")
+			listMatchs << createMatch("euriware", ["GBE","PSR"], ["RST","JLE"], 11, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["GBE","PSR"], ["RST","JLE"], 12, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JND","MSI","BPT"], ["FEE","FRT","ADE"], 3, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JND","MSI","BPT"], ["FEE","FRT","ADE"], 13, 10, "07/05/2009")
+			listMatchs << createMatch("euriware", ["RST"], ["JLE"], 11, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["RST","JLE"], ["JND","ADE"], 13, 4, "07/05/2009")
+			listMatchs << createMatch("euriware", ["RST","JND"], ["JLE","ADE"], 13, 0, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JND"], ["ADE"], 4, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JND"], ["ADE"], 9, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JND"], ["ADE"], 8, 13, "07/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","EBT"], ["RST","ADE"], 13, 11, "14/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","EBT"], ["RST","ADE"], 6, 13, "14/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","EBT"], ["RST","ADE"], 13, 11, "14/05/2009")
+			listMatchs << createMatch("euriware", ["JLE"], ["FRT"], 9, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["EBT"], ["FRT"], 5, 13, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["FEE","RST"], ["ADE","BPT"], 13, 1, "15/05/2009")
+			listMatchs << createMatch("euriware", ["FEE","RST"], ["ADE","BPT"], 13, 3, "15/05/2009")
+			listMatchs << createMatch("euriware", ["FEE"], ["RST"], 13, 11, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["FEE"], ["BPT"], 13, 5, "15/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["FRT","JLE"], ["ADE","EBT"], 10, 13, "15/05/2009")
+			listMatchs << createMatch("euriware", ["JND","RST","BPT"], ["EBT","FRT","ADE"], 7, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["PSR","JLE"], ["ADE","RST"], 4, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["EBT","BPT"], ["GBE","JND"], 13, 2, "19/05/2009")
+			listMatchs << createMatch("euriware", ["PSR","JLE"], ["GBE","JND"], 11, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["EBT","BPT"], ["ADE","RST"], 9, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["RST","ADE"], ["GBE","JND"], 11, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["PSR","JLE"], ["EBT","BPT"], 12, 13, "19/05/2009")
+			listMatchs << createMatch("euriware", ["FRT","JLE"], ["EBT","GBE"], 13, 9, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","BPT"], ["MSI","RST"], 12, 13, "20/05/2009")
+			listMatchs << createMatch("euriware", ["FRT","JLE"], ["MSI","RST"], 13, 9, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","BPT"], ["EBT","GBE"], 6, 13, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","FRT","GBE"], ["JLE","RST","EBT"], 1, 13, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","FRT","EBT"], ["JLE","RST","GBE"], 2, 13, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","GBE","EBT"], ["JLE","RST","FRT"], 5, 13, "20/05/2009")
+			listMatchs << createMatch("euriware", ["ADE","EBT"], ["JLE","RST"], 13, 10, "20/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","PSR"], ["BPT","FRT"], 13, 10, "27/05/2009")
+			listMatchs << createMatch("euriware", ["EBT","FEE"], ["GBE","JND"], 10, 13, "27/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","PSR"], ["GBE","JND"], 6, 13, "27/05/2009")
+			listMatchs << createMatch("euriware", ["EBT","FEE"], ["BPT","FRT"], 11, 13, "27/05/2009")
+			listMatchs << createMatch("euriware", ["JLE","PSR","FEE"], ["JAY","EBT"], 13, 10, "28/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["JLE","PSR","FEE"], ["JAY","EBT"], 13, 9, "28/05/2009", TypeMatch.NON_OFFICIEL)
+			
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 13, 10, "15/05/2009")
 		}
 		return listMatchs
+	}
+	
+	static def getMatchByGroupName(group) {
+		def c = []
+		def petankGroup = PetankGroupUtil.getGroup(group)
+		listMatchs.each {
+			if(petankGroup.id == it.group.id) {
+				c << it
+			}
+		}
+		return c
 	}
 	
 	static def makeDate(event) {
@@ -130,14 +141,14 @@ class MatchUtil{
 		return String.format('%td/%<tm/%<tY', date)
 	}
 	
-	static Match createMatch(play1, play2, sc1, sc2, dateString=null, type=TypeMatch.OFFICIEL) {
+	static Match createMatch(group, play1, play2, sc1, sc2, dateString=null, type=TypeMatch.OFFICIEL) {
 		def date = makeDate(dateString)
 		def player1 = []
 		def player2 = []
-		play1.each { player1 << PetankUserUtil.getUser(it)}
-		play2.each { player2 << PetankUserUtil.getUser(it)}
+		play1.each { player1 << PetankUserUtil.getUser(it, group)}
+		play2.each { player2 << PetankUserUtil.getUser(it, group)}
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
-
+		match.group = PetankGroupUtil.getGroup(group)
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
 		//au moment où l'on applique les barêmes
 
@@ -328,7 +339,7 @@ class MatchUtil{
 		def pointmin = points.min()
 		def pointmax = points.max()
 		
-		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=600,750&cht=lc&chxt=y&chxl=0:|600|650|700|750&chxp=600,650,700,750|&chtt=${player.petankName}"
+		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=600,750&cht=lc&chxt=y&chxl=0:|600|650|700|750&chxp=600,650,700,750|&chtt=${player.name}"
 		//couleur bleuté : &chco=76A4FB
 		//style : &cht=lc
 		//label sur x : chxt=x,x

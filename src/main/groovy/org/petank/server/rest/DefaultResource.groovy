@@ -16,7 +16,7 @@ import org.restlet.representation.Variant
  *
  */
 public class DefaultResource extends Resource {
-
+	
 	def DefaultResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		//le 1er variant est le variant par défaut !

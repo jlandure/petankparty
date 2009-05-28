@@ -7,18 +7,21 @@ import junit.framework.TestCase;
 
 import org.petank.client.model.Bareme;
 import org.petank.client.model.Match;
+import org.petank.client.model.PetankGroup;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
+import org.petank.server.PetankGroupUtil;
 import org.petank.server.PetankUserUtil;
 
 public class TestAlgo extends TestCase {
 
 	
-	private List<Bareme> listBaremes = new ArrayList<Bareme>(9);
+	private List<Bareme> listBaremes;
 	
-	private List<PetankUser> listUsers = new ArrayList<PetankUser>(11);
-	private List<Match> listMatchs = new ArrayList<Match>();
+	private List<PetankUser> listUsers;
+	private List<PetankGroup> listGroups;
+	private List<Match> listMatchs;
 	
 //	@Override
 //	protected void setUp() throws Exception {
@@ -69,24 +72,31 @@ public class TestAlgo extends TestCase {
 //	}
 	
 	public void testAll() {
-		listUsers = PetankUserUtil.populate();
-		listMatchs = MatchUtil.populate();
+		PetankGroupUtil.populate();
+		PetankUserUtil.populate();
+		MatchUtil.populate();
 		listBaremes = BaremeUtil.populate();
-		for(Match match : listMatchs) {
-			
-			MatchUtil.applyMatch(match);
-			//MatchUtil.getPlayers(match.getPlayer1());
-			//MatchUtil.getPlayersWithPoints(match.getPlayer1());
-		}
 		
-		listUsers = PetankUserUtil.sortByPoint(listUsers);
+		PetankGroup group = PetankGroupUtil.getGroup("euriware");
+		PetankGroupUtil.prepareGroup(group);
+		listUsers = group.getListUsers();
+		listMatchs = group.getListMatchs();
+		
+//		for(Match match : listMatchs) {
+//			
+//			MatchUtil.applyMatch(match);
+//			//MatchUtil.getPlayers(match.getPlayer1());
+//			//MatchUtil.getPlayersWithPoints(match.getPlayer1());
+//		}
+//		
+//		listUsers = PetankUserUtil.sortByPoint(listUsers);
 		int i = 1;
 		for(PetankUser user : listUsers) {
 			System.out.println(i+"-"+user.getName() +" - "+user.getPoints());
 			i++;
 		}
 		
-		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JLE"));
+		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JLE", "euriware"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("GBE"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("RST"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));

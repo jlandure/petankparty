@@ -23,10 +23,9 @@ public class PetankPartyRestApplication extends Application {
         // new instance of HelloWorldResource.
         Router router = new Router(getContext());
 
-        // Defines only one route
-        router.attachDefault(ClassementResource.class);
-        router.attach("/classement", ClassementResource.class);
-        router.attach("/match", MatchResource.class);
+        router.attach("/",BaseResource.class)
+        router.attach("/{group}/classement", ClassementResource.class);
+        router.attach("/{group}/match", MatchResource.class);
         router.attach("/bareme", BaremeResource.class);
 
         return router;
