@@ -105,6 +105,9 @@ class MatchUtil{
 			listMatchs << createMatch("euriware", ["EBT","FEE"], ["BPT","FRT"], 11, 13, "27/05/2009")
 			listMatchs << createMatch("euriware", ["JLE","PSR","FEE"], ["JAY","EBT"], 13, 10, "28/05/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["JLE","PSR","FEE"], ["JAY","EBT"], 13, 9, "28/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["PSR","FEE"], ["JND","EBT"], 4, 13, "29/05/2009")
+			listMatchs << createMatch("euriware", ["GBE","BPT"], ["JLE","FEE"], 3, 13, "29/05/2009")
+			listMatchs << createMatch("euriware", ["JND","FEE","GBE"], ["PSR","EBT","JLE"], 4, 13, "29/05/2009")
 			
 			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 13, 10, "15/05/2009")
 		}
