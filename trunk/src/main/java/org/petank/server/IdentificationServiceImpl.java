@@ -7,7 +7,6 @@ import javax.jdo.PersistenceManager;
 
 import org.petank.client.IdentificationService;
 import org.petank.client.model.PetankUser;
-import org.petank.server.bareme.Points;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -61,8 +60,6 @@ IdentificationService {
 		
 		user.setName(googleUser.getNickname());
 		user.setEmail(googleUser.getEmail());
-		user.setPoints(Points.DEBUT_JOUEUR);
-		user.setDebutSaisonPoints(Points.DEBUT_JOUEUR);
 		user.setDateInscription(Calendar.getInstance().getTime());
 		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
