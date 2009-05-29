@@ -9,6 +9,10 @@ import org.restlet.resource.*
 import org.restlet.representation.Representation
 import org.restlet.representation.StringRepresentation
 import org.restlet.representation.Variant
+import java.util.Collections
+import javax.cache.Cache
+
+
 
 
 /**
@@ -16,6 +20,12 @@ import org.restlet.representation.Variant
  *
  */
 public class DefaultResource extends Resource {
+	
+	public static Cache MEMCACHE
+	
+	def expireCache() {
+		return false
+	}
 	
 	def DefaultResource(Context context, Request request, Response response) {
 		super(context, request, response)
@@ -30,19 +40,30 @@ public class DefaultResource extends Resource {
 	}
 	
 	Representation represent(Variant variant) {
+		String text
+		def representation
+		def key
     	switch (variant.mediaType) {
 	    	case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
-	    		return new StringRepresentation(toHTML(), MediaType.TEXT_HTML)
+	    		key = getRequest().getOriginalRef().getPath()
+	    		if(!MEMCACHE.containsKey(key) || expireCache()) {
+	    			//Put the value into the cache.
+	    	        MEMCACHE.put(key, toHTML());
+	    		}
+	    		//Get the value from the cache.
+	    		text = (MEMCACHE.get(key) as String);
+    			representation = new StringRepresentation(text, MediaType.TEXT_HTML)
 	    		break;
 	    	case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
-	    		return new StringRepresentation(toXML(), MediaType.TEXT_XML)
+	    		representation = new StringRepresentation(toXML(), MediaType.TEXT_XML)
 	    		break
 	    	case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
-	    		return new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
+	    		representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
 	    		break
 	    	default:
-	    		return new StringRepresentation(toPLAIN(), MediaType.TEXT_PLAIN);
-	    	}	
+	    		representation = new StringRepresentation(toPLAIN(), MediaType.TEXT_PLAIN);
+	    	}
+		return representation
     }
 	
 	def toHTML() {

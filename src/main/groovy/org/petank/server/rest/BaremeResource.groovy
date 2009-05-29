@@ -59,7 +59,7 @@ public class BaremeResource extends DefaultResource {
 		    }
 		    body {
 		    	h1 "Bareme"
-		        p "v0.3-beta"
+		        p "v0.3.1-beta"
 		        p {
 		    		a(href:"/euriware/classement",  "Classement")
 		    		yield " / " 
