@@ -44,4 +44,10 @@ public class DefaultGroupResource extends DefaultResource {
 		listUsers = group.listUsers
 		listMatchs = group.listMatchs
 	}
+	
+	def expireCache() {
+		groupName = (String) request.getAttributes().get("group");
+		def group = PetankGroupUtil.getGroup(groupName)
+		return (!group.matchApplied)
+	}
 }

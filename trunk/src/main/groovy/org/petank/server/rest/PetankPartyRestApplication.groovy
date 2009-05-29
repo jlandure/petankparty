@@ -3,9 +3,13 @@
  */
 package org.petank.server.rest
 
-import org.restlet.Application;
-import org.restlet.Restlet;
-import org.restlet.routing.Router;
+import org.restlet.Application
+import org.restlet.Restlet
+import org.restlet.routing.Router
+import javax.cache.CacheException
+import javax.cache.CacheManager
+import javax.cache.Cache
+import java.util.Collections
 
 
 /**
@@ -21,6 +25,10 @@ public class PetankPartyRestApplication extends Application {
     public synchronized Restlet createRoot() {
         // Create a router Restlet that routes each call to a
         // new instance of HelloWorldResource.
+        
+        //Préparation du cache GAE
+        prepareCache()
+        
         Router router = new Router(getContext());
 
         router.attach("/",BaseResource.class)
@@ -29,6 +37,15 @@ public class PetankPartyRestApplication extends Application {
         router.attach("/bareme", BaremeResource.class);
 
         return router;
+    }
+    
+    def prepareCache() {
+    	try {
+    		Cache memcache = CacheManager.getInstance().getCacheFactory().createCache(Collections.emptyMap());
+    		DefaultResource.MEMCACHE = memcache
+        } catch (CacheException e) {
+            println "CacheException>>"+e
+        }
     }
 	
 	

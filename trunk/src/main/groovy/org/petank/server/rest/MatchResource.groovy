@@ -53,7 +53,7 @@ public class MatchResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Matchs"
-		        p "v0.3-beta"
+		        p "v0.3.1-beta"
 		        p { 
 		    		a(href:"/${groupName}/classement",  "Classement")
 		    		yield " / " 
