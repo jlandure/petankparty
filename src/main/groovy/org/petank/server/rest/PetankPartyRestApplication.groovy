@@ -44,6 +44,7 @@ public class PetankPartyRestApplication extends Application {
     		Map props = new HashMap();
             props.put(GCacheFactory.EXPIRATION_DELTA, 3600);
     		Cache memcache = CacheManager.getInstance().getCacheFactory().createCache(props);
+    		memcache.clear()
     		DefaultResource.MEMCACHE = memcache
         } catch (CacheException e) {
             println "CacheException>>"+e
