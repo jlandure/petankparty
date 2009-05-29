@@ -9,8 +9,8 @@ import org.restlet.routing.Router
 import javax.cache.CacheException
 import javax.cache.CacheManager
 import javax.cache.Cache
-import java.util.Collections
-
+import java.util.HashMap
+import com.google.appengine.api.memcache.stdimpl.GCacheFactory
 
 /**
  * @author jlandure
@@ -41,7 +41,9 @@ public class PetankPartyRestApplication extends Application {
     
     def prepareCache() {
     	try {
-    		Cache memcache = CacheManager.getInstance().getCacheFactory().createCache(Collections.emptyMap());
+    		Map props = new HashMap();
+            props.put(GCacheFactory.EXPIRATION_DELTA, 3600);
+    		Cache memcache = CacheManager.getInstance().getCacheFactory().createCache(props);
     		DefaultResource.MEMCACHE = memcache
         } catch (CacheException e) {
             println "CacheException>>"+e
