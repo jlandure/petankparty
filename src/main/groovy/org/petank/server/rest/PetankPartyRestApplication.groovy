@@ -29,6 +29,12 @@ public class PetankPartyRestApplication extends Application {
         //Préparation du cache GAE
         prepareCache()
         
+        //pas propre pour l'instant
+		PetankGroupUtil.populate()
+		PetankUserUtil.populate();
+		MatchUtil.populate();
+		BaremeUtil.populate();
+        
         Router router = new Router(getContext());
 
         router.attach("/",BaseResource.class)

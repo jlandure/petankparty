@@ -29,18 +29,12 @@ public class DefaultGroupResource extends DefaultResource {
 	def DefaultGroupResource(Context context, Request request, Response response) {
 		super(context, request, response)
 				
-		//pas propre pour l'instant
-		PetankGroupUtil.populate()
-		PetankUserUtil.populate();
-		MatchUtil.populate();
-		BaremeUtil.populate();
 		groupName = (String) request.getAttributes().get("group");
 		def group = PetankGroupUtil.getGroup(groupName)
 		if(group == null) {
 			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 			return;
 		}
-		PetankGroupUtil.prepareGroup(group)
 		listUsers = group.listUsers
 		listMatchs = group.listMatchs
 	}
