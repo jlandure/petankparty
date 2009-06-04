@@ -117,11 +117,9 @@ class MatchUtil{
 			listMatchs << createMatch("euriware", ["GBE","FRT"], ["ADE","RST"], 6, 13, "01/06/2009")
 			listMatchs << createMatch("euriware", ["GBE","EBT","FRT"], ["ADE","FEE","RST"], 8, 13, "02/06/2009")
 			listMatchs << createMatch("euriware", ["GBE","EBT","FRT"], ["ADE","FEE","RST"], 11, 13, "02/06/2009")
-			
 			listMatchs << createMatch("euriware", ["ADE","GBE"], ["RST","EBT"], 3, 13, "02/06/2009")
 			listMatchs << createMatch("euriware", ["ADE","GBE"], ["RST","EBT"], 13, 11, "02/06/2009")
 			listMatchs << createMatch("euriware", ["ADE","GBE"], ["RST","EBT"], 8, 13, "02/06/2009")
-
 			listMatchs << createMatch("euriware", ["GBE","FEE"], ["JAY","ADE"], 13, 6, "03/06/2009")
 			listMatchs << createMatch("euriware", ["GBE","EBT"], ["RST","CBO"], 13, 3, "03/06/2009")
 			listMatchs << createMatch("euriware", ["CBO","JAY"], ["ADE","FEE"], 3, 13, "03/06/2009")
@@ -129,8 +127,36 @@ class MatchUtil{
 			listMatchs << createMatch("euriware", ["RST"], ["GBE"], 13, 9, "03/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["EBT"], ["ADE"], 12, 13, "03/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["FRT"], ["ADE"], 4, 13, "03/06/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("euriware", ["RST","FEE"], ["GBE","JAY"], 13, 3, "04/06/2009")
+			listMatchs << createMatch("euriware", ["JLE","JND"], ["ADE","SHS"], 13, 0, "04/06/2009")
+			listMatchs << createMatch("euriware", ["RST","FEE"], ["ADE","SHS"], 13, 9, "04/06/2009")
+			listMatchs << createMatch("euriware", ["ADE","SHS"], ["GBE","JAY"], 13, 10, "04/06/2009")
 			
-			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 13, 10, "15/05/2009")
+			
+			listMatchs << createMatch("orvault", ["DOM"], ["JRO"], 9, 13, "22/03/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("orvault", ["AXE"], ["JRO"], 0, 13, "22/03/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 8, 13, "11/04/2009")
+			listMatchs << createMatch("orvault", ["VAN","TYN"], ["JU","JRO"], 1, 13, "11/04/2009")
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 6, 13, "17/04/2009")
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 8, 13, "17/04/2009")
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 0, 13, "17/04/2009")
+			listMatchs << createMatch("orvault", ["PDO"], ["JRO"], 9, 13, "17/04/2009")
+			listMatchs << createMatch("orvault", ["JU"], ["JRO"], 13, 9, "03/05/2009")
+			listMatchs << createMatch("orvault", ["DOM"], ["JRO"], 3, 13, "08/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PDO"], 13, 4, "09/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PDO"], 13, 12, "09/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 3, 13, "21/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 1, 13, "21/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 13, 11, "23/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 13, 1, "23/05/2009")
+			listMatchs << createMatch("orvault", ["PDO"], ["JRO"], 13, 6, "24/05/2009")
+			listMatchs << createMatch("orvault", ["PDO"], ["JRO"], 5, 13, "24/05/2009")
+			listMatchs << createMatch("orvault", ["PDO"], ["JRO"], 13, 11, "24/05/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 8, 13, "30/05/2009")
+			listMatchs << createMatch("orvault", ["PDO"], ["JRO"], 11, 13, "31/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("orvault", ["PLO"], ["JRO"], 10, 13, "31/05/2009", TypeMatch.NON_OFFICIEL)
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 13, 5, "01/06/2009")
+			listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 8, 13, "01/06/2009")
 		}
 		return listMatchs
 	}
@@ -173,6 +199,7 @@ class MatchUtil{
 		play2.each { player2 << PetankUserUtil.getUser(it, group)}
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
 		match.group = PetankGroupUtil.getGroup(group)
+		match.group.listMatchs << match
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
 		//au moment où l'on applique les barêmes
 

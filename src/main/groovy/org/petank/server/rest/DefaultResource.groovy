@@ -5,7 +5,8 @@ package org.petank.server.rest
 
 import org.restlet.*  
 import org.restlet.data.*  
-import org.restlet.resource.*  
+import org.restlet.resource.*
+import org.petank.server.*
 import org.restlet.representation.Representation
 import org.restlet.representation.StringRepresentation
 import org.restlet.representation.Variant
@@ -29,6 +30,7 @@ public class DefaultResource extends Resource {
 	
 	def DefaultResource(Context context, Request request, Response response) {
 		super(context, request, response)
+		
 		//le 1er variant est le variant par défaut !
 		variants.add(new Variant(MediaType.TEXT_HTML))
 		variants.add(new Variant(MediaType.APPLICATION_XHTML))
