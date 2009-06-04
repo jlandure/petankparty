@@ -129,7 +129,7 @@ class MatchUtil{
 			listMatchs << createMatch("euriware", ["FRT"], ["ADE"], 4, 13, "03/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["RST","FEE"], ["GBE","JAY"], 13, 3, "04/06/2009")
 			listMatchs << createMatch("euriware", ["JLE","JND"], ["ADE","SHS"], 13, 0, "04/06/2009")
-			listMatchs << createMatch("euriware", ["RST","FEE"], ["ADE","SHS"], 13, 9, "04/06/2009")
+			listMatchs << createMatch("euriware", ["RST","FEE"], ["JLE","JND"], 13, 9, "04/06/2009")
 			listMatchs << createMatch("euriware", ["ADE","SHS"], ["GBE","JAY"], 13, 10, "04/06/2009")
 			
 			
