@@ -10,6 +10,7 @@ import javax.cache.CacheException
 import javax.cache.CacheManager
 import javax.cache.Cache
 import java.util.HashMap
+import org.petank.server.*
 import com.google.appengine.api.memcache.stdimpl.GCacheFactory
 
 /**
@@ -23,17 +24,14 @@ public class PetankPartyRestApplication extends Application {
      */
     @Override
     public synchronized Restlet createRoot() {
-        // Create a router Restlet that routes each call to a
-        // new instance of HelloWorldResource.
-        
+        //pas propre pour l'instant
+    	PetankGroupUtil.populate()
+    	PetankUserUtil.populate()
+    	MatchUtil.populate()
+    	BaremeUtil.populate()
+    	
         //Préparation du cache GAE
         prepareCache()
-        
-        //pas propre pour l'instant
-		PetankGroupUtil.populate()
-		PetankUserUtil.populate();
-		MatchUtil.populate();
-		BaremeUtil.populate();
         
         Router router = new Router(getContext());
 
@@ -41,7 +39,7 @@ public class PetankPartyRestApplication extends Application {
         router.attach("/{group}/classement", ClassementResource.class);
         router.attach("/{group}/match", MatchResource.class);
         router.attach("/bareme", BaremeResource.class);
-
+        
         return router;
     }
     

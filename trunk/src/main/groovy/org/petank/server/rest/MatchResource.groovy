@@ -76,7 +76,8 @@ public class MatchResource extends DefaultGroupResource {
 		    			}
 		    		}
 		    		tbody {
-		    			listMatchs[-1..0].each{
+		    			if(listMatchs != null) {
+		    				listMatchs[-1..0].each{
 		    				match = it
 				    		tr {
 				    			td(class:"special", "${MatchUtil.getDateToFrString(match.jour)}")
@@ -105,6 +106,7 @@ public class MatchResource extends DefaultGroupResource {
 				    			}
 				    		}
 		    			}
+		    			}//not null listMatchs
 		    		}
 		    	}
 		    }

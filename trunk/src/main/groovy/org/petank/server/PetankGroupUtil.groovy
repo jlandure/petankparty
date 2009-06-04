@@ -26,6 +26,8 @@ class PetankGroupUtil{
 	static PetankGroup createPetankGroup(name, petankName, password, matchApplied=false) {
 		def group = new PetankGroup(name:name, petankName:petankName, matchApplied:matchApplied)
 		group.id = listGroups.size()
+		group.listMatchs = []
+		group.listUsers = []
 		return group
 	}
 

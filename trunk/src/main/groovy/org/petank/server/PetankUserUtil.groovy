@@ -38,7 +38,14 @@ class PetankUserUtil{
 			listUsers << createPetankUser("MSI", "Marouane Skouri", "euriware")
 			
 			listUsers << createPetankUser("JRO", "Jean-Ro", "orvault")
+			listUsers << createPetankUser("TYN", "Martine", "orvault")
 			listUsers << createPetankUser("JU", "Julien", "orvault")
+			listUsers << createPetankUser("VAN", "Vanessa", "orvault")
+			listUsers << createPetankUser("DOM", "Dominique", "orvault")
+			listUsers << createPetankUser("AXE", "Axel", "orvault")
+			listUsers << createPetankUser("PLO", "Polo", "orvault")
+			listUsers << createPetankUser("PDO", "Pedro", "orvault")
+			listUsers << createPetankUser("GIL", "Gilbert", "orvault")
 		}
 		return listUsers
 	}
@@ -47,6 +54,7 @@ class PetankUserUtil{
 		def user = new PetankUser(name:name, petankName:petankName, points:points)
 		user.id = listUsers.size()
 		user.group = PetankGroupUtil.getGroup(group)
+		user.group.listUsers << user
 		return user
 	}
 
