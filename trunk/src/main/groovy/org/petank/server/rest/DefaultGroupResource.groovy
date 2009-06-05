@@ -26,11 +26,18 @@ public class DefaultGroupResource extends DefaultResource {
 	
 	def groupName, group, listUsers, listMatchs
 	
+	def getGroupName() {
+		return groupName = (String) request.getAttributes().get("group");
+	}
+	
+	def getGroup() {
+		return PetankGroupUtil.getGroup(getGroupName())
+	}
+	
 	def DefaultGroupResource(Context context, Request request, Response response) {
 		super(context, request, response)
-				
-		groupName = (String) request.getAttributes().get("group");
-		def group = PetankGroupUtil.getGroup(groupName)
+		
+		def group = getGroup()
 		if(group == null) {
 			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 			return;
@@ -44,8 +51,9 @@ public class DefaultGroupResource extends DefaultResource {
 	
 	//return true if cache is up to date
 	def expireCache() {
-		groupName = (String) request.getAttributes().get("group");
-		def group = PetankGroupUtil.getGroup(groupName)
+		def group = getGroup()
 		return (!group.matchApplied)
 	}
+	
+	
 }
