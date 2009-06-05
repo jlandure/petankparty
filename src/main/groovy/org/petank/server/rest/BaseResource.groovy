@@ -7,7 +7,8 @@ import org.restlet.*
 import org.restlet.data.*  
 import org.restlet.resource.*  
 import org.restlet.representation.*
-import groovy.xml.MarkupBuilder;
+import groovy.xml.MarkupBuilder
+import org.petank.server.PetankGroupUtil
 
 /**
  * @author jlandure
@@ -32,9 +33,13 @@ public class BaseResource extends DefaultResource {
 		        p "v0.3.1-beta"
 		        p {
 		    		a(href:"/bareme",  "Bareme")
-		    		br()
-		    		br()
-		    		a(href:"/euriware/classement",  "Euriware")
+		    		
+		    		PetankGroupUtil.listGroups.each {
+		    			br()
+			    		br()
+			    		a(href:"/"+it.name+"/c", it.petankName)
+		    		}
+		    		
 		    		
 		    	}
 		    }

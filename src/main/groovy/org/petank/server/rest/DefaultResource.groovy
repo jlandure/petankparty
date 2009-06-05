@@ -48,12 +48,16 @@ public class DefaultResource extends Resource {
     	switch (variant.mediaType) {
 	    	case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
 	    		key = getRequest().getOriginalRef().getPath()
-	    		if(!MEMCACHE.containsKey(key) || expireCache()) {
-	    			//Put the value into the cache.
-	    	        MEMCACHE.put(key, toHTML());
-	    		}
+	    		
 	    		//Get the value from the cache.
 	    		text = (MEMCACHE.get(key) as String);
+	    	
+		    	if(text == null || expireCache()) {
+	    			//Put the value into the cache.
+	    			text = toHTML()
+	    	        MEMCACHE.put(key, text);
+	    		}
+	    	
     			representation = new StringRepresentation(text, MediaType.TEXT_HTML)
 	    		break;
 	    	case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
