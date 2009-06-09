@@ -62,7 +62,7 @@ class PetankUserUtil{
 		def c
 		def petankGroup = PetankGroupUtil.getGroup(group)
 		listUsers.each {
-			if(name == it.name && petankGroup.id == it.group.id) {
+			if(name.equalsIgnoreCase(it.name) && petankGroup.id == it.group.id) {
 				c = it
 			}
 		}

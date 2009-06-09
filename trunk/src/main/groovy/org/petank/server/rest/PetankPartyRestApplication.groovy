@@ -70,6 +70,7 @@ public class PetankPartyRestApplication extends Application {
 //
         router.attach("/{group}/classement", ClassementResource.class);
         router.attach("/{group}/match", MatchResource.class);
+        router.attach("/{group}/{player}", PlayerResource.class);
         router.attach("/bareme", BaremeResource.class);
         
         return router;
