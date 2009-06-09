@@ -27,7 +27,7 @@ public class DefaultGroupResource extends DefaultResource {
 	def groupName, group, listUsers, listMatchs
 	
 	def getGroupName() {
-		return groupName = (String) request.getAttributes().get("group");
+		return groupName = (String) request.getAttributes().get("group")
 	}
 	
 	def getGroup() {
@@ -39,8 +39,8 @@ public class DefaultGroupResource extends DefaultResource {
 		
 		def group = getGroup()
 		if(group == null) {
-			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-			return;
+			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
+			return
 		}
 		if(!group.matchApplied) {
 			PetankGroupUtil.prepareGroup(group)

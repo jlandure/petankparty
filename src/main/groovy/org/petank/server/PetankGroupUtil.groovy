@@ -34,7 +34,7 @@ class PetankGroupUtil{
 	static PetankGroup getGroup(name) {
 		def c
 		listGroups.each {
-			if(name == it.name) {
+			if(name.equalsIgnoreCase(it.name)) {
 				c = it
 			}
 		}
