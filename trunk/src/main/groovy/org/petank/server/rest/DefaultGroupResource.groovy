@@ -50,10 +50,10 @@ public class DefaultGroupResource extends DefaultResource {
 	}
 	
 	//return true if cache is up to date
-	def expireCache() {
-		def group = getGroup()
-		return (!group.matchApplied)
-	}
+//	def expireCache() {
+//		def group = getGroup()
+//		return (!group.matchApplied)
+//	}
 	
 	
 }
