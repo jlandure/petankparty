@@ -69,6 +69,14 @@ class PetankUserUtil{
 		return c
 	}
 	
+	static List getUsers(names, group) {
+		def users = []
+		names.split(",").each{
+			users << PetankUserUtil.getUser(it, group)
+		}
+		return users
+	}
+	
 	static def getUserByGroupName(group) {
 		def c = []
 		def petankGroup = PetankGroupUtil.getGroup(group)

@@ -1,6 +1,6 @@
 package org.petank;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -101,6 +101,16 @@ public class TestAlgo extends TestCase {
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("RST"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
+		//System.out.println(MatchUtil.getPlayersEvolution(PetankUserUtil.getUsers("jle,gbe,rst", "euriware")));
+		//MatchUtil.getPlayerEvolution(
+		System.out.println(MatchUtil.getDateToGoogleDateString(new Date()));
+		System.out.println(MatchUtil.getDateToFrString(new Date()));
+		System.out.println(MatchUtil.getDateToString(new Date()));
+		
+		Date date = MatchUtil.populate().get(MatchUtil.populate().size()-1).getJour();//01/06/09
+		System.out.println(MatchUtil.getDateToGoogleDateString(date));
+		System.out.println(MatchUtil.getDateToFrString(date));
+		System.out.println(MatchUtil.getDateToString(date));
 	}
 
 }

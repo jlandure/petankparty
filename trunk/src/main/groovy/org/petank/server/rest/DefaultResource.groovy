@@ -9,10 +9,12 @@ import org.restlet.resource.*
 import org.petank.server.*
 import org.restlet.representation.Representation
 import org.restlet.representation.StringRepresentation
+import org.restlet.representation.OutputRepresentation
 import org.restlet.representation.Variant
 import java.util.Collections
 import javax.cache.Cache
-
+import org.restlet.data.Encoding
+import java.util.zip.GZIPOutputStream
 
 
 
@@ -59,6 +61,10 @@ public class DefaultResource extends Resource {
 	    		}
 	    	
     			representation = new StringRepresentation(text, MediaType.TEXT_HTML)
+    			//GZIPOutputStream GZIPStream = new GZIPOutputStream(representation)
+    			//representation = new OutputRepresentation(GZIPStream)
+    			//representation.setEncodings([Encoding.DEFLATE])
+    			//httpResponse.addHeader("Content-Encoding", "gzip");
 	    		break;
 	    	case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
 	    		representation = new StringRepresentation(toXML(), MediaType.TEXT_XML)
@@ -83,5 +89,10 @@ public class DefaultResource extends Resource {
 	}
 	def toPLAIN() {
 		return "PLAIN TEXT"
+	}
+	
+	def quit() {
+		getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
+		return;
 	}
 }
