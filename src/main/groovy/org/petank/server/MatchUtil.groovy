@@ -199,7 +199,7 @@ class MatchUtil{
 	    def eventDate = Calendar.getInstance()
 		if (event != null) {
 			def dmy = event.split("/").collect { num -> Integer.parseInt(num.trim()) }
-			eventDate.set(dmy[2], dmy[1] - 1, dmy[0], 0, 0, 0)
+			eventDate.set(dmy[2], (dmy[1] - 1), dmy[0], 0, 0, 0)
 		}
 	    return eventDate.getTime()
 	}
@@ -212,6 +212,21 @@ class MatchUtil{
 	static def getDateToFrString(date) {
 		//format FR
 		return String.format('%td/%<tm/%<tY', date)
+	}
+	
+	static def getDateToGoogleDateString(date) {
+		//format new Date(2009, 1 ,3)); //Y, M-1, D (3 février 2009)
+		def dateStringFormat = String.format('%tY, %<tm, %<td', date)
+		def dateString = dateStringFormat
+		def matcher = (dateStringFormat =~ /([0-9]+), ([0-9]+), ([0-9]+)/)
+		if (matcher.matches()) {
+//			println matcher[0][0]
+//			println matcher[0][1]
+//			println matcher[0][2]
+//			println matcher[0][3]
+			dateString = ""+matcher[0][1]+", "+(Integer.parseInt(matcher[0][2])-1)+", "+matcher[0][3]
+		}
+		return dateString
 	}
 	
 	static Match createMatch(group, play1, play2, sc1, sc2, dateString=null, type=TypeMatch.OFFICIEL) {
@@ -413,7 +428,7 @@ class MatchUtil{
 		def pointmin = points.min()
 		def pointmax = points.max()
 		
-		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=600,750&cht=lc&chxt=y&chxl=0:|600|650|700|750&chxp=600,650,700,750|&chtt=${player.name}"
+		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chds=550,800&chxt=y&chxl=0:|550|600|650|700|750|800&chxp=550,600,650,700,750,800|&chtt=${player.name}&chd=t:${allpoints}"
 		//couleur bleuté : &chco=76A4FB
 		//style : &cht=lc
 		//label sur x : chxt=x,x
@@ -446,6 +461,75 @@ class MatchUtil{
 		// http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&
 		//println a;
 		return a;
+	}
+	
+	static def getPlayersEvolution(players) {
+		def player
+		def point
+		def points = [][]
+		
+		def colors = ["FF9900","0000FF","00FF00","000000","FF0000"]
+//	    * FF0000 = red
+//	    * 00FF00 = green
+//	    * 0000FF = blue
+//	    * 000000 = black
+//	    * FFFFFF = white
+//	    * FF9900 = jaune
+
+		
+		players.each{
+			player = it
+			println player.name
+			listMatchs.each{
+				point = getPlayerPoints(it.playersWithPoints, player.id as String);
+				println point
+				if(point != null) points[player.name] << point;
+			}
+			points[player.name] << player.points
+		}
+		
+		players.each{
+			println points[it.name]
+		}
+		
+//		def allpoints = points.join(",")
+//		def pointmin = points.min()
+//		def pointmax = points.max()
+//		
+//		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chd=t:${allpoints}&chds=600,750&cht=lc&chxt=y&chxl=0:|600|650|700|750&chxp=600,650,700,750|&chtt=${player.name}"
+		//couleur bleuté : &chco=76A4FB
+		//style : &cht=lc
+		//label sur x : chxt=x,x
+		//deux labels sur x donc valeurs indexés : chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st
+		//taille du graphe : &chs=400x150
+		//?? : &chls=2.0
+		//min max en ordonnées pour la taille : &chds=647.5,680.5
+				
+//		def debut = getDateMonth(listMatchs[0].jour)
+//		println debut
+//		def diffDates = listMatchs[-1].jour - debut
+//	    println diffDates
+	    
+//	    def info = ""
+//	    def i = 0;
+//	    diffDates.times{
+//			debut++
+//			println getDateToString(debut)
+//			if(i == 1 || i == 15) {
+//			info += "300,"
+//				
+//			} else {
+//				info += "650,"
+//			}
+//			i++
+//		}
+//		println info
+		//	http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&chd=s:cEAELFJHHHKUju9uuXUc&chco=76A4FB&chls=2.0&chs=400x150&chxs=0,0000dd,10|1,0000dd,12,0
+		//	http://chart.apis.google.com/chart?chd=s:cEAELFJHHHKUju9uuXUc&chxs=0,0000dd,10|1,0000dd,12,0
+		// http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&
+		//println a;
+		//return a;
+		return points
 	}
 	
 }

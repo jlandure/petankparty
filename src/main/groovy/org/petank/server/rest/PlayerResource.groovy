@@ -28,8 +28,7 @@ public class PlayerResource extends DefaultGroupResource {
 		playerName = (String) request.getAttributes().get("player")
 		player = PetankUserUtil.getUser(playerName, groupName)
 		if(player == null) {
-			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
-			return;
+			quit();return
 		}
 	}
 	
