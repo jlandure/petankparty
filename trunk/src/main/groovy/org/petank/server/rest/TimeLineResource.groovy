@@ -30,12 +30,10 @@ public class TimeLineResource extends DefaultGroupResource {
 	def TimeLineResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		playersName = (String) request.getAttributes().get("players")
-		println playersName
 		if(playersName == null) {
 			quit();return
 		}
 		players = PetankUserUtil.getUsers(playersName, groupName)
-		players.each{println it.name}
 		if(players == null || players.size == 0) {
 			quit();return
 		}
@@ -104,12 +102,10 @@ public class TimeLineResource extends DefaultGroupResource {
 			hasPoints = false
 			players.each{
 				player = it
-				println player.name
 				point = MatchUtil.getPlayerPoints(matchAvantDay.playersWithPoints, player.id as String);
 				if(point != null) {
 					hasPoints = true
 					points."${player.id}" = point
-					println points."${player.id}"
 				}
 			}
 			if(hasPoints) {
