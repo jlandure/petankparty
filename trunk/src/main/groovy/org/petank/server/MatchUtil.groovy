@@ -156,11 +156,15 @@ class MatchUtil{
 			listMatchs << createMatch("euriware", ["ADE"], ["FEE"], 13, 7, "10/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["ADE"], ["EBT"], 13, 12, "10/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["EBT","ADE"], ["JLE","FEE"], 13, 11, "10/06/2009")
-			
 			listMatchs << createMatch("euriware", ["ADE","FEE","JAY"], ["EBT","JLE"], 3, 13, "11/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["ADE","FEE","EBT"], ["JAY","JLE"], 0, 13, "11/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["ADE","FEE"], ["EBT","JAY","JLE"], 11, 13, "11/06/2009", TypeMatch.NON_OFFICIEL)
 			listMatchs << createMatch("euriware", ["FEE","EBT"], ["ADE","JLE"], 13, 10, "11/06/2009")
+			
+			listMatchs << createMatch("euriware", ["BPT","JAY"], ["SHS","JND"], 5, 13, "12/06/2009")
+			listMatchs << createMatch("euriware", ["JLE","ADE"], ["EBT","GBE"], 13, 7, "12/06/2009")
+			listMatchs << createMatch("euriware", ["JLE","EBT"], ["BPT","GBE"], 2, 13, "12/06/2009")
+			listMatchs << createMatch("euriware", ["JLE","EBT","GBE"], ["BPT","JAY","JND"], 13, 6, "12/06/2009")
 			
 			
 			listMatchs << createMatch("orvault", ["DOM"], ["JRO"], 9, 13, "22/03/2009", TypeMatch.NON_OFFICIEL)

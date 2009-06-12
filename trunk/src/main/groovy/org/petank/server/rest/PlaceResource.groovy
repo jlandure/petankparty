@@ -86,13 +86,11 @@ public class PlaceResource extends DefaultResource {
 		    var marker = new google.maps.Marker({
 		        position: myLatlng, 
 		        map: map,
-		        title :" """+place.petankName+""" " 
+		        title :" """+place.petankName[0..-2]+""" " 
 		    });      
 
 			var infowindow = new google.maps.InfoWindow(
-		    	      { content: '"""
-		gString += place.content
-		gString += """',
+		    	      { content: '"""+place.content+"""'
 		    	      });
 
 		    google.maps.event.addListener(marker, 'click', function() {
