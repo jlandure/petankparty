@@ -30,6 +30,7 @@ public class PetankPartyRestApplication extends Application {
         //pas propre pour l'instant
     	PetankGroupUtil.populate()
     	PetankUserUtil.populate()
+    	PetankPlaceUtil.populate()
     	MatchUtil.populate()
     	BaremeUtil.populate()
     	
@@ -68,7 +69,8 @@ public class PetankPartyRestApplication extends Application {
 //        router.attach("/euriware/",guard)
 //        guard.setNext(ClassementResource.class)
 //
-        router.attach("/{group}/classement", ClassementResource.class);
+		router.attach("/place/{place}", PlaceResource.class);
+		router.attach("/{group}/classement", ClassementResource.class);
         router.attach("/{group}/match", MatchResource.class);
         router.attach("/{group}/timeline", TimeLineResource.class).extractQuery("players", "players", true)  ;
         router.attach("/{group}/{player}", PlayerResource.class);
