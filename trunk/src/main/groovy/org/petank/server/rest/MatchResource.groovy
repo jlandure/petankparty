@@ -73,6 +73,7 @@ public class MatchResource extends DefaultGroupResource {
 		        			td(class:"special", "Classement Equipe 1")
 		        			td(class:"special", "Classement Equipe 2")
 		        			td(class:"special", "Bareme Utilis\u00E9")
+		        			td(class:"special", "Lieu")
 		    			}
 		    		}
 		    		tbody {
@@ -103,6 +104,9 @@ public class MatchResource extends DefaultGroupResource {
 				    			td(class:"special", "${String.format('%.2f', match.point2)}")
 				    			td(class:"special") {
 				    				a(href:"/bareme", "${match.bareme.minimum} - ${match.bareme.maximum}")
+				    			}
+				    			td(class:"special") {
+				    				a(href:("/place/"+match.place.name), target:"_blank", match.place.petankName[0..-2])
 				    			}
 				    		}
 		    			}

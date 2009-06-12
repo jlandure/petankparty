@@ -245,6 +245,13 @@ class MatchUtil{
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
 		match.group = PetankGroupUtil.getGroup(group)
 		match.group.listMatchs << match
+		if(group.equalsIgnoreCase("euriware")) {
+			match.place = PetankPlaceUtil.getPlace("souchais")
+			match.place.listMatchs << match
+		} else if(group.equalsIgnoreCase("orvault")) {
+			match.place = PetankPlaceUtil.getPlace("souchais")
+			match.place.listMatchs << match
+		}
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
 		//au moment où l'on applique les barêmes
 

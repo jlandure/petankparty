@@ -2,7 +2,6 @@ package org.petank.client.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -22,6 +21,9 @@ public class Match implements Serializable {
 	
 	@Persistent
     private PetankGroup group;
+	
+	@Persistent
+    private PetankPlace place;
 	
 	/**
 	 * tous les joueurs de l'équipe 1 concaténé
@@ -177,6 +179,14 @@ public class Match implements Serializable {
 
 	public void setGroup(PetankGroup group) {
 		this.group = group;
+	}
+
+	public PetankPlace getPlace() {
+		return place;
+	}
+
+	public void setPlace(PetankPlace place) {
+		this.place = place;
 	}
 
 }
