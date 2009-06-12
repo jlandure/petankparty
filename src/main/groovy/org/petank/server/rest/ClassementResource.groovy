@@ -54,11 +54,13 @@ public class ClassementResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Classement"
-		        p "v0.3.1-beta"
+		        p "V0.4-beta"
 		        p {
 		    		a(href:"/${groupName}/match",  "Matchs")
 		    		yield " / " 
 		    		a(href:"/bareme",  "Bareme")
+		    		yield " / " 
+		    		a(href:("/${groupName}/timeline/?players="+listUsers[0].name+","+listUsers[1].name+","+listUsers[2].name), target:"_blank", "Courbes d'\u00E9volution")
 		    	}
 		        
 		        table(border:1, cellpadding:"15px", bordercolor:"black") {

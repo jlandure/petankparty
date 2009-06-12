@@ -59,7 +59,7 @@ public class BaremeResource extends DefaultResource {
 		    }
 		    body {
 		    	h1 "Bareme"
-		        p "v0.3.1-beta"
+		        p "V0.4-beta"
 		        br()
 		        br()
 		        
