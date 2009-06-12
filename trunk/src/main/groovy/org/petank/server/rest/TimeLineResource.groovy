@@ -34,7 +34,7 @@ public class TimeLineResource extends DefaultGroupResource {
 			quit();return
 		}
 		players = PetankUserUtil.getUsers(playersName, groupName)
-		if(players == null || players.size == 0) {
+		if(players == null || players.size() == 0) {
 			quit();return
 		}
 	}
