@@ -88,7 +88,7 @@ public class ClassementResource extends DefaultGroupResource {
 				    		tr {
 				    			td(class:"special", "$i")
 				    			td(class:"special2") {
-				    				a(href:"${user.evolution}", target:"_blank", "${user.petankName}")
+				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
 				    			}
 				    			td(class:"special", "${user.points}")
 				    			td(class:"special", "${user.partiesJoues}")

@@ -108,7 +108,7 @@ public class PlayerResource extends DefaultGroupResource {
 				    			td(class:"special", "${user.nbMatchOfficiel}")
 				    		}
 		    		}
-		    	}
+		    	}//fin table
 		    }
 		}
 		return writer.toString();

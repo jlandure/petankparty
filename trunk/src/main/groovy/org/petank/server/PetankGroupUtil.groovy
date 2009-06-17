@@ -56,7 +56,6 @@ class PetankGroupUtil{
 			def listMatchs = MatchUtil.getMatchByGroupName(group.name)
 			def listUsers = PetankUserUtil.getUserByGroupName(group.name)
 			listMatchs.each{MatchUtil.applyMatch(it)}
-			listUsers.each{it.evolution = MatchUtil.getPlayerEvolution(it)}
 			listUsers = PetankUserUtil.sortByPoint(listUsers)
 			group.listUsers = listUsers
 			group.listMatchs = listMatchs
