@@ -10,6 +10,7 @@ import org.petank.client.model.Match;
 import org.petank.client.model.PetankGroup;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
+import org.petank.server.DateUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankGroupUtil;
 import org.petank.server.PetankPlaceUtil;
@@ -105,14 +106,14 @@ public class TestAlgo extends TestCase {
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
 		//System.out.println(MatchUtil.getPlayersEvolution(PetankUserUtil.getUsers("jle,gbe,rst", "euriware")));
 		//MatchUtil.getPlayerEvolution(
-		System.out.println(MatchUtil.getDateToGoogleDateString(new Date()));
-		System.out.println(MatchUtil.getDateToFrString(new Date()));
-		System.out.println(MatchUtil.getDateToString(new Date()));
+		System.out.println(DateUtil.getDateToGoogleDateString(new Date()));
+		System.out.println(DateUtil.getDateToFrString(new Date()));
+		System.out.println(DateUtil.getDateToString(new Date()));
 		
 		Date date = MatchUtil.populate().get(MatchUtil.populate().size()-1).getJour();//01/06/09
-		System.out.println(MatchUtil.getDateToGoogleDateString(date));
-		System.out.println(MatchUtil.getDateToFrString(date));
-		System.out.println(MatchUtil.getDateToString(date));
+		System.out.println(DateUtil.getDateToGoogleDateString(date));
+		System.out.println(DateUtil.getDateToFrString(date));
+		System.out.println(DateUtil.getDateToString(date));
 	}
 
 }

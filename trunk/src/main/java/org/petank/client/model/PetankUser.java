@@ -48,9 +48,6 @@ public class PetankUser implements Serializable {
     private String commentaire;
     
     @Transient
-    private String evolution;
-    
-    @Transient
     private Integer partiesJoues = 0;
     
     @Transient
@@ -153,14 +150,6 @@ public class PetankUser implements Serializable {
 
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
-	}
-
-	public String getEvolution() {
-		return evolution;
-	}
-
-	public void setEvolution(String evolution) {
-		this.evolution = evolution;
 	}
 
 	public Integer getPartiesJoues() {

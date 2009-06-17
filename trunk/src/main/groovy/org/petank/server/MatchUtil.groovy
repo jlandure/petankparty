@@ -10,6 +10,7 @@ import org.petank.client.model.TypeVictoire;
 import org.petank.client.model.TypeMatch;
 import org.petank.client.model.Bareme;
 import org.petank.server.PetankUserUtil;
+import org.petank.server.DateUtil;
 
 /**
  * @author jlandure
@@ -198,9 +199,9 @@ class MatchUtil{
 		return listMatchs
 	}
 	
-	static def getMatchByGroupName(group) {
+	static def getMatchByGroupName(groupName) {
 		def c = []
-		def petankGroup = PetankGroupUtil.getGroup(group)
+		def petankGroup = PetankGroupUtil.getGroup(groupName)
 		listMatchs.each {
 			if(petankGroup.id == it.group.id) {
 				c << it
@@ -209,42 +210,19 @@ class MatchUtil{
 		return c
 	}
 	
-	static def makeDate(event) {
-	    def eventDate = Calendar.getInstance()
-		if (event != null) {
-			def dmy = event.split("/").collect { num -> Integer.parseInt(num.trim()) }
-			eventDate.set(dmy[2], (dmy[1] - 1), dmy[0], 0, 0, 0)
+	static def getMatchByPlayerNameAndGroupName(playerName, groupName) {
+		def c = []
+		def player = PetankUserUtil.getUser(playerName, groupName)
+		listMatchs.each {
+			if(match.player1.contains(player.name) || match.player2.contains(player.name)) {
+				c << it
+			}
 		}
-	    return eventDate.getTime()
-	}
-	
-	static def getDateToString(date) {
-		//le nouveau est mieux car c'est ordonné niveau temps
-		return String.format('%tY/%<tm/%<td', date)
-	}
-	
-	static def getDateToFrString(date) {
-		//format FR
-		return String.format('%td/%<tm/%<tY', date)
-	}
-	
-	static def getDateToGoogleDateString(date) {
-		//format new Date(2009, 1 ,3)); //Y, M-1, D (3 février 2009)
-		def dateStringFormat = String.format('%tY, %<tm, %<td', date)
-		def dateString = dateStringFormat
-		def matcher = (dateStringFormat =~ /([0-9]+), ([0-9]+), ([0-9]+)/)
-		if (matcher.matches()) {
-//			println matcher[0][0]
-//			println matcher[0][1]
-//			println matcher[0][2]
-//			println matcher[0][3]
-			dateString = ""+matcher[0][1]+", "+(Integer.parseInt(matcher[0][2])-1)+", "+matcher[0][3]
-		}
-		return dateString
+		return c
 	}
 	
 	static Match createMatch(group, play1, play2, sc1, sc2, dateString=null, place="souchais", type=TypeMatch.OFFICIEL) {
-		def date = makeDate(dateString)
+		def date = DateUtil.makeDate(dateString)
 		def player1 = []
 		def player2 = []
 		play1.each { player1 << PetankUserUtil.getUser(it, group)}
@@ -324,114 +302,11 @@ class MatchUtil{
 		def printId = {
 				def matcher = (it.trim() =~ /([0-9]+).*(\[)([0-9]+\.*[0-9]*)(\])/)
 				if (matcher.matches()) {
-					//println(matcher[0][1] + ">" + matcher[0][3])
 					id."${matcher[0][1]}" = matcher[0][3]
 				}
 			}
 		data.each(printId)
 		return id;
-	}
-	
-	static Float getBetween(Match match) {
-		return (match.point1 - match.point2).abs()
-	}
-	
-	static void applyMatch(Match match) {
-		
-		def victory = match.score1 > match.score2
-		def fanny1 = (victory && match.score2 == 0) 
-		def fanny2 = (!victory && match.score1 == 0) 
-		
-		//preparation des baremes :
-		def player1 = getPlayers(match.player1)
-		def player2 = getPlayers(match.player2)
-		
-		//maj des id/points joueurs pour sauvegarde
-		player1.each{
-			match.playersWithPoints += it.id+ " ["+it.points+"];"
-			match.point1 += it.points
-			it.partiesJoues++;
-			it.totalPoints += match.score1
-			if(victory) {
-				it.partiesGagnes++
-			} else {
-				it.partiesPerdus++
-			}
-			if(fanny1) it.fannyGagnes++
-			if(fanny2) it.fannyPerdus++
-			if(match.isOfficiel()) it.nbMatchOfficiel++
-		}
-		player2.each{
-			match.playersWithPoints += it.id+ " ["+it.points+"];"
-			match.point2 += it.points
-			it.partiesJoues++;
-			it.totalPoints += match.score2
-			if(!victory) {
-				it.partiesGagnes++
-			} else {
-				it.partiesPerdus++
-			}
-			if(fanny2) it.fannyGagnes++
-			if(fanny1) it.fannyPerdus++
-			if(match.isOfficiel()) it.nbMatchOfficiel++
-		}
-		match.playersWithPoints = match.playersWithPoints[0..-2]
-		//calcul des points moyens
-		match.point1 /= player1.size()
-		
-		match.point2 /= player2.size()
-		//println match.playersWithPoints
-		
-		//récupération du bareme à appliquer
-		Bareme bareme = BaremeUtil.chooseBareme(MatchUtil.getBetween(match))
-		match.bareme = bareme
-		def coefficient = BaremeUtil.getCoefficient(match.typeMatch)
-		
-		if(match.point1 >= match.point2) {
-			if(victory) {
-				match.typeVictoire = TypeVictoire.NORMAL 
-				player1.each {
-					it.points += bareme.victoireNormale * coefficient
-					it.victoireNormale++
-				}
-				player2.each {
-					it.points += bareme.defaiteNormale * coefficient
-					it.defaiteNormale++
-				}
-			} else {
-				match.typeVictoire = TypeVictoire.ANORMAL 
-				player1.each {
-					it.points += bareme.defaiteAnormale * coefficient
-					it.defaiteAnormale++
-				}
-				player2.each {
-					it.points += bareme.victoireAnormale * coefficient
-					it.victoireAnormale++
-				}
-			}
-		} else {
-			if(victory) {
-				match.typeVictoire = TypeVictoire.ANORMAL
-				player1.each {
-					it.points += bareme.victoireAnormale * coefficient
-					it.victoireAnormale++
-				}
-				player2.each {
-					it.points += bareme.defaiteAnormale * coefficient
-					it.defaiteAnormale++
-				}
-			} else {
-				match.typeVictoire = TypeVictoire.NORMAL
-				player1.each {
-					it.points += bareme.defaiteNormale * coefficient
-					it.defaiteNormale++
-				}
-				player2.each {
-					it.points += bareme.victoireNormale * coefficient
-					it.victoireNormale++
-				}
-			}
-		}
 	}
 	
 	static Float getPlayerPoints(playersWithPoints, String id) {

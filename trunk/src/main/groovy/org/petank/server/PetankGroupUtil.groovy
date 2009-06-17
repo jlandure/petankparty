@@ -4,6 +4,7 @@
 package org.petank.server
 
 import org.petank.client.model.PetankGroup;
+import org.petank.server.StatUtil;
 
 /**
  * @author jlandure
@@ -55,7 +56,7 @@ class PetankGroupUtil{
 		if(!group.matchApplied) {
 			def listMatchs = MatchUtil.getMatchByGroupName(group.name)
 			def listUsers = PetankUserUtil.getUserByGroupName(group.name)
-			listMatchs.each{MatchUtil.applyMatch(it)}
+			listMatchs.each{StatUtil.applyMatch(it)}
 			listUsers = PetankUserUtil.sortByPoint(listUsers)
 			group.listUsers = listUsers
 			group.listMatchs = listMatchs
