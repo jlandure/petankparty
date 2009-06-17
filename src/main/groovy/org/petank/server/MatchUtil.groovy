@@ -447,11 +447,7 @@ class MatchUtil{
 			if(point != null) points << point;
 		}
 		points << player.points
-		def allpoints = points.join(",")
-		def pointmin = points.min()
-		def pointmax = points.max()
 		
-		String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chds=550,800&chxt=y&chxl=0:|550|600|650|700|750|800&chxp=550,600,650,700,750,800|&chtt=${player.name}&chd=t:${allpoints}"
 		//couleur bleuté : &chco=76A4FB
 		//style : &cht=lc
 		//label sur x : chxt=x,x
@@ -483,7 +479,7 @@ class MatchUtil{
 		//	http://chart.apis.google.com/chart?chd=s:cEAELFJHHHKUju9uuXUc&chxs=0,0000dd,10|1,0000dd,12,0
 		// http://chart.apis.google.com/chart?chxt=x,x&chxl=1:||Mar|Avr||0:|1st|15th|1st|15th|1st&cht=lc&
 		//println a;
-		return a;
+		return points;
 	}
 	
 	static def getPlayersEvolution(players) {
