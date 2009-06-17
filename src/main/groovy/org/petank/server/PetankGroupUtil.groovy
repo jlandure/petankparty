@@ -56,8 +56,7 @@ class PetankGroupUtil{
 		if(!group.matchApplied) {
 			def listMatchs = MatchUtil.getMatchByGroupName(group.name)
 			def listUsers = PetankUserUtil.getUserByGroupName(group.name)
-			listMatchs.each{StatUtil.applyMatch(it)}
-			listUsers = PetankUserUtil.sortByPoint(listUsers)
+			listUsers = StatUtil.applyMatchs(listMatchs, listUsers)
 			group.listUsers = listUsers
 			group.listMatchs = listMatchs
 			group.matchApplied = true;

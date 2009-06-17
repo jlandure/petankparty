@@ -26,8 +26,16 @@ public class StatUtil{
 		return (match.point1 - match.point2).abs()
 	}
 	
-	static void applyMatch(Match match) {
-		
+	static def applyMatchs(listMatchs, listUsers) {
+		//listMatchs = MatchUtil.sortByDate(listMatchs)
+		listMatchs.each {
+			StatUtil.applyMatch(it, listUsers)
+			listUsers = PetankUserUtil.sortByPoint(listUsers)
+		}
+		return listUsers
+	}
+	
+	static def applyMatch(Match match, listUsers) {
 		def victory = match.score1 > match.score2
 		def fanny1 = (victory && match.score2 == 0) 
 		def fanny2 = (!victory && match.score1 == 0) 
@@ -35,6 +43,11 @@ public class StatUtil{
 		//preparation des baremes :
 		def player1 = MatchUtil.getPlayers(match.player1)
 		def player2 = MatchUtil.getPlayers(match.player2)
+		
+		//maj progression
+		listUsers.each{
+			StatUtil.applyProgression(it, match.jour, listUsers)
+		}
 		
 		//maj des id/points joueurs pour sauvegarde
 		player1.each{
@@ -53,6 +66,7 @@ public class StatUtil{
 		}
 		player2.each{
 			match.playersWithPoints += it.id+ " ["+it.points+"];"
+			StatUtil.applyProgression(it, match.jour, listUsers)
 			match.point2 += it.points
 			it.partiesJoues++;
 			it.totalPoints += match.score2
@@ -121,6 +135,16 @@ public class StatUtil{
 					it.victoireNormale++
 				}
 			}
+		}
+	}
+	
+	static def applyProgression(player, jour, listUsers) {
+		if(player.dayBefore == null) {
+			player.dayBefore = jour
+		} else if(player.dayBefore.before(jour)) {
+			player.pointsDayBefore = player.points
+			player.placeDayBefore = PetankUserUtil.getClassementUser(player, listUsers)
+			player.dayBefore = jour
 		}
 	}
 	

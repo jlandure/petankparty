@@ -61,7 +61,7 @@ public class PlayerResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Détail de "+player.name
-		        p "V0.4-beta"
+		        p "V0.4.1-beta"
 		        p {
 		    		a(href:"/${groupName}/match",  "Matchs")
 		    		yield " / " 
