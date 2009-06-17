@@ -86,7 +86,7 @@ public class PlaceResource extends DefaultResource {
 		    var marker = new google.maps.Marker({
 		        position: myLatlng, 
 		        map: map,
-		        title :" """+place.petankName[0..-2]+""" " 
+		        title :" """+PetankPlaceUtil.getPlaceName(place)+""" " 
 		    });      
 
 			var infowindow = new google.maps.InfoWindow(

@@ -13,7 +13,8 @@ import org.petank.client.model.Match;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
-import org.petank.server.PetankUserUtil;
+import org.petank.server.PetankUserUtil;
+import org.petank.server.PetankPlaceUtil;
 /**
  * @author jlandure
  *
@@ -106,7 +107,7 @@ public class MatchResource extends DefaultGroupResource {
 				    				a(href:"/bareme", "${match.bareme.minimum} - ${match.bareme.maximum}")
 				    			}
 				    			td(class:"special") {
-				    				a(href:("/place/"+match.place.name), target:"_blank", match.place.petankName[0..-2])
+				    				a(href:("/place/"+match.place.name), target:"_blank", PetankPlaceUtil.getPlaceName(match.place))
 				    			}
 				    		}
 		    			}
