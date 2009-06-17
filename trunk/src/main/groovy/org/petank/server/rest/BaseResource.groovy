@@ -30,7 +30,7 @@ public class BaseResource extends DefaultResource {
 		    }
 		    body {
 		    	h1 "P\u00E9tank Party"
-		        p "V0.4-beta"
+		        p "V0.4.1-beta"
 		        p {
 		    		a(href:"/bareme",  "Bareme")
 		    		

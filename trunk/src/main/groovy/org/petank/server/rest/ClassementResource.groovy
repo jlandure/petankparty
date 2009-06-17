@@ -54,7 +54,7 @@ public class ClassementResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Classement"
-		        p "V0.4-beta"
+		        p "V0.4.1-beta"
 		        p {
 		    		a(href:"/${groupName}/match",  "Matchs")
 		    		yield " / " 
@@ -86,11 +86,19 @@ public class ClassementResource extends DefaultGroupResource {
 		    			listUsers.each{
 		    				user = it
 				    		tr {
-				    			td(class:"special", "$i")
+				    			td(class:"special") {
+				    				yield "$i"
+				    				br()
+				    				yield "[${(user.placeDayBefore - i)}]"
+				    			}
 				    			td(class:"special2") {
 				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
 				    			}
-				    			td(class:"special", "${user.points}")
+				    			td(class:"special") {
+				    				yield "${user.points}"
+				    				br()
+				    				yield "[${(user.points - user.pointsDayBefore)}]"
+				    			}
 				    			td(class:"special", "${user.partiesJoues}")
 				    			td(class:"special", "${user.partiesGagnes}")
 				    			td(class:"special", "${user.partiesPerdus}")

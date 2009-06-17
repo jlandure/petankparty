@@ -210,6 +210,12 @@ class MatchUtil{
 		return c
 	}
 	
+	static def sortByDate(listMatchs) {
+		def mc= [compare:{a,b-> a.jour.compareTo(b.jour)}] as Comparator
+		listMatchs.sort(mc)
+		return listMatchs
+	}
+	
 	static def getMatchByPlayerNameAndGroupName(playerName, groupName) {
 		def c = []
 		def player = PetankUserUtil.getUser(playerName, groupName)

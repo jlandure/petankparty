@@ -78,6 +78,15 @@ public class PetankUser implements Serializable {
     private Integer defaiteAnormale = 0;
     
     @Transient
+    private Date dayBefore;
+    
+    @Transient
+    private Integer placeDayBefore = 0;
+    
+    @Transient
+    private Float pointsDayBefore;
+    
+    @Transient
     private Integer nbMatchOfficiel = 0;
     
 	public Long getId() {
@@ -246,6 +255,30 @@ public class PetankUser implements Serializable {
 
 	public void setGroup(PetankGroup group) {
 		this.group = group;
+	}
+
+	public Integer getPlaceDayBefore() {
+		return placeDayBefore;
+	}
+
+	public void setPlaceDayBefore(Integer placeDayBefore) {
+		this.placeDayBefore = placeDayBefore;
+	}
+
+	public Float getPointsDayBefore() {
+		return pointsDayBefore;
+	}
+
+	public void setPointsDayBefore(Float pointsDayBefore) {
+		this.pointsDayBefore = pointsDayBefore;
+	}
+
+	public Date getDayBefore() {
+		return dayBefore;
+	}
+
+	public void setDayBefore(Date dayBefore) {
+		this.dayBefore = dayBefore;
 	}
 
 }

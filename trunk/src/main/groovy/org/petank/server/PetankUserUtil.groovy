@@ -99,6 +99,18 @@ class PetankUserUtil{
 		return c
 	}
 	
+	static def getClassementUser(user, listUsers) {
+		def c
+		int i = 0
+		listUsers.each {
+			i++
+			if(c == null && user.id == it.id) {
+				c = i
+			}
+		}
+		return c
+	}
+	
 //	static PetankUser[] getTest1() {
 //		return [listUsers[0], listUsers[2]]
 //	}
