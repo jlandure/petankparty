@@ -12,6 +12,7 @@ import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankGroupUtil;
+import org.petank.server.PetankPlaceUtil;
 import org.petank.server.PetankUserUtil;
 
 public class TestAlgo extends TestCase {
@@ -74,6 +75,7 @@ public class TestAlgo extends TestCase {
 	public void testAll() {
 		PetankGroupUtil.populate();
 		PetankUserUtil.populate();
+		PetankPlaceUtil.populate();
 		MatchUtil.populate();
 		listBaremes = BaremeUtil.populate();
 		
