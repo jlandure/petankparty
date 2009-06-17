@@ -13,6 +13,7 @@ import org.petank.client.model.Match;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
+import org.petank.server.DateUtil;
 import org.petank.server.PetankUserUtil;
 import org.petank.server.PetankPlaceUtil;
 /**
@@ -34,7 +35,7 @@ public class MatchResource extends DefaultGroupResource {
 
 		xml.matchs(group:'euriware') {
 			listMatchs[-1..0].each{ ma ->
-				match(id:i, date:MatchUtil.getDateToFrString(ma.jour), bareme:ma.bareme.id)
+				match(id:i, date:DateUtil.getDateToFrString(ma.jour), bareme:ma.bareme.id)
 				i++
 			}
 		}
@@ -82,7 +83,7 @@ public class MatchResource extends DefaultGroupResource {
 		    				listMatchs[-1..0].each{
 		    				match = it
 				    		tr {
-				    			td(class:"special", "${MatchUtil.getDateToFrString(match.jour)}")
+				    			td(class:"special", "${DateUtil.getDateToFrString(match.jour)}")
 				    			td(class:"special") {
 				    				ul {
 				    					MatchUtil.getPlayers(match.player1).each{

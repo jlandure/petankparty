@@ -13,6 +13,7 @@ import org.petank.client.model.Match;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
+import org.petank.server.DateUtil;
 import org.petank.server.PetankUserUtil;
 
 /**
@@ -92,8 +93,8 @@ public class TimeLineResource extends DefaultGroupResource {
 	def matchAvantDay
 	listMatchs.each{
 		
-//		if(date == null || !(MatchUtil.getDateToFrString(it.jour).equals(date))) {
-//			date = MatchUtil.getDateToFrString(it.jour)
+//		if(date == null || !(DateUtil.getDateToFrString(it.jour).equals(date))) {
+//			date = DateUtil.getDateToFrString(it.jour)
 //			sameDate = false
 //		} else {
 //			sameDate = true
@@ -111,7 +112,7 @@ public class TimeLineResource extends DefaultGroupResource {
 			if(hasPoints) {
 				j = 1
 				gString += "\ndata.addRow();"
-				gString += "\ndata.setValue("+i+", 0, new Date("+MatchUtil.getDateToGoogleDateString(matchAvantDay.jour)+"));"
+				gString += "\ndata.setValue("+i+", 0, new Date("+DateUtil.getDateToGoogleDateString(matchAvantDay.jour)+"));"
 				players.each{
 					player = it
 					gString += "\ndata.setValue("+i+", "+j+", "+points."${player.id}"+");"
