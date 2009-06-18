@@ -20,10 +20,7 @@ public class BaseResource extends DefaultResource {
 		super(context, request, response)
 	}
 	
-	def toHTML() {
-		def writer = new StringWriter()
-		def html = new MarkupBuilder(writer)
-		html.setDoubleQuotes(true)
+	def toHTML(html, writer) {
 		html.html {
 			head {
 		        title "P\u00E9tank Party"
