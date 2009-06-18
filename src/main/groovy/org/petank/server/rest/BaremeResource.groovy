@@ -24,13 +24,9 @@ public class BaremeResource extends DefaultResource {
 		super(context, request, response)
 	}
 	
-    def toXML() {
+    def toXML(xml, writer) {
     	def listBaremes = BaremeUtil.populate();
 		
-    	def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		xml.setDoubleQuotes(true)
-
 		xml.baremes() {
 			listBaremes.each{ ba ->
 				bareme( id:ba.id, 
@@ -46,13 +42,9 @@ public class BaremeResource extends DefaultResource {
 		return writer.toString()
     }
 
-	def toHTML() {
+	def toHTML(html, writer) {
 		def listBaremes = BaremeUtil.populate();
-		
 		def bareme 
-		def writer = new StringWriter()
-		def html = new MarkupBuilder(writer)
-		html.setDoubleQuotes(true)
 		html.html {
 			head {
 		        title "Bareme P\u00E9tank Party"

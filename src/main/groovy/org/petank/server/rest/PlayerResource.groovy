@@ -32,12 +32,9 @@ public class PlayerResource extends DefaultGroupResource {
 		}
 	}
 	
-    def toXML() {
+    def toXML(xml, writer) {
 
 		int i = 1;
-    	def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		xml.setDoubleQuotes(true)
 
 		xml.player(name:player.petankName) {
 //			listUsers.each{ play ->
@@ -48,13 +45,10 @@ public class PlayerResource extends DefaultGroupResource {
 		return writer.toString()
     }
 
-	def toHTML() {
+	def toHTML(html, writer) {
 
 		int i = 1;
 		def user 
-		def writer = new StringWriter()
-		def html = new MarkupBuilder(writer)
-		html.setDoubleQuotes(true)
 		html.html {
 		    head {
 		        title "Détail de "+player.name+" | P\u00E9tank Party"

@@ -40,23 +40,7 @@ public class TimeLineResource extends DefaultGroupResource {
 		}
 	}
 	
-    def toXML() {
-
-		int i = 1;
-    	def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		xml.setDoubleQuotes(true)
-
-		xml.test{//(name:player.petankName) {
-//			listUsers.each{ play ->
-//				player(place:i, nom:play.petankName, score:play.points)
-//				i++
-//			}
-		}
-		return writer.toString()
-    }
-
-	def toHTML() {
+	def toHTML(html, writer) {
 
 		String gString = """
 		

@@ -15,6 +15,7 @@ import java.util.Collections
 import javax.cache.Cache
 import org.restlet.data.Encoding
 import java.util.zip.GZIPOutputStream
+import groovy.xml.MarkupBuilder
 
 
 
@@ -56,7 +57,7 @@ public class DefaultResource extends Resource {
 	    	
 		    	if(text == null || expireCache()) {
 	    			//Put the value into the cache.
-	    			text = toHTML()
+	    			text = toHTML(prepareHtmlWriter())
 	    	        MEMCACHE.put(key, text);
 	    		}
 	    	
@@ -67,7 +68,7 @@ public class DefaultResource extends Resource {
     			//httpResponse.addHeader("Content-Encoding", "gzip");
 	    		break;
 	    	case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
-	    		representation = new StringRepresentation(toXML(), MediaType.TEXT_XML)
+	    		representation = new StringRepresentation(toXML(prepareXmlWriter()), MediaType.TEXT_XML)
 	    		break
 	    	case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
 	    		representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
@@ -78,10 +79,26 @@ public class DefaultResource extends Resource {
 		return representation
     }
 	
-	def toHTML() {
+	def prepareHtmlWriter() {
+		def writer = new StringWriter()
+		writer.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n")
+		def html = new MarkupBuilder(writer)
+		html.setDoubleQuotes(true)
+		return [html, writer]
+	}
+	
+	def prepareXmlWriter() {
+		def writer = new StringWriter()
+		writer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+		def xml = new MarkupBuilder(writer)
+		xml.setDoubleQuotes(true)
+		return [xml, writer]
+	}
+	
+	def toHTML(html, writer) {
 		return "<html><body>HTML</body></html>"
 	}
-	def toXML() {
+	def toXML(xml, writer) {
 		return "<xml>xml</xml>"
 	}
 	def toJSON() {

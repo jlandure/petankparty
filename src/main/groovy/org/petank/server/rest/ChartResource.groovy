@@ -29,7 +29,7 @@ public class ChartResource extends PlayerResource {
 		super(context, request, response)
 	}
 
-	def toHTML() {
+	def toHTML(html, writer) {
 		def points = MatchUtil.getPlayerEvolution(player)
 		def allpoints = points.join(",")
 		//def pointmin = points.min()

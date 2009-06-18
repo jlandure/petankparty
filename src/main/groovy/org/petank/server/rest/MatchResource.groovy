@@ -26,12 +26,9 @@ public class MatchResource extends DefaultGroupResource {
 		super(context, request, response)
 	}
 	
-    def toXML() {
+    def toXML(xml, writer) {
 
 		int i = 1;
-    	def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		xml.setDoubleQuotes(true)
 
 		xml.matchs(group:'euriware') {
 			listMatchs[-1..0].each{ ma ->
@@ -42,13 +39,10 @@ public class MatchResource extends DefaultGroupResource {
 		return writer.toString()
     }
 
-	def toHTML() {
+	def toHTML(html, writer) {
 
 		int i = 1;
 		def match
-		def writer = new StringWriter()
-		def html = new MarkupBuilder(writer)
-		html.setDoubleQuotes(true)
 		html.html {
 			head {
 		        title "Matchs P\u00E9tank Party"

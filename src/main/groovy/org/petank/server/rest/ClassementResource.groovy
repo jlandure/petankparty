@@ -25,12 +25,9 @@ public class ClassementResource extends DefaultGroupResource {
 		super(context, request, response)
 	}
 	
-    def toXML() {
+    def toXML(xml, writer) {
 
 		int i = 1;
-    	def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		xml.setDoubleQuotes(true)
 
 		xml.players(date:'15/05/09') {
 			listUsers.each{ play ->
@@ -38,16 +35,14 @@ public class ClassementResource extends DefaultGroupResource {
 				i++
 			}
 		}
+		//return writer.toString()
 		return writer.toString()
     }
 
-	def toHTML() {
+	def toHTML(html, writer) {
 
 		int i = 1;
 		def user 
-		def writer = new StringWriter()
-		def html = new MarkupBuilder(writer)
-		html.setDoubleQuotes(true)
 		html.html {
 		    head {
 		        title "Classement P\u00E9tank Party"
