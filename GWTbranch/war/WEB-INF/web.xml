@@ -7,7 +7,7 @@
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>index</welcome-file>
+    <welcome-file>PetankParty.html</welcome-file>
   </welcome-file-list>
   
   <!-- Servlets -->
@@ -44,7 +44,7 @@
   -->
 	<servlet-mapping>
 		<servlet-name>RestletServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/test/*</url-pattern>
 	</servlet-mapping>
   
   <servlet-mapping>

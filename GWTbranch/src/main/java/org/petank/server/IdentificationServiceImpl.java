@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 
-import org.petank.client.IdentificationService;
 import org.petank.client.model.PetankUser;
+import org.petank.client.web.IdentificationService;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -33,7 +33,7 @@ IdentificationService {
 			}
 		} else {
 			currentUser = new PetankUser();
-			currentUser.setEmail(userService.createLoginURL("/"));
+			currentUser.setEmail(userService.createLoginURL("/PetankParty.html"));
 			//throw new UserNotFoundException(userService.createLoginURL("/"));
 		}
 		return currentUser;

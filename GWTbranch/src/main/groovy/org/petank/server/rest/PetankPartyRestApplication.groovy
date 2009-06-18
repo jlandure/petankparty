@@ -39,7 +39,7 @@ public class PetankPartyRestApplication extends Application {
         
         Router router = new Router(getContext());
 
-        router.attach("/",BaseResource.class)
+        //router.attach("/",BaseResource.class)
         
         Guard guard1
         Guard guard2
