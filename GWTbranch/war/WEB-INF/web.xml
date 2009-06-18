@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>index</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>org.petank.server.GreetingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>identifyServlet</servlet-name>
+    <servlet-class>org.petank.server.IdentificationServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/petankparty/greet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Application class name 
+-->
+	<context-param>
+		<param-name>org.restlet.application</param-name>
+		<param-value>
+			org.petank.server.rest.PetankPartyRestApplication  
+       </param-value>
+	</context-param>
+	<!-- Restlet adapter
+ -->
+	<servlet>
+		<servlet-name>RestletServlet</servlet-name>
+		<servlet-class>org.restlet.util.ServerServlet</servlet-class>
+	</servlet>
+	<!-- Catch all requests 
+  -->
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>identifyServlet</servlet-name>
+    <url-pattern>/petankparty/identify</url-pattern>
+  </servlet-mapping>  
+  
+
+</web-app>
