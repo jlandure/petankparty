@@ -172,6 +172,10 @@ public class Match implements Serializable {
 	public boolean isOfficiel() {
 		return this.typeMatch.equals(TypeMatch.OFFICIEL);
 	}
+	
+	public boolean isNormal() {
+		return this.typeVictoire.equals(TypeVictoire.NORMAL);
+	}
 
 	public PetankGroup getGroup() {
 		return group;

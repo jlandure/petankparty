@@ -99,7 +99,13 @@ public class MatchResource extends DefaultGroupResource {
 				    			td(class:"special", "${String.format('%.2f', match.point1)}")
 				    			td(class:"special", "${String.format('%.2f', match.point2)}")
 				    			td(class:"special") {
-				    				a(href:"/bareme", "${match.bareme.minimum} - ${match.bareme.maximum}")
+				    				yield "${match.bareme.minimum} - ${match.bareme.maximum}"
+				    				br()
+				    				if(match.isNormal()) {
+				    					yield "[${match.bareme.victoireNormale} / ${match.bareme.defaiteNormale}]"
+				    				} else {
+				    					yield "[${match.bareme.victoireAnormale} / ${match.bareme.defaiteAnormale}]"
+				    				}
 				    			}
 				    			td(class:"special") {
 				    				a(href:("/place/"+match.place.name), target:"_blank", PetankPlaceUtil.getPlaceName(match.place))
