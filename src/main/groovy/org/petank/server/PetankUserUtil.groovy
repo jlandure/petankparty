@@ -102,7 +102,7 @@ class PetankUserUtil {
 		def petankGroup = PetankGroupUtil.instance.getGroup(group)
 		def listUsers = PetankUserUtil.instance.getUsers()
 		listUsers.each {
-			if(petankGroup.id == it.group.id) {
+			if(petankGroup.id == it.idGroup) {
 				c << it
 			}
 		}

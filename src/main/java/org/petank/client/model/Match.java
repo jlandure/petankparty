@@ -10,10 +10,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Transient;
 
-import org.petank.server.BaremeUtil;
-import org.petank.server.PetankGroupUtil;
-import org.petank.server.PetankPlaceUtil;
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Match implements Serializable {
 
@@ -157,10 +153,6 @@ public class Match implements Serializable {
 		this.typeVictoire = typeVictoire;
 	}
 
-	public Bareme getBareme() {
-		return BaremeUtil.getInstance().getBaremeById(idBareme);
-	}
-
 	public TypeMatch getTypeMatch() {
 		return typeMatch;
 	}
@@ -175,14 +167,6 @@ public class Match implements Serializable {
 	
 	public boolean isNormal() {
 		return this.typeVictoire.equals(TypeVictoire.NORMAL);
-	}
-
-	public PetankGroup getGroup() {
-		return PetankGroupUtil.getInstance().getGroupById(idGroup);
-	}
-
-	public PetankPlace getPlace() {
-		return PetankPlaceUtil.getInstance().getPlaceById(idPlace);
 	}
 
 	public Long getIdGroup() {
