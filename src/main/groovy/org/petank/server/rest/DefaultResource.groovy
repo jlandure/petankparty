@@ -17,6 +17,11 @@ import org.restlet.data.Encoding
 import java.util.zip.GZIPOutputStream
 import groovy.xml.MarkupBuilder
 
+import javax.jdo.PersistenceManager
+import org.petank.server.PMF
+import javax.jdo.Transaction
+import org.petank.server.dao.DAOManager
+
 
 
 /**
@@ -45,39 +50,39 @@ public class DefaultResource extends Resource {
 	}
 	
 	Representation represent(Variant variant) {
-		String text
 		def representation
+		String text
 		def key
-    	switch (variant.mediaType) {
-	    	case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
-	    		key = getRequest().getOriginalRef().getPath()
-	    		
-	    		//Get the value from the cache.
-	    		text = (MEMCACHE.get(key) as String);
-	    	
-		    	if(text == null || expireCache()) {
-	    			//Put the value into the cache.
-	    			text = toHTML(prepareHtmlWriter())
-	    	        MEMCACHE.put(key, text);
-	    		}
-	    	
-    			representation = new StringRepresentation(text, MediaType.TEXT_HTML)
-    			//GZIPOutputStream GZIPStream = new GZIPOutputStream(representation)
-    			//representation = new OutputRepresentation(GZIPStream)
-    			//representation.setEncodings([Encoding.DEFLATE])
-    			//httpResponse.addHeader("Content-Encoding", "gzip");
-	    		break;
-	    	case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
-	    		representation = new StringRepresentation(toXML(prepareXmlWriter()), MediaType.TEXT_XML)
-	    		break
-	    	case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
-	    		representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
-	    		break
-	    	default:
-	    		representation = new StringRepresentation(toPLAIN(), MediaType.TEXT_PLAIN);
-	    	}
+		switch (variant.mediaType) {
+			case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
+			//key = getRequest().getOriginalRef().getPath()
+			
+			//Get the value from the cache.
+			//text = (MEMCACHE.get(key) as String);
+			
+			//if(text == null || expireCache()) {
+			//Put the value into the cache.
+				text = toHTML(prepareHtmlWriter())
+			//    MEMCACHE.put(key, text);
+			//}
+			
+				representation = new StringRepresentation(text, MediaType.TEXT_HTML)
+			//GZIPOutputStream GZIPStream = new GZIPOutputStream(representation)
+			//representation = new OutputRepresentation(GZIPStream)
+			//representation.setEncodings([Encoding.DEFLATE])
+			//httpResponse.addHeader("Content-Encoding", "gzip");
+				break;
+			case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
+				representation = new StringRepresentation(toXML(prepareXmlWriter()), MediaType.TEXT_XML)
+				break
+			case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
+				representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
+				break
+			default:
+				representation = new StringRepresentation(toPLAIN(), MediaType.TEXT_PLAIN);
+		}
 		return representation
-    }
+	}
 	
 	def prepareHtmlWriter() {
 		def writer = new StringWriter()
@@ -112,4 +117,5 @@ public class DefaultResource extends Resource {
 		getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
 		return;
 	}
+	
 }

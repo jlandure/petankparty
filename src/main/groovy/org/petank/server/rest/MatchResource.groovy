@@ -32,7 +32,7 @@ public class MatchResource extends DefaultGroupResource {
 
 		xml.matchs(group:'euriware') {
 			listMatchs[-1..0].each{ ma ->
-				match(id:i, date:DateUtil.getDateToFrString(ma.jour), bareme:ma.bareme.id)
+				match(id:i, date:DateUtil.instance.getDateToFrString(ma.jour), bareme:ma.bareme.id)
 				i++
 			}
 		}
@@ -49,7 +49,7 @@ public class MatchResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Matchs"
-		        p "V0.4.1-beta"
+		        p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        p { 
 		    		a(href:"/${groupName}/classement",  "Classement")
 		    		yield " / " 
@@ -77,18 +77,18 @@ public class MatchResource extends DefaultGroupResource {
 		    				listMatchs[-1..0].each{
 		    				match = it
 				    		tr {
-				    			td(class:"special", "${DateUtil.getDateToFrString(match.jour)}")
+				    			td(class:"special", "${DateUtil.instance.getDateToFrString(match.jour)}")
 				    			td(class:"special") {
 				    				ul {
-				    					MatchUtil.getPlayers(match.player1).each{
-				    						li(it.name + " [" + MatchUtil.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
+				    					MatchUtil.instance.getPlayers(match.player1).each{
+				    						li(it.name + " [" + MatchUtil.instance.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
 				    					}
 				    				}
 				    			}
 				    			td(class:"special") {
 				    				ul {
-				    					MatchUtil.getPlayers(match.player2).each{
-				    						li(it.name + " [" + MatchUtil.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
+				    					MatchUtil.instance.getPlayers(match.player2).each{
+				    						li(it.name + " [" + MatchUtil.instance.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
 				    					}
 				    				}
 				    			}
@@ -108,7 +108,7 @@ public class MatchResource extends DefaultGroupResource {
 				    				}
 				    			}
 				    			td(class:"special") {
-				    				a(href:("/place/"+match.place.name), target:"_blank", PetankPlaceUtil.getPlaceName(match.place))
+				    				a(href:("/place/"+match.place.name), target:"_blank", PetankPlaceUtil.instance.getPlaceName(match.place))
 				    			}
 				    		}
 		    			}

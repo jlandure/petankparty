@@ -2,7 +2,6 @@ package org.petank.client.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -34,12 +33,6 @@ public class PetankGroup implements Serializable {
     
     @Persistent
     private Boolean matchApplied;
-    
-    @Persistent(mappedBy = "group")
-    private List<PetankUser> listUsers;
-    
-    @Persistent(mappedBy = "group")
-    private List<Match> listMatchs;
     
 	public Long getId() {
 		return id;
@@ -87,22 +80,6 @@ public class PetankGroup implements Serializable {
 
 	public void setMatchApplied(Boolean matchApplied) {
 		this.matchApplied = matchApplied;
-	}
-
-	public List<PetankUser> getListUsers() {
-		return listUsers;
-	}
-
-	public void setListUsers(List<PetankUser> listUsers) {
-		this.listUsers = listUsers;
-	}
-
-	public List<Match> getListMatchs() {
-		return listMatchs;
-	}
-
-	public void setListMatchs(List<Match> listMatchs) {
-		this.listMatchs = listMatchs;
 	}
 
 }

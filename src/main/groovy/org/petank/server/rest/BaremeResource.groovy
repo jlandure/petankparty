@@ -13,20 +13,21 @@ import org.petank.client.model.Match;
 import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
-import org.petank.server.PetankUserUtil;
+import org.petank.server.PetankUserUtil;import org.petank.server.dao.DAOManager
 /**
  * @author jlandure
  *
  */
 public class BaremeResource extends DefaultResource {
 
+	def listBaremes
+	
 	def BaremeResource(Context context, Request request, Response response) {
 		super(context, request, response)
+		listBaremes = DAOManager.instance.getAll(Bareme.class)
 	}
 	
     def toXML(xml, writer) {
-    	def listBaremes = BaremeUtil.populate();
-		
 		xml.baremes() {
 			listBaremes.each{ ba ->
 				bareme( id:ba.id, 
@@ -43,7 +44,6 @@ public class BaremeResource extends DefaultResource {
     }
 
 	def toHTML(html, writer) {
-		def listBaremes = BaremeUtil.populate();
 		def bareme 
 		html.html {
 			head {
@@ -51,7 +51,7 @@ public class BaremeResource extends DefaultResource {
 		    }
 		    body {
 		    	h1 "Bareme"
-		        p "V0.4.1-beta"
+		        p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        br()
 		        br()
 		        
@@ -69,7 +69,7 @@ public class BaremeResource extends DefaultResource {
 		    			listBaremes.each{
 		    				bareme = it
 				    		tr {
-				    			td(class:"special", "${bareme.minimum as Integer} - ${bareme.maximum as Integer}")
+				    			td(class:"special", "$bareme.id ${bareme.minimum as Integer} - ${bareme.maximum as Integer}")
 				    			td(class:"special", "${bareme.victoireNormale}")
 				    			td(class:"special", "${bareme.defaiteNormale}")
 				    			td(class:"special", "${bareme.victoireAnormale}")
