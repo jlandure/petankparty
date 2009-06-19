@@ -10,9 +10,13 @@ import groovy.lang.Singleton
  *
  */
 @Singleton
-public class DateUtil{
+public class DateUtil {
 
-	static def makeDate(event) {
+	static DateUtil getInstance() {
+		return instance
+	}
+	
+	def makeDate(event) {
 	    def eventDate = Calendar.getInstance()
 		if (event != null) {
 			def dmy = event.split("/").collect { num -> Integer.parseInt(num.trim()) }
@@ -21,17 +25,17 @@ public class DateUtil{
 	    return eventDate.getTime()
 	}
 	
-	static def getDateToString(date) {
+	def getDateToString(date) {
 		//le nouveau est mieux car c'est ordonné niveau temps
 		return String.format('%tY/%<tm/%<td', date)
 	}
 	
-	static def getDateToFrString(date) {
+	def getDateToFrString(date) {
 		//format FR
 		return String.format('%td/%<tm/%<tY', date)
 	}
 	
-	static def getDateToGoogleDateString(date) {
+	def getDateToGoogleDateString(date) {
 		//format new Date(2009, 1 ,3)); //Y, M-1, D (3 février 2009)
 		def dateStringFormat = String.format('%tY, %<tm, %<td', date)
 		def dateString = dateStringFormat

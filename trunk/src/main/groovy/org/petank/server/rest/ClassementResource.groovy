@@ -23,6 +23,7 @@ public class ClassementResource extends DefaultGroupResource {
 
 	def ClassementResource(Context context, Request request, Response response) {
 		super(context, request, response)
+		listUsers = PetankUserUtil.instance.sortByPoint(listUsers)
 	}
 	
     def toXML(xml, writer) {
@@ -49,7 +50,7 @@ public class ClassementResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Classement"
-		        p "V0.4.1-beta"
+		        p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        p {
 		    		a(href:"/${groupName}/match",  "Matchs")
 		    		yield " / " 

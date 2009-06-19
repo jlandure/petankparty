@@ -14,39 +14,44 @@ import org.petank.client.model.PetankUser;
 import org.petank.client.model.TypeVictoire;
 import org.petank.client.model.TypeMatch;
 import org.petank.client.model.Bareme;
+import org.petank.server.dao.DAOManager
 
 /**
  * @author jlandure
  *
  */
 @Singleton
-public class StatUtil{
+public class StatUtil {
 
-	static Float getBetween(Match match) {
+	static StatUtil getInstance() {
+		return instance
+	}
+	
+	Float getBetween(Match match) {
 		return (match.point1 - match.point2).abs()
 	}
 	
-	static def applyMatchs(listMatchs, listUsers) {
+	def applyMatchs(listMatchs, listUsers) {
 		//listMatchs = MatchUtil.sortByDate(listMatchs)
 		listMatchs.each {
-			StatUtil.applyMatch(it, listUsers)
-			listUsers = PetankUserUtil.sortByPoint(listUsers)
+			this.applyMatch(it, listUsers)
+			listUsers = PetankUserUtil.instance.sortByPoint(listUsers)
 		}
 		return listUsers
 	}
 	
-	static def applyMatch(Match match, listUsers) {
+	def applyMatch(Match match, listUsers) {
 		def victory = match.score1 > match.score2
 		def fanny1 = (victory && match.score2 == 0) 
 		def fanny2 = (!victory && match.score1 == 0) 
 		
 		//preparation des baremes :
-		def player1 = MatchUtil.getPlayers(match.player1)
-		def player2 = MatchUtil.getPlayers(match.player2)
+		def player1 = MatchUtil.instance.getPlayers(match.player1)
+		def player2 = MatchUtil.instance.getPlayers(match.player2)
 		
 		//maj progression
 		listUsers.each{
-			StatUtil.applyProgression(it, match.jour, listUsers)
+			this.applyProgression(it, match.jour, listUsers)
 		}
 		
 		//maj des id/points joueurs pour sauvegarde
@@ -66,7 +71,7 @@ public class StatUtil{
 		}
 		player2.each{
 			match.playersWithPoints += it.id+ " ["+it.points+"];"
-			StatUtil.applyProgression(it, match.jour, listUsers)
+			this.applyProgression(it, match.jour, listUsers)
 			match.point2 += it.points
 			it.partiesJoues++;
 			it.totalPoints += match.score2
@@ -87,9 +92,9 @@ public class StatUtil{
 		//println match.playersWithPoints
 		
 		//récupération du bareme à appliquer
-		Bareme bareme = BaremeUtil.chooseBareme(StatUtil.getBetween(match))
-		match.bareme = bareme
-		def coefficient = BaremeUtil.getCoefficient(match.typeMatch)
+		Bareme bareme = BaremeUtil.instance.chooseBareme(this.getBetween(match))
+		match.idBareme = bareme.id
+		def coefficient = BaremeUtil.instance.getCoefficient(match.typeMatch)
 		
 		if(match.point1 >= match.point2) {
 			if(victory) {
@@ -138,21 +143,21 @@ public class StatUtil{
 		}
 	}
 	
-	static def applyProgression(player, jour, listUsers) {
+	def applyProgression(player, jour, listUsers) {
 		if(player.dayBefore == null) {
 			player.dayBefore = jour
 		} else if(player.dayBefore.before(jour)) {
 			player.pointsDayBefore = player.points
-			player.placeDayBefore = PetankUserUtil.getClassementUser(player, listUsers)
+			player.placeDayBefore = PetankUserUtil.instance.getClassementUser(player, listUsers)
 			player.dayBefore = jour
 		}
 	}
 	
-	static def getPlayerEvolution(player, listMatchs=null) {
+	def getPlayerEvolution(player, listMatchs=null) {
 		def point
 		def points = []
 		if(listMatchs == null) {
-			listMatchs = MatchUtil.getMatchByPlayerNameAndGroupName(player.name, player.group.name)
+			listMatchs = MatchUtil.instance.getMatchByPlayerNameAndGroupName(player.name, player.group.name)
 		}
 		listMatchs.each{
 			point = getPlayerPoints(it.playersWithPoints, player.id as String);

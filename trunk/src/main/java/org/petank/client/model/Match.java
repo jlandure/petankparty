@@ -10,6 +10,10 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Transient;
 
+import org.petank.server.BaremeUtil;
+import org.petank.server.PetankGroupUtil;
+import org.petank.server.PetankPlaceUtil;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Match implements Serializable {
 
@@ -20,10 +24,10 @@ public class Match implements Serializable {
     private Long id;
 	
 	@Persistent
-    private PetankGroup group;
+	private Long idGroup;
 	
 	@Persistent
-    private PetankPlace place;
+	private Long idPlace;
 	
 	/**
 	 * tous les joueurs de l'équipe 1 concaténé
@@ -71,7 +75,7 @@ public class Match implements Serializable {
     private TypeMatch typeMatch;
 	
 	@Persistent
-    private Bareme bareme;
+	private Long idBareme;
 
 	public Long getId() {
 		return id;
@@ -154,11 +158,7 @@ public class Match implements Serializable {
 	}
 
 	public Bareme getBareme() {
-		return bareme;
-	}
-
-	public void setBareme(Bareme bareme) {
-		this.bareme = bareme;
+		return BaremeUtil.getInstance().getBaremeById(idBareme);
 	}
 
 	public TypeMatch getTypeMatch() {
@@ -178,19 +178,35 @@ public class Match implements Serializable {
 	}
 
 	public PetankGroup getGroup() {
-		return group;
-	}
-
-	public void setGroup(PetankGroup group) {
-		this.group = group;
+		return PetankGroupUtil.getInstance().getGroupById(idGroup);
 	}
 
 	public PetankPlace getPlace() {
-		return place;
+		return PetankPlaceUtil.getInstance().getPlaceById(idPlace);
 	}
 
-	public void setPlace(PetankPlace place) {
-		this.place = place;
+	public Long getIdGroup() {
+		return idGroup;
+	}
+
+	public void setIdGroup(Long idGroup) {
+		this.idGroup = idGroup;
+	}
+
+	public Long getIdPlace() {
+		return idPlace;
+	}
+
+	public void setIdPlace(Long idPlace) {
+		this.idPlace = idPlace;
+	}
+
+	public Long getIdBareme() {
+		return idBareme;
+	}
+
+	public void setIdBareme(Long idBareme) {
+		this.idBareme = idBareme;
 	}
 
 }

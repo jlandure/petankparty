@@ -1,7 +1,6 @@
 package org.petank.client.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -26,17 +25,14 @@ public class PetankPlace implements Serializable {
     private String petankName;
 	
 	@Persistent
-    private Number lat;
+    private String lat;
 	
 	@Persistent
-    private Number lng;
+    private String lng;
 	
 	@Persistent
     private String content;
 	
-    @Persistent(mappedBy = "place")
-    private List<Match> listMatchs;
-    
 	public Long getId() {
 		return id;
 	}
@@ -61,19 +57,19 @@ public class PetankPlace implements Serializable {
 		this.petankName = petankName;
 	}
 
-	public Number getLat() {
+	public String getLat() {
 		return lat;
 	}
 
-	public void setLat(Number lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 
-	public Number getLng() {
+	public String getLng() {
 		return lng;
 	}
 
-	public void setLng(Number lng) {
+	public void setLng(String lng) {
 		this.lng = lng;
 	}
 
@@ -83,14 +79,6 @@ public class PetankPlace implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public List<Match> getListMatchs() {
-		return listMatchs;
-	}
-
-	public void setListMatchs(List<Match> listMatchs) {
-		this.listMatchs = listMatchs;
 	}
 
 }

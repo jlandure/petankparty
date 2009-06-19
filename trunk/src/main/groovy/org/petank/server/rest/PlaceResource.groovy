@@ -10,6 +10,7 @@ import org.restlet.representation.*
 import groovy.xml.MarkupBuilder;
 import org.petank.client.model.PetankPlace;
 import org.petank.server.PetankPlaceUtil;
+import org.petank.server.dao.DAOManager
 
 /**
  * @author jlandure
@@ -29,7 +30,7 @@ public class PlaceResource extends DefaultResource {
 		if(placeName == null) {
 			quit();return
 		}
-		place = PetankPlaceUtil.getPlace(placeName)
+		place = PetankPlaceUtil.instance.getPlace(placeName)
 		if(place == null) {
 			quit();return
 		}
@@ -70,7 +71,7 @@ public class PlaceResource extends DefaultResource {
 		    var marker = new google.maps.Marker({
 		        position: myLatlng, 
 		        map: map,
-		        title :" """+PetankPlaceUtil.getPlaceName(place)+""" " 
+		        title :" """+PetankPlaceUtil.instance.getPlaceName(place)+""" " 
 		    });      
 
 			var infowindow = new google.maps.InfoWindow(

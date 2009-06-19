@@ -5,11 +5,11 @@
 	<classpathentry kind="src" path="src/main/groovy"/>
 	<classpathentry kind="src" path="src/main/test/java"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/groovy-all-1.6.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.restlet.gae.jar"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/groovy-all-1.6.3.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

@@ -5,61 +5,48 @@ package org.petank.server
 
 import org.petank.client.model.PetankGroup;
 import org.petank.server.StatUtil;
-
+import org.petank.server.dao.DAOManager
 /**
  * @author jlandure
  *
  */
 @Singleton
-class PetankGroupUtil{
+class PetankGroupUtil {
 
-	private static def listGroups
+	static PetankGroupUtil getInstance() {
+		return instance
+	}
 	
-	static List<PetankGroup> populate() {
-		if(listGroups == null) {
-			listGroups = new ArrayList<PetankGroup>()
-			listGroups << createPetankGroup("euriware", "Euriware", "euriware")
-			listGroups << createPetankGroup("orvault", "Orvault", "56")
-		}
+	List<PetankGroup> populate() {
+		def listGroups = new ArrayList<PetankGroup>()
+		listGroups = new ArrayList<PetankGroup>()
+		listGroups << createPetankGroup("euriware", "Euriware", "euriware")
+		listGroups << createPetankGroup("orvault", "Orvault", "56")
 		return listGroups
 	}
 	
-	static PetankGroup createPetankGroup(name, petankName, password, matchApplied=false) {
+	PetankGroup createPetankGroup(name, petankName, password, matchApplied=false) {
 		def group = new PetankGroup(name:name, petankName:petankName, password:password, matchApplied:matchApplied)
-		group.id = listGroups.size()
-		group.listMatchs = []
-		group.listUsers = []
 		return group
 	}
+	
+	def getGroups() {
+		return DAOManager.instance.getAll(PetankGroup.class)
+	}
 
-	static PetankGroup getGroup(name) {
-		def c
-		listGroups.each {
-			if(name.equalsIgnoreCase(it.name)) {
-				c = it
-			}
-		}
-		return c
+	PetankGroup getGroup(name) {
+		return DAOManager.instance.getObjectByName(PetankGroup.class, name)
 	}
 	
-	static PetankGroup getGroupById(idt) {
-		def c
-		listGroups.each {
-			if(idt == it.id) {
-				c = it
-			}
-		}
-		return c
+	PetankGroup getGroupById(id) {
+		return DAOManager.instance.get(PetankGroup.class, id)
 	}
 	
-	static def prepareGroup(group) {
-		if(!group.matchApplied) {
-			def listMatchs = MatchUtil.getMatchByGroupName(group.name)
-			def listUsers = PetankUserUtil.getUserByGroupName(group.name)
-			listUsers = StatUtil.applyMatchs(listMatchs, listUsers)
-			group.listUsers = listUsers
-			group.listMatchs = listMatchs
-			group.matchApplied = true;
-		}
+	def prepareGroup(group) {
+		def listMatchs = MatchUtil.instance.getMatchByGroupName(group.name)
+		def listUsers = PetankUserUtil.instance.getUserByGroupName(group.name)
+		listUsers = StatUtil.instance.applyMatchs(listMatchs, listUsers)
+		group.matchApplied = true;
+		return [listUsers, listMatchs]
 	}
 }

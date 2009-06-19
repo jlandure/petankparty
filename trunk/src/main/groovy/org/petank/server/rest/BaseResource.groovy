@@ -9,15 +9,53 @@ import org.restlet.resource.*
 import org.restlet.representation.*
 import groovy.xml.MarkupBuilder
 import org.petank.server.PetankGroupUtil
-
+
+import org.restlet.Application
+import org.restlet.Restlet
+import org.restlet.routing.Router
+import org.restlet.routing.Redirector
+import org.restlet.security.Guard
+import org.restlet.data.ChallengeScheme
 /**
  * @author jlandure
  *
  */
 public class BaseResource extends DefaultResource {
 
+	def listGroups
+	
+	def expireCache() {
+		return true
+	}
+	
 	def BaseResource(Context context, Request request, Response response) {
 		super(context, request, response)
+		listGroups = PetankGroupUtil.instance.getGroups()
+		
+		def router = this.getApplication().getRoot()
+		
+		Guard guard1
+        Guard guard2
+        Redirector redirector1
+        Redirector redirector2
+        listGroups.each{
+        	
+        	guard1 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
+        	guard1.getSecrets().put(it.name, it.password.toCharArray());
+        	
+        	guard2 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
+        	guard2.getSecrets().put(it.name, it.password.toCharArray());
+        	
+        	router.attach("/"+it.name+"/c",guard1)
+        	router.attach("/"+it.name+"/m",guard2)
+        	redirector1 = new Redirector(getContext(), "/"+it.name+"/classement",  
+        			Redirector.MODE_CLIENT_PERMANENT);
+        	redirector2 = new Redirector(getContext(), "/"+it.name+"/match",  
+        			Redirector.MODE_CLIENT_PERMANENT);
+        	
+        	guard1.setNext(redirector1)
+        	guard2.setNext(redirector2)
+        }
 	}
 	
 	def toHTML(html, writer) {
@@ -27,17 +65,15 @@ public class BaseResource extends DefaultResource {
 		    }
 		    body {
 		    	h1 "P\u00E9tank Party"
-		        p "V0.4.1-beta"
+		        p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        p {
 		    		a(href:"/bareme",  "Bareme")
 		    		
-		    		PetankGroupUtil.listGroups.each {
+		    		listGroups.each {
 		    			br()
 			    		br()
 			    		a(href:"/"+it.name+"/c", it.petankName)
 		    		}
-		    		
-		    		
 		    	}
 		    }
 		}
