@@ -55,16 +55,16 @@ public class DefaultResource extends Resource {
 		def key
 		switch (variant.mediaType) {
 			case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
-			//key = getRequest().getOriginalRef().getPath()
+				key = getRequest().getOriginalRef().getPath()
 			
-			//Get the value from the cache.
-			//text = (MEMCACHE.get(key) as String);
+				//Get the value from the cache.
+				text = (MEMCACHE.get(key) as String);
 			
-			//if(text == null || expireCache()) {
-			//Put the value into the cache.
-				text = toHTML(prepareHtmlWriter())
-			//    MEMCACHE.put(key, text);
-			//}
+				if(text == null || expireCache()) {
+					//Put the value into the cache.
+					text = toHTML(prepareHtmlWriter())
+					MEMCACHE.put(key, text);
+				}
 			
 				representation = new StringRepresentation(text, MediaType.TEXT_HTML)
 			//GZIPOutputStream GZIPStream = new GZIPOutputStream(representation)
