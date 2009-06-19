@@ -16,6 +16,10 @@ public class DateUtil {
 		return instance
 	}
 	
+	def getNewDateToFrString() {
+		return getDateToFrString(new Date());
+	}
+	
 	def makeDate(event) {
 	    def eventDate = Calendar.getInstance()
 		if (event != null) {

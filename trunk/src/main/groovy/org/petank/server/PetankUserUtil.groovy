@@ -40,6 +40,7 @@ class PetankUserUtil {
 		listUsers << createPetankUser("PSR", "Pierre Sehier", "euriware")
 		listUsers << createPetankUser("MSI", "Marouane Skouri", "euriware")
 		listUsers << createPetankUser("NHT", "Nicolas Huet", "euriware")
+		listUsers << createPetankUser("NBN", "Nicolas Bizien", "euriware")
 		
 		listUsers << createPetankUser("JRO", "Jean-Ro", "orvault")
 		listUsers << createPetankUser("TYN", "Martine", "orvault")
@@ -51,6 +52,25 @@ class PetankUserUtil {
 		listUsers << createPetankUser("PDO", "Pedro", "orvault")
 		listUsers << createPetankUser("GIL", "Gilbert", "orvault")
 		return listUsers
+	}
+	
+	def resetUser(user) {
+		user.points = DEBUT_POINTS
+		user.partiesJoues = 0
+		user.partiesGagnes = 0
+		user.partiesPerdus = 0
+		user.totalPoints = 0
+		user.fannyGagnes = 0
+		user.fannyPerdus = 0
+		user.victoireNormale = 0
+		user.victoireAnormale = 0
+		user.defaiteNormale = 0
+		user.defaiteAnormale = 0
+		user.dayBefore = null
+		user.placeDayBefore = 0
+		user.pointsDayBefore = null
+		user.nbMatchOfficiel = 0
+		return user
 	}
 	
 	PetankUser createPetankUser(name, petankName, group, dateString=null, points=PetankUserUtil.DEBUT_POINTS) {

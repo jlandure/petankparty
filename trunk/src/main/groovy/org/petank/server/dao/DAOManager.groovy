@@ -49,7 +49,7 @@ public class DAOManager {
 		def object
 		def PersistenceManager pm = initTransaction();
 		try {
-			object = pm.getObjectById(clazz, id)
+			object = pm.getObjectById(clazz, (id as Long))
 			commitTransaction()
 		} finally {
 			closeTransaction()
