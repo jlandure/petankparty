@@ -10,9 +10,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Transient;
 
-import org.petank.server.PetankGroupUtil;
-
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class PetankUser implements Serializable {
 
@@ -249,10 +246,6 @@ public class PetankUser implements Serializable {
 
 	public void setNbMatchOfficiel(Integer nbMatchOfficiel) {
 		this.nbMatchOfficiel = nbMatchOfficiel;
-	}
-
-	public PetankGroup getGroup() {
-		return PetankGroupUtil.getInstance().getGroupById(idGroup);
 	}
 
 	public Integer getPlaceDayBefore() {

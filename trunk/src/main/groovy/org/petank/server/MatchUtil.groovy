@@ -222,7 +222,7 @@ class MatchUtil {
 		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
 		def listMatchs = MatchUtil.instance.getMatchs()
 		listMatchs.each {
-			if(petankGroup.id == it.group.id) {
+			if(petankGroup.id == it.idGroup) {
 				c << it
 			}
 		}

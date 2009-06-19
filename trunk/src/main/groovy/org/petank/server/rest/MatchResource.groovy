@@ -83,6 +83,8 @@ public class MatchResource extends DefaultGroupResource {
 		
 		int i = 1;
 		def match
+		def bareme
+		def place
 		html.html {
 			head {
 				title "Matchs P\u00E9tank Party"
@@ -116,6 +118,8 @@ public class MatchResource extends DefaultGroupResource {
 						if(listMatchs != null) {
 							listMatchs[-1..0].each{
 								match = it
+								bareme = BaremeUtil.getInstance().getBaremeById(match.idBareme);
+								place = PetankPlaceUtil.getInstance().getPlaceById(match.idPlace);
 								tr {
 									td(class:"special", "${DateUtil.instance.getDateToFrString(match.jour)}")
 									td(class:"special") {
@@ -139,16 +143,16 @@ public class MatchResource extends DefaultGroupResource {
 									td(class:"special", "${String.format('%.2f', match.point1)}")
 									td(class:"special", "${String.format('%.2f', match.point2)}")
 									td(class:"special") {
-										yield "${match.bareme.minimum} - ${match.bareme.maximum}"
+										yield "${bareme.minimum} - ${bareme.maximum}"
 										br()
 										if(match.isNormal()) {
-											yield "[${match.bareme.victoireNormale} / ${match.bareme.defaiteNormale}]"
+											yield "[${bareme.victoireNormale} / ${bareme.defaiteNormale}]"
 										} else {
-											yield "[${match.bareme.victoireAnormale} / ${match.bareme.defaiteAnormale}]"
+											yield "[${bareme.victoireAnormale} / ${bareme.defaiteAnormale}]"
 										}
 									}
 									td(class:"special") {
-										a(href:("/place/"+match.place.name), target:"_blank", PetankPlaceUtil.instance.getPlaceName(match.place))
+										a(href:("/place/"+place.name), target:"_blank", PetankPlaceUtil.instance.getPlaceName(place))
 									}
 								}
 							}

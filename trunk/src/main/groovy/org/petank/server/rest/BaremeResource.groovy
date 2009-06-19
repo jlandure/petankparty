@@ -69,7 +69,7 @@ public class BaremeResource extends DefaultResource {
 		    			listBaremes.each{
 		    				bareme = it
 				    		tr {
-				    			td(class:"special", "$bareme.id ${bareme.minimum as Integer} - ${bareme.maximum as Integer}")
+				    			td(class:"special", "${bareme.minimum as Integer} - ${bareme.maximum as Integer}")
 				    			td(class:"special", "${bareme.victoireNormale}")
 				    			td(class:"special", "${bareme.defaiteNormale}")
 				    			td(class:"special", "${bareme.victoireAnormale}")
