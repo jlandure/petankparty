@@ -16,7 +16,7 @@ import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankUserUtil;
 import org.petank.server.PetankGroupUtil;
-
+import org.petank.server.dao.DAOManager
 
 /**
  * @author jlandure
@@ -31,22 +31,28 @@ public class DefaultGroupResource extends DefaultResource {
 	}
 	
 	def getGroup() {
-		return PetankGroupUtil.getGroup(getGroupName())
+		return PetankGroupUtil.instance.getGroup(getGroupName())
 	}
 	
 	def DefaultGroupResource(Context context, Request request, Response response) {
 		super(context, request, response)
-		
 		def group = getGroup()
 		if(group == null) {
 			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
 			return
 		}
 		if(!group.matchApplied) {
-			PetankGroupUtil.prepareGroup(group)
+			this.assign(PetankGroupUtil.instance.prepareGroup(group))
+		} else {
+			this.assign(PetankUserUtil.instance.getUserByGroupName(group.name), MatchUtil.instance.getMatchByGroupName(group.name))
 		}
-		listUsers = group.listUsers
-		listMatchs = group.listMatchs
+		//listUsers = group.listUsers
+		//listMatchs = group.listMatchs
+	}
+	
+	def assign(listUsers, listMatchs) {
+		this.listUsers = listUsers
+		this.listMatchs = listMatchs
 	}
 	
 	//return true if cache is up to date

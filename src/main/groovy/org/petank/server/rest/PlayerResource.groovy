@@ -26,7 +26,7 @@ public class PlayerResource extends DefaultGroupResource {
 	def PlayerResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		playerName = (String) request.getAttributes().get("player")
-		player = PetankUserUtil.getUser(playerName, groupName)
+		player = PetankUserUtil.instance.getUser(playerName, groupName)
 		if(player == null) {
 			quit();return
 		}

@@ -30,7 +30,7 @@ public class ChartResource extends PlayerResource {
 	}
 
 	def toHTML(html, writer) {
-		def points = MatchUtil.getPlayerEvolution(player)
+		def points = MatchUtil.instance.getPlayerEvolution(player)
 		def allpoints = points.join(",")
 		//def pointmin = points.min()
 		//def pointmax = points.max()

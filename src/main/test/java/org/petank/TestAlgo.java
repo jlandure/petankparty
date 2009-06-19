@@ -74,16 +74,16 @@ public class TestAlgo extends TestCase {
 //	}
 	
 	public void testAll() {
-		PetankGroupUtil.populate();
-		PetankUserUtil.populate();
-		PetankPlaceUtil.populate();
-		MatchUtil.populate();
-		listBaremes = BaremeUtil.populate();
+		listBaremes = BaremeUtil.getInstance().populate();
+		PetankGroupUtil.getInstance().populate();
+		PetankUserUtil.getInstance().populate();
+		PetankPlaceUtil.getInstance().populate();
+		MatchUtil.getInstance().populate();
 		
-		PetankGroup group = PetankGroupUtil.getGroup("euriware");
-		PetankGroupUtil.prepareGroup(group);
-		listUsers = group.getListUsers();
-		listMatchs = group.getListMatchs();
+		PetankGroup group = PetankGroupUtil.getInstance().getGroup("euriware");
+		PetankGroupUtil.getInstance().prepareGroup(group);
+		listUsers = PetankUserUtil.getInstance().getUserByGroupName(group.getName());//group.getListUsers();
+		listMatchs = MatchUtil.getInstance().getMatchByGroupName(group.getName());//group.getListMatchs();
 		
 //		for(Match match : listMatchs) {
 //			
@@ -99,21 +99,21 @@ public class TestAlgo extends TestCase {
 			i++;
 		}
 		
-		MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JLE", "euriware"));
+		MatchUtil.getInstance().getPlayerEvolution(PetankUserUtil.getInstance().getUser("JLE", "euriware"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("GBE"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("RST"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("EBT"));
 		//MatchUtil.getPlayerEvolution(PetankUserUtil.getUser("JND"));
 		//System.out.println(MatchUtil.getPlayersEvolution(PetankUserUtil.getUsers("jle,gbe,rst", "euriware")));
 		//MatchUtil.getPlayerEvolution(
-		System.out.println(DateUtil.getDateToGoogleDateString(new Date()));
-		System.out.println(DateUtil.getDateToFrString(new Date()));
-		System.out.println(DateUtil.getDateToString(new Date()));
+		System.out.println(DateUtil.getInstance().getDateToGoogleDateString(new Date()));
+		System.out.println(DateUtil.getInstance().getDateToFrString(new Date()));
+		System.out.println(DateUtil.getInstance().getDateToString(new Date()));
 		
-		Date date = MatchUtil.populate().get(MatchUtil.populate().size()-1).getJour();//01/06/09
-		System.out.println(DateUtil.getDateToGoogleDateString(date));
-		System.out.println(DateUtil.getDateToFrString(date));
-		System.out.println(DateUtil.getDateToString(date));
+		Date date = MatchUtil.getInstance().populate().get(MatchUtil.getInstance().populate().size()-1).getJour();//01/06/09
+		System.out.println(DateUtil.getInstance().getDateToGoogleDateString(date));
+		System.out.println(DateUtil.getInstance().getDateToFrString(date));
+		System.out.println(DateUtil.getInstance().getDateToString(date));
 	}
 
 }

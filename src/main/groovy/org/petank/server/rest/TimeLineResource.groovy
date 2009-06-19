@@ -34,7 +34,7 @@ public class TimeLineResource extends DefaultGroupResource {
 		if(playersName == null) {
 			quit();return
 		}
-		players = PetankUserUtil.getUsers(playersName, groupName)
+		players = PetankUserUtil.instance.getUsers(playersName, groupName)
 		if(players == null || players.size() == 0) {
 			quit();return
 		}
@@ -87,7 +87,7 @@ public class TimeLineResource extends DefaultGroupResource {
 			hasPoints = false
 			players.each{
 				player = it
-				point = MatchUtil.getPlayerPoints(matchAvantDay.playersWithPoints, player.id as String);
+				point = MatchUtil.instance.getPlayerPoints(matchAvantDay.playersWithPoints, player.id as String);
 				if(point != null) {
 					hasPoints = true
 					points."${player.id}" = point
@@ -96,7 +96,7 @@ public class TimeLineResource extends DefaultGroupResource {
 			if(hasPoints) {
 				j = 1
 				gString += "\ndata.addRow();"
-				gString += "\ndata.setValue("+i+", 0, new Date("+DateUtil.getDateToGoogleDateString(matchAvantDay.jour)+"));"
+				gString += "\ndata.setValue("+i+", 0, new Date("+DateUtil.instance.getDateToGoogleDateString(matchAvantDay.jour)+"));"
 				players.each{
 					player = it
 					gString += "\ndata.setValue("+i+", "+j+", "+points."${player.id}"+");"
