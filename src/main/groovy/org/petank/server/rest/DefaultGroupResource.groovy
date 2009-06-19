@@ -46,8 +46,6 @@ public class DefaultGroupResource extends DefaultResource {
 		} else {
 			this.assign(PetankUserUtil.instance.getUserByGroupName(group.name), MatchUtil.instance.getMatchByGroupName(group.name))
 		}
-		//listUsers = group.listUsers
-		//listMatchs = group.listMatchs
 	}
 	
 	def assign(listUsers, listMatchs) {
@@ -56,10 +54,10 @@ public class DefaultGroupResource extends DefaultResource {
 	}
 	
 	//return true if cache is up to date
-//	def expireCache() {
-//		def group = getGroup()
-//		return (!group.matchApplied)
-//	}
+	def expireCache() {
+		//return (!getGroup().matchApplied)
+		return true
+	}
 	
 	
 }

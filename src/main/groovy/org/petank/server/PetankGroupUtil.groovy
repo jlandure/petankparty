@@ -4,6 +4,7 @@
 package org.petank.server
 
 import org.petank.client.model.PetankGroup;
+import org.petank.server.PetankUserUtil;
 import org.petank.server.StatUtil;
 import org.petank.server.dao.DAOManager
 /**
@@ -45,7 +46,14 @@ class PetankGroupUtil {
 	def prepareGroup(group) {
 		def listMatchs = MatchUtil.instance.getMatchByGroupName(group.name)
 		def listUsers = PetankUserUtil.instance.getUserByGroupName(group.name)
-		listUsers = StatUtil.instance.applyMatchs(listMatchs, listUsers)
+		def listUsersReset = []
+		listUsers.each {
+			listUsersReset << PetankUserUtil.instance.resetUser(it)
+		}
+		listMatchs.each {
+			it.playersWithPoints = ""
+		}
+		listUsers = StatUtil.instance.applyMatchs(listMatchs, listUsersReset)
 		group.matchApplied = true;
 		return [listUsers, listMatchs]
 	}
