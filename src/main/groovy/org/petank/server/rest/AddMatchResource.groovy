@@ -107,7 +107,7 @@ public class AddMatchResource extends MatchResource {
 										}
 										li {
 											label(for:"officiel",  "Officiel : ") 
-											input(type:"checkbox", name:"officiel", id:"officiel")
+											input(type:"checkbox", checked:"checked", name:"officiel", id:"officiel")
 										}
 										li {
 											input(type:"submit", value:"sauvegarder")

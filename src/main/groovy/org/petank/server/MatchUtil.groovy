@@ -229,6 +229,13 @@ class MatchUtil {
 		return c
 	}
 	
+	def resetMatch(match) {
+		match.playersWithPoints = ""
+		match.point1 = 0
+		match.point2 = 0
+		return match
+	}
+	
 	def getMatchs() {
 		return DAOManager.instance.getAll(Match.class)
 	}
