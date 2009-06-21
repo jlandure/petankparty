@@ -60,6 +60,7 @@ public class PetankPartyRestApplication extends Application {
 //        	guard2.setNext(redirector2)
 //        }
 
+        router.attach("/populate/{number}", PopulateResource.class);
         router.attach("/place/{place}", PlaceResource.class);
 		router.attach("/{group}/classement", ClassementResource.class);
         router.attach("/{group}/match", MatchResource.class);
@@ -68,7 +69,6 @@ public class PetankPartyRestApplication extends Application {
         router.attach("/{group}/{player}", PlayerResource.class);
         router.attach("/{group}/{player}/chart", ChartResource.class);
         router.attach("/bareme", BaremeResource.class);
-        router.attach("/populate", PopulateResource.class);
         router.attach("/export", ExportResource.class);
         
         return router;
