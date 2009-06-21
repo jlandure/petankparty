@@ -8,7 +8,6 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.Transient;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Match implements Serializable {
@@ -61,13 +60,13 @@ public class Match implements Serializable {
 	/**
 	 * normal / anormal
 	 */
-	@Transient
+	@Persistent
     private TypeVictoire typeVictoire;
 	
 	/**
 	 * officiel / non officiel
 	 */
-	@Transient
+	@Persistent
     private TypeMatch typeMatch;
 	
 	@Persistent
