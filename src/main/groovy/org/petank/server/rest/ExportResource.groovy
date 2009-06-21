@@ -22,6 +22,10 @@ import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManage
  */
 public class ExportResource extends DefaultResource /*extends DefaultGroupResource*/ {
 
+	def expireCache() {
+		return true
+	}
+	
 	private static final def ADMIN_MAIL = ["jujujuz@gmail.com"]
 	
 	def ExportResource(Context context, Request request, Response response) {
@@ -46,7 +50,7 @@ public class ExportResource extends DefaultResource /*extends DefaultGroupResour
 		        br()
 		        br()
 		        h1 {
-		    		"ok to "
+		    		"ok to "+ADMIN_MAIL
 		    	}
 		    }
 		}

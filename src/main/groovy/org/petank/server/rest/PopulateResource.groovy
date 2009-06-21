@@ -22,11 +22,17 @@ import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManage
  */
 public class PopulateResource extends DefaultResource {
 
-	def number
+	def expireCache() {
+		return true
+	}
+	
+	def number, start, end
 	
 	def PopulateResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		number = request.getAttributes().get("number")
+		start = (getQuery().getFirstValue('start') as int);  
+		end = (getQuery().getFirstValue('end') as int);  
 		populate()
 	}
 	
@@ -46,16 +52,17 @@ public class PopulateResource extends DefaultResource {
 				loadObjects(PetankUserUtil.instance.populate())
 				break;
 			case 5 :
-				loadObjects(MatchUtil.instance.populate()[0..50])
-				break;
-			case 6 :
-				loadObjects(MatchUtil.instance.populate()[51..100])
-				break;
-			case 7 :
-				loadObjects(MatchUtil.instance.populate()[101..150])
-				break;
-			case 8 : 
-				loadObjects(MatchUtil.instance.populate()[150..-1])
+				def listMatchs = MatchUtil.instance.populate()
+					if(start > listMatchs.size()) {
+						quit()
+					} else {
+						if(end > listMatchs.size()) {
+							end = -1
+						}
+						 if(start != null && end != null) {
+							loadObjects(listMatchs[start..end])
+						 }
+					}
 				break;
 		}
 	}
@@ -92,16 +99,9 @@ public class PopulateResource extends DefaultResource {
 						yield("PetankUserUtil.instance.populate()")
 						break;
 					case 5 :
-						yield("MatchUtil.instance.populate()[0..50]")
-						break;
-					case 6 :
-						yield("MatchUtil.instance.populate()[51..100]")
-						break;
-					case 7 :
-						yield("MatchUtil.instance.populate()[101..150]")
-						break;
-					case 8 : 
-						yield("MatchUtil.instance.populate()[150..-1]")
+						if(start != null && end != null) {
+							 yield("MatchUtil.instance.populate()[$start..$end]")
+						}
 						break;
 		    		}
 		    	}
