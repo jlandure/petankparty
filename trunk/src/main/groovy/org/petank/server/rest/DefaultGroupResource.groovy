@@ -25,6 +25,7 @@ import org.petank.server.dao.DAOManager
 public class DefaultGroupResource extends DefaultResource {
 	
 	def groupName, group, listUsers, listMatchs
+	def expire
 	
 	def getGroupName() {
 		return groupName = (String) request.getAttributes().get("group")
@@ -41,8 +42,14 @@ public class DefaultGroupResource extends DefaultResource {
 			getResponse().setStatus(Status.CLIENT_ERROR_NOT_FOUND)
 			return
 		}
-		if(!group.matchApplied) {
+		expire = !group.matchApplied
+		if(expire) {
 			this.assign(PetankGroupUtil.instance.prepareGroup(group))
+			//String classement = "/$groupName/classement"
+			//String match = "/$groupName/match"
+				//DefaultResource.MEMCACHE.delete(match)
+			DefaultResource.MEMCACHE.remove("/$groupName/classement")
+			DefaultResource.MEMCACHE.remove("/$groupName/match")
 		} else {
 			this.assign(PetankUserUtil.instance.getUserByGroupName(group.name), MatchUtil.instance.getMatchByGroupName(group.name))
 		}
@@ -54,10 +61,9 @@ public class DefaultGroupResource extends DefaultResource {
 	}
 	
 	//return true if cache is up to date
-	def expireCache() {
-		//return (!getGroup().matchApplied)
-		return true
-	}
+	//def expireCache() {
+		//return expire
+	//}
 	
 	
 }

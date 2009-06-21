@@ -96,6 +96,8 @@ public class MatchResource extends DefaultGroupResource {
 					a(href:"/${groupName}/classement",  "Classement")
 					yield " / " 
 					a(href:"/bareme",  "Bareme")
+					br()
+					a(href:"/${groupName}/match/add",  "Ajouter un match")
 				}
 				
 				table(border:1, cellpadding:"2px", bordercolor:"black") {

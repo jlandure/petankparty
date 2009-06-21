@@ -21,6 +21,10 @@ import org.petank.server.PetankUserUtil;
  */
 public class PlayerResource extends DefaultGroupResource {
 
+	def expireCache() {
+		return true
+	}
+	
 	def playerName, player
 	
 	def PlayerResource(Context context, Request request, Response response) {

@@ -47,14 +47,15 @@ class PetankGroupUtil {
 		def listMatchs = MatchUtil.instance.getMatchByGroupName(group.name)
 		def listUsers = PetankUserUtil.instance.getUserByGroupName(group.name)
 		def listUsersReset = []
+		def listMatchsReset = []
 		listUsers.each {
 			listUsersReset << PetankUserUtil.instance.resetUser(it)
 		}
 		listMatchs.each {
-			it.playersWithPoints = ""
+			listMatchsReset << MatchUtil.instance.resetMatch(it)
 		}
-		listUsers = StatUtil.instance.applyMatchs(listMatchs, listUsersReset)
+		listUsers = StatUtil.instance.applyMatchs(listMatchsReset, listUsersReset)
 		group.matchApplied = true;
-		return [listUsers, listMatchs]
+		return [listUsersReset, listMatchsReset]
 	}
 }
