@@ -98,7 +98,7 @@ public class ClassementResource extends DefaultGroupResource {
 				    			td(class:"special", "${user.partiesJoues}")
 				    			td(class:"special", "${user.partiesGagnes}")
 				    			td(class:"special", "${user.partiesPerdus}")
-				    			td(class:"special", "${String.format('%.2f', (user.totalPoints / user.partiesJoues))}")
+				    			td(class:"special", "${String.format('%.2f', (user.totalPoints / (user.partiesJoues ?: 1)))}")
 				    			td(class:"special", "${user.fannyGagnes}")
 				    			td(class:"special", "${user.fannyPerdus}")
 				    			td(class:"special", "${user.victoireNormale}")
