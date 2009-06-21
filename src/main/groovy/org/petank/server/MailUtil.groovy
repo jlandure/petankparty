@@ -27,6 +27,7 @@ import javax.activation.DataHandler;
 public class MailUtil {
 	
 	private static String FROM = "jujujuz@gmail.com"
+	private static String HEAD = "[PetankParty] "
 
 	static MailUtil getInstance() {
 		return instance
@@ -61,7 +62,7 @@ public class MailUtil {
 	        	msg.addRecipient(Message.RecipientType.TO,
                         new InternetAddress(it));
 	        }
-            msg.setSubject(subject);
+            msg.setSubject(HEAD + subject);
         
             Transport.send(msg);
     
