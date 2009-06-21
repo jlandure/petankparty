@@ -26,7 +26,7 @@ import javax.activation.DataHandler;
 @Singleton
 public class MailUtil {
 	
-	private static String FROM = "petankparty@no-reply.org"
+	private static String FROM = "jujujuz@gmail.com"
 
 	static MailUtil getInstance() {
 		return instance
