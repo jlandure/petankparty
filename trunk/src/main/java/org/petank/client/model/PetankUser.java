@@ -8,7 +8,6 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.Transient;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class PetankUser implements Serializable {
@@ -46,46 +45,46 @@ public class PetankUser implements Serializable {
     @Persistent
     private String commentaire;
     
-    @Transient
+    @Persistent
     private Integer partiesJoues = 0;
     
-    @Transient
+    @Persistent
     private Integer partiesGagnes = 0;
     
-    @Transient
+    @Persistent
     private Integer partiesPerdus = 0;
     
-    @Transient
+    @Persistent
     private Integer totalPoints = 0;
     
-    @Transient
+    @Persistent
     private Integer fannyGagnes = 0;
     
-    @Transient
+    @Persistent
     private Integer fannyPerdus = 0;
     
-    @Transient
+    @Persistent
     private Integer victoireNormale = 0;
     
-    @Transient
+    @Persistent
     private Integer victoireAnormale = 0;
     
-    @Transient
+    @Persistent
     private Integer defaiteNormale = 0;
     
-    @Transient
+    @Persistent
     private Integer defaiteAnormale = 0;
     
-    @Transient
+    @Persistent
     private Date dayBefore;
     
-    @Transient
+    @Persistent
     private Integer placeDayBefore = 0;
     
-    @Transient
+    @Persistent
     private Float pointsDayBefore;
     
-    @Transient
+    @Persistent
     private Integer nbMatchOfficiel = 0;
     
 	public Long getId() {
