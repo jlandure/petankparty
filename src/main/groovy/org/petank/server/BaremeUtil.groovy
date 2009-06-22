@@ -31,10 +31,10 @@ class BaremeUtil {
 		listBaremes << new Bareme(minimum:500,maximum:100000,victoireNormale:0   ,defaiteNormale:0   ,victoireAnormale:40,defaiteAnormale:-29);
 	}
 	
-	Bareme chooseBareme(between) {
+	Bareme chooseBareme(between, listBaremes) {
 		def c
 		def roundBetween = between.round()
-		this.getBaremes().each {
+		listBaremes.each {
 			if(roundBetween >= it.minimum && roundBetween <= it.maximum) {
 				c = it
 			}

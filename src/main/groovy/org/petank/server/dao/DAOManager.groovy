@@ -124,7 +124,7 @@ public class DAOManager {
 		def PersistenceManager pm = initTransaction();
 		try {
 			pm.deletePersistent(object);
-		  commitTransaction()
+		    commitTransaction()
 		} finally {
 			closeTransaction()
 		}

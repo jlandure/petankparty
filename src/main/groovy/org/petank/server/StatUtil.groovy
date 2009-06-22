@@ -33,14 +33,15 @@ public class StatUtil {
 	
 	def applyMatchs(listMatchs, listUsers) {
 		//listMatchs = MatchUtil.sortByDate(listMatchs)
+		def listBaremes = BaremeUtil.instance.getBaremes()
 		listMatchs.each {
-			this.applyMatch(it, listUsers)
+			this.applyMatch(it, listUsers, listBaremes)
 			listUsers = PetankUserUtil.instance.sortByPoint(listUsers)
 		}
 		return listUsers
 	}
 	
-	def applyMatch(Match match, listUsers) {
+	def applyMatch(Match match, listUsers, listBaremes) {
 		def victory = match.score1 > match.score2
 		def fanny1 = (victory && match.score2 == 0) 
 		def fanny2 = (!victory && match.score1 == 0) 
@@ -92,7 +93,7 @@ public class StatUtil {
 		//println match.playersWithPoints
 		
 		//récupération du bareme à appliquer
-		Bareme bareme = BaremeUtil.instance.chooseBareme(this.getBetween(match))
+		Bareme bareme = BaremeUtil.instance.chooseBareme(this.getBetween(match), listBaremes)
 		match.idBareme = bareme.id
 		def coefficient = BaremeUtil.instance.getCoefficient(match.typeMatch)
 		
