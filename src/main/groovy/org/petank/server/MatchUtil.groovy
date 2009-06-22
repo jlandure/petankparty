@@ -27,6 +27,20 @@ class MatchUtil {
 	
 	private static String JOIN_PLAYER = ";"
 	
+	List<Match> populate() {
+		def listMatchs = new ArrayList<Match>()
+		listMatchs.addAll(this.populate1())
+		listMatchs.addAll(this.populate2())
+		listMatchs.addAll(this.populate3())
+		listMatchs.addAll(this.populate4())
+		listMatchs.addAll(this.populate5())
+		listMatchs.addAll(this.populate6())
+		listMatchs.addAll(this.populate7())
+		listMatchs.addAll(this.populate8())
+		listMatchs.addAll(this.populate9())
+		return listMatchs
+	}
+	
 	List<Match> populate1() {
 		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["SHS","RST","EBT"], ["GBE","CLC","JLE","JND"], 13, 4, "26/03/2009", "souchais", TypeMatch.NON_OFFICIEL)
@@ -247,16 +261,8 @@ class MatchUtil {
 	}
 	
 	List getMatchByGroupName(groupName) {
-		//TODO filtrer par groupe : requete SQL
-		def c = []
 		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
-		def listMatchs = MatchUtil.instance.getMatchs()
-		listMatchs.each {
-			if(petankGroup.id == it.idGroup) {
-				c << it
-			}
-		}
-		return c
+		return DAOManager.instance.getAllFromIdGroup(Match.class, petankGroup.id)
 	}
 	
 	def resetMatch(match) {

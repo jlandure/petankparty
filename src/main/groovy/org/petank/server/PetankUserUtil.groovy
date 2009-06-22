@@ -96,17 +96,9 @@ class PetankUserUtil {
 		return users
 	}
 	
-	List getUserByGroupName(group) {
-		//TODO filtrer par groupe : requete SQL
-		def c = []
-		def petankGroup = PetankGroupUtil.instance.getGroup(group)
-		def listUsers = PetankUserUtil.instance.getUsers()
-		listUsers.each {
-			if(petankGroup.id == it.idGroup) {
-				c << it
-			}
-		}
-		return c
+	List getUserByGroupName(groupName) {
+		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
+		return DAOManager.instance.getAllFromIdGroup(PetankUser.class, petankGroup.id)
 	}
 	
 	PetankUser getUserById(id) {
