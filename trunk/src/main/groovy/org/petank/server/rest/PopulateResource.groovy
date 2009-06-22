@@ -37,19 +37,18 @@ public class PopulateResource extends DefaultResource {
 	}
 	
 	def populate() {
-		def loadObjects = {objects -> objects.each{DAOManager.instance.save(it)}}
 		switch((number as int)) {
 			case 1 : 
-				loadObjects(BaremeUtil.instance.populate()); 
+				DAOManager.instance.saveAll(BaremeUtil.instance.populate()); 
 				break;
 			case 2 : 
-				loadObjects(PetankGroupUtil.instance.populate())
+				DAOManager.instance.saveAll(PetankGroupUtil.instance.populate())
 				break;
 			case 3 :
-				loadObjects(PetankPlaceUtil.instance.populate())
+				DAOManager.instance.saveAll(PetankPlaceUtil.instance.populate())
 				break;
 			case 4 :
-				loadObjects(PetankUserUtil.instance.populate())
+				DAOManager.instance.saveAll(PetankUserUtil.instance.populate())
 				break;
 			case 5 :
 				def listMatchs
@@ -82,7 +81,7 @@ public class PopulateResource extends DefaultResource {
 					listMatchs = MatchUtil.instance.populate9()
 					break;
 				}
-				loadObjects(listMatchs)
+				DAOManager.instance.saveAll(listMatchs)
 				break;
 			case 6 :
 				DAOManager.instance.getAll(PetankGroup.class).each{
