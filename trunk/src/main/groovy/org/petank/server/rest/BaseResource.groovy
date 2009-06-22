@@ -30,7 +30,13 @@ public class BaseResource extends DefaultResource {
 	
 	def BaseResource(Context context, Request request, Response response) {
 		super(context, request, response)
+	}
+	
+	def prepareObjects() {
 		listGroups = PetankGroupUtil.instance.getGroups()
+	}
+	
+	def toHTML(html, writer) {
 		
 		def router = this.getApplication().getRoot()
 		
@@ -56,9 +62,7 @@ public class BaseResource extends DefaultResource {
         	guard1.setNext(redirector1)
         	guard2.setNext(redirector2)
         }
-	}
-	
-	def toHTML(html, writer) {
+		
 		html.html {
 			head {
 		        title "P\u00E9tank Party"

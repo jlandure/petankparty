@@ -307,9 +307,9 @@ class MatchUtil {
 		play1.each { player1 << PetankUserUtil.instance.getUser(it, group)}
 		play2.each { player2 << PetankUserUtil.instance.getUser(it, group)}
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
+		match.matchOrder = DAOManager.instance.getNextMatchOrder()
 		match.idGroup = PetankGroupUtil.instance.getGroup(group).id
 		match.idPlace = PetankPlaceUtil.instance.getPlace(place).id
-		
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
 		//au moment où l'on applique les barêmes
 		
@@ -327,11 +327,12 @@ class MatchUtil {
 		return player.split(JOIN_PLAYER)
 	}
 	
-	List getPlayers(player) {
+	List getPlayers(player, listUsers) {
 		//retourn les PetankUser à partir des id
 		def id = getPlayersId(player)
 		def players = []
-		id.each{players << PetankUserUtil.instance.getUserById(it as Long)}
+		//chargement tout le temps : mauvais
+		id.each{players << PetankUserUtil.instance.getUserById(it as Long, listUsers)}
 		return players;
 	}
 	

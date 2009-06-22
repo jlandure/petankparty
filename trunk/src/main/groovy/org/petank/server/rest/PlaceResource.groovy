@@ -30,14 +30,13 @@ public class PlaceResource extends DefaultResource {
 		if(placeName == null) {
 			quit();return
 		}
+	}
+	
+	def prepareObjects() {
 		place = PetankPlaceUtil.instance.getPlace(placeName)
-		if(place == null) {
-			quit();return
-		}
 	}
 	
 	def toHTML(html, writer) {
-
 		String gString = """
 		
 <!--

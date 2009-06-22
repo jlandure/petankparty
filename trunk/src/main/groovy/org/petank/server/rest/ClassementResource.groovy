@@ -21,15 +21,19 @@ import org.petank.server.PetankUserUtil;
  */
 public class ClassementResource extends DefaultGroupResource {
 
+	def listUsers
+	
 	def ClassementResource(Context context, Request request, Response response) {
 		super(context, request, response)
+	}
+	
+	def prepareObjects() {
+		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
 		listUsers = PetankUserUtil.instance.sortByPoint(listUsers)
 	}
 	
     def toXML(xml, writer) {
-
 		int i = 1;
-
 		xml.players(date:'15/05/09') {
 			listUsers.each{ play ->
 				player(place:i, nom:play.petankName, score:play.points)
@@ -41,7 +45,6 @@ public class ClassementResource extends DefaultGroupResource {
     }
 
 	def toHTML(html, writer) {
-
 		int i = 1;
 		def user 
 		html.html {

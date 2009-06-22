@@ -20,14 +20,19 @@ import org.petank.server.PetankPlaceUtil;
  * @author jlandure
  *
  */
-public class AddMatchResource extends MatchResource {
+public class AddMatchResource extends DefaultGroupResource {
+	
+	def listUsers
 	
 	def AddMatchResource(Context context, Request request, Response response) {
 		super(context, request, response)
 	}
 	
+	def prepareObjects() {
+		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
+	}
+	
 	def toHTML(html, writer) {
-		
 		int i = 1;
 		def match
 		def user

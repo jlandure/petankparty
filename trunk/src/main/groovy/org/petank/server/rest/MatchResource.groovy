@@ -23,8 +23,20 @@ import org.petank.server.PetankPlaceUtil;import java.lang.Overrideimport org.p
  */
 public class MatchResource extends DefaultGroupResource {
 	
+	def listMatchs, listUsers
+	
 	def MatchResource(Context context, Request request, Response response) {
 		super(context, request, response)
+	}
+	
+	def prepareObjects() {
+		listMatchs = MatchUtil.instance.getMatchByGroupName(groupName)
+		if(listMatchs.size() < 25) {
+			listMatchs = listMatchs[-1..0]
+		} else {
+			listMatchs = MatchUtil.instance.getMatchByGroupName(groupName)[-25..0]
+		}
+		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
 	}
 	
 	@Override
@@ -67,11 +79,9 @@ public class MatchResource extends DefaultGroupResource {
 	
 	
 	def toXML(xml, writer) {
-		
 		int i = 1;
-		
 		xml.matchs(group:'euriware') {
-			listMatchs[-1..0].each{ ma ->
+			listMatchs.each{ ma ->
 				match(id:i, date:DateUtil.instance.getDateToFrString(ma.jour), bareme:ma.bareme.id)
 				i++
 			}
@@ -80,7 +90,6 @@ public class MatchResource extends DefaultGroupResource {
 	}
 	
 	def toHTML(html, writer) {
-		
 		int i = 1;
 		def match
 		def bareme
@@ -118,7 +127,7 @@ public class MatchResource extends DefaultGroupResource {
 					}
 					tbody {
 						if(listMatchs != null) {
-							listMatchs[-1..0].each{
+							listMatchs.each{
 								match = it
 								bareme = BaremeUtil.getInstance().getBaremeById(match.idBareme);
 								place = PetankPlaceUtil.getInstance().getPlaceById(match.idPlace);
@@ -126,14 +135,14 @@ public class MatchResource extends DefaultGroupResource {
 									td(class:"special", "${DateUtil.instance.getDateToFrString(match.jour)}")
 									td(class:"special") {
 										ul {
-											MatchUtil.instance.getPlayers(match.player1).each{
+											MatchUtil.instance.getPlayers(match.player1, listUsers).each{
 												li(it.name + " [" + MatchUtil.instance.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
 											}
 										}
 									}
 									td(class:"special") {
 										ul {
-											MatchUtil.instance.getPlayers(match.player2).each{
+											MatchUtil.instance.getPlayers(match.player2, listUsers).each{
 												li(it.name + " [" + MatchUtil.instance.getPlayerPoints(match.playersWithPoints, it.id as String) + "]")
 											}
 										}

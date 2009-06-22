@@ -47,12 +47,12 @@ public class StatUtil {
 		def fanny2 = (!victory && match.score1 == 0) 
 		
 		//preparation des baremes :
-		def player1 = MatchUtil.instance.getPlayers(match.player1)
-		def player2 = MatchUtil.instance.getPlayers(match.player2)
+		def player1 = MatchUtil.instance.getPlayers(match.player1, listUsers)
+		def player2 = MatchUtil.instance.getPlayers(match.player2, listUsers)
 		
 		//maj progression
 		listUsers.each{
-			this.applyProgression(it, match.jour, listUsers)
+			this.applyProgression(it, match.jour)
 		}
 		
 		//maj des id/points joueurs pour sauvegarde
@@ -72,7 +72,6 @@ public class StatUtil {
 		}
 		player2.each{
 			match.playersWithPoints += it.id+ " ["+it.points+"];"
-			this.applyProgression(it, match.jour, listUsers)
 			match.point2 += it.points
 			it.partiesJoues++;
 			it.totalPoints += match.score2
@@ -144,12 +143,12 @@ public class StatUtil {
 		}
 	}
 	
-	def applyProgression(player, jour, listUsers) {
+	def applyProgression(player, jour) {
 		if(player.dayBefore == null) {
 			player.dayBefore = jour
 		} else if(player.dayBefore.before(jour)) {
 			player.pointsDayBefore = player.points
-			player.placeDayBefore = PetankUserUtil.instance.getClassementUser(player, listUsers)
+			player.placeDayBefore = PetankUserUtil.instance.getClassementUser(player)
 			player.dayBefore = jour
 		}
 	}
