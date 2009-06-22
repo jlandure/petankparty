@@ -27,13 +27,12 @@ public class PopulateResource extends DefaultResource {
 		return true
 	}
 	
-	def number, start, end
+	def number, start
 	
 	def PopulateResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		number = request.getAttributes().get("number")
 		start = (getQuery().getFirstValue('start') as int);  
-		//end = (getQuery().getFirstValue('end') as int);  
 		populate()
 	}
 	
@@ -53,7 +52,7 @@ public class PopulateResource extends DefaultResource {
 				loadObjects(PetankUserUtil.instance.populate())
 				break;
 			case 5 :
-				def listMatchs/* = MatchUtil.instance.populate()*/
+				def listMatchs
 				switch((start as int)) {
 				case 1 : 
 					listMatchs = MatchUtil.instance.populate1()
@@ -83,16 +82,6 @@ public class PopulateResource extends DefaultResource {
 					listMatchs = MatchUtil.instance.populate9()
 					break;
 				}
-//					if(start > listMatchs.size()) {
-//						quit()
-//					} else {
-//						if(end > listMatchs.size()) {
-//							end = -1
-//						}
-//						 if(start != null && end != null) {
-//							loadObjects(listMatchs[start..end])
-//						 }
-//					}
 				loadObjects(listMatchs)
 				break;
 			case 6 :
@@ -136,9 +125,7 @@ public class PopulateResource extends DefaultResource {
 						yield("PetankUserUtil.instance.populate()")
 						break;
 					case 5 :
-						if(start != null && end != null) {
-							 yield("MatchUtil.instance.populate()[$start..$end]")
-						}
+						yield("MatchUtil.instance.populate()/?start=$start")
 						break;
 		    		}
 		    	}

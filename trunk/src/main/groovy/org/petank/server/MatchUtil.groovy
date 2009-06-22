@@ -229,6 +229,12 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["RST"], ["JAY"], 13, 1, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["RST"], ["EBT"], 13, 9, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["PSR","GBE"], ["ADE","FEE"], 13, 11, "19/06/2009")
+		
+		listMatchs << createMatch("euriware", ["JAY","GBE"], ["RST","PSR"], 11, 13, "19/06/2009")
+		listMatchs << createMatch("euriware", ["JAY","GBE"], ["RST","PSR"], 11, 13, "19/06/2009")
+		
+		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 10, "19/06/2009")
+		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 12, "19/06/2009")
 		return listMatchs
 	}
 	List<Match> populate9() {
