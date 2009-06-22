@@ -63,7 +63,7 @@ public class PlayerResource extends DefaultGroupResource {
 		    }
 		    body {
 		    	h1 "Détail de "+player.name
-		        p "V0.4.1-beta"
+		    	p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        p {
 		    		a(href:"/${groupName}/match",  "Matchs")
 		    		yield " / " 
