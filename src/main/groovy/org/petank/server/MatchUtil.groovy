@@ -27,9 +27,8 @@ class MatchUtil {
 	
 	private static String JOIN_PLAYER = ";"
 	
-	List<Match> populate() {
+	List<Match> populate1() {
 		def listMatchs = new ArrayList<Match>()
-		listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["SHS","RST","EBT"], ["GBE","CLC","JLE","JND"], 13, 4, "26/03/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 4, "30/03/2009")
 		listMatchs << createMatch("euriware", ["JLE","JND","BPT"], ["ADE","EBT","CBO"], 13, 8, "30/03/2009")
@@ -51,6 +50,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["SHS","JAY"], ["GBE","ADE"], 13, 12, "22/04/2009")
 		listMatchs << createMatch("euriware", ["SHS","JAY"], ["RST","JLE"], 6, 13, "22/04/2009")
 		listMatchs << createMatch("euriware", ["EBT","FEE"], ["GBE","ADE"], 13, 12, "22/04/2009")
+		return listMatchs
+	}
+	List<Match> populate2() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 13, 8, "22/04/2009")
 		listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 13, 4, "22/04/2009")
 		listMatchs << createMatch("euriware", ["JLE","GBE"], ["SHS","RST"], 9, 13, "22/04/2009")
@@ -72,6 +75,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["GBE"], ["RST"], 13, 8, "06/05/2009")
 		listMatchs << createMatch("euriware", ["GBE","PSR"], ["RST","JLE"], 11, 13, "07/05/2009")
 		listMatchs << createMatch("euriware", ["GBE","PSR"], ["RST","JLE"], 12, 13, "07/05/2009")
+		return listMatchs
+	}
+	List<Match> populate3() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["JND","MSI","BPT"], ["FEE","FRT","ADE"], 3, 13, "07/05/2009")
 		listMatchs << createMatch("euriware", ["JND","MSI","BPT"], ["FEE","FRT","ADE"], 13, 10, "07/05/2009")
 		listMatchs << createMatch("euriware", ["RST"], ["JLE"], 11, 13, "07/05/2009")
@@ -93,6 +100,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["JND","RST","BPT"], ["EBT","FRT","ADE"], 7, 13, "19/05/2009")
 		listMatchs << createMatch("euriware", ["PSR","JLE"], ["ADE","RST"], 4, 13, "19/05/2009")
 		listMatchs << createMatch("euriware", ["EBT","BPT"], ["GBE","JND"], 13, 2, "19/05/2009")
+		return listMatchs
+	}
+	List<Match> populate4() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["PSR","JLE"], ["GBE","JND"], 11, 13, "19/05/2009")
 		listMatchs << createMatch("euriware", ["EBT","BPT"], ["ADE","RST"], 9, 13, "19/05/2009")
 		listMatchs << createMatch("euriware", ["RST","ADE"], ["GBE","JND"], 11, 13, "19/05/2009")
@@ -114,6 +125,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["PSR","FEE"], ["JND","EBT"], 4, 13, "29/05/2009")
 		listMatchs << createMatch("euriware", ["GBE","BPT"], ["JLE","FEE"], 3, 13, "29/05/2009")
 		listMatchs << createMatch("euriware", ["JND","FEE","GBE"], ["PSR","EBT","JLE"], 4, 13, "29/05/2009")
+		return listMatchs
+	}
+	List<Match> populate5() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["JND","RST"], ["GBE","JLE"], 5, 13, "29/05/2009")
 		listMatchs << createMatch("euriware", ["GBE","JAY"], ["FRT","PSR"], 13, 8, "01/06/2009")
 		listMatchs << createMatch("euriware", ["RST","SHS"], ["ADE","JND"], 11, 13, "01/06/2009")
@@ -135,6 +150,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["FRT"], ["ADE"], 4, 13, "03/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["RST","FEE"], ["GBE","JAY"], 13, 3, "04/06/2009", "mainguais")
 		listMatchs << createMatch("euriware", ["JLE","JND"], ["ADE","SHS"], 13, 0, "04/06/2009", "mainguais")
+		return listMatchs
+	}
+	List<Match> populate6() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["RST","FEE"], ["JLE","JND"], 13, 9, "04/06/2009", "mainguais")
 		listMatchs << createMatch("euriware", ["ADE","SHS"], ["GBE","JAY"], 13, 10, "04/06/2009", "mainguais")
 		listMatchs << createMatch("euriware", ["JND","JLE","RST"], ["GBE","JAY","SHS"], 13, 1, "04/06/2009")
@@ -156,6 +175,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["RST"], ["GBE"], 13, 9, "09/06/2009")
 		listMatchs << createMatch("euriware", ["RST"], ["GBE"], 13, 7, "09/06/2009")
 		listMatchs << createMatch("euriware", ["RST"], ["GBE"], 7, 13, "09/06/2009")
+		return listMatchs
+	}
+	List<Match> populate7() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["EBT","FEE"], ["JLE","PSR"], 11, 13, "09/06/2009")
 		listMatchs << createMatch("euriware", ["EBT","PSR"], ["JLE","FEE"], 5, 13, "09/06/2009")
 		listMatchs << createMatch("euriware", ["EBT","PSR"], ["JLE","FEE"], 3, 13, "09/06/2009")
@@ -176,7 +199,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["ADE","RST","BPT"], ["NHT","FEE","CLC"], 10, 13, "17/06/2009")
 		listMatchs << createMatch("euriware", ["RST","ADE"], ["PSR","JAY"], 13, 0, "17/06/2009")
 		listMatchs << createMatch("euriware", ["RST","PSR"], ["ADE","JAY"], 13, 10, "17/06/2009")
-		
+		return listMatchs
+	}
+	List<Match> populate8() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("euriware", ["RST","JAY"], ["JLE","NBN"], 13, 9, "18/06/2009")
 		listMatchs << createMatch("euriware", ["GBE"], ["FEE"], 13, 7, "18/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["GBE"], ["EBT"], 13, 6, "18/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
@@ -189,7 +215,10 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["RST"], ["JAY"], 13, 1, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["RST"], ["EBT"], 13, 9, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["PSR","GBE"], ["ADE","FEE"], 13, 11, "19/06/2009")
-				
+		return listMatchs
+	}
+	List<Match> populate9() {
+		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("orvault", ["DOM"], ["JRO"], 9, 13, "22/03/2009", "56", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("orvault", ["AXE"], ["JRO"], 0, 13, "22/03/2009", "56", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("orvault", ["JU"], ["JRO"], 8, 13, "11/04/2009", "56")
@@ -214,6 +243,7 @@ class MatchUtil {
 		listMatchs << createMatch("orvault", ["PLO"], ["JRO"], 10, 13, "31/05/2009", "56", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 13, 5, "01/06/2009", "56")
 		listMatchs << createMatch("orvault", ["DOM","GIL"], ["JRO","PLO"], 8, 13, "01/06/2009", "56")
+		return listMatchs
 	}
 	
 	List getMatchByGroupName(groupName) {
