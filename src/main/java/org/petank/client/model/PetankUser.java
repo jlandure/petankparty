@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -86,6 +87,9 @@ public class PetankUser implements Serializable {
     
     @Persistent
     private Integer nbMatchOfficiel = 0;
+    
+    @NotPersistent
+    private Integer classement = 0;
     
 	public Long getId() {
 		return id;
@@ -277,6 +281,14 @@ public class PetankUser implements Serializable {
 
 	public void setIdGroup(Long idGroup) {
 		this.idGroup = idGroup;
+	}
+
+	public Integer getClassement() {
+		return classement;
+	}
+
+	public void setClassement(Integer classement) {
+		this.classement = classement;
 	}
 	
 }

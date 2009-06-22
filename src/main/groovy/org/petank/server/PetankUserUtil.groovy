@@ -105,21 +105,30 @@ class PetankUserUtil {
 		return DAOManager.instance.get(PetankUser.class, id)
 	}
 	
-	def getClassementUser(user, listUsers) {
-		def c
+	PetankUser getUserById(id, listUsers) {
+		def user
 		int i = 0
-		listUsers.each {
-			i++
-			if(c == null && user.id == it.id) {
-				c = i
+		while(user == null) {
+			if(listUsers[i].id == id) {
+				user = listUsers[i]
 			}
+			i++
 		}
-		return c
+		return user
+	}
+	
+	def getClassementUser(user) {
+		return user.classement
 	}
 	
 	List<PetankUser> sortByPoint(players) {
 		def mc= [compare:{a,b-> a?.points>b?.points? -1: a?.points<b?.points? 1: a?.name.compareTo(b?.name)}] as Comparator
 		players.sort(mc)
+		int i = 1
+		players.each{
+			it.classement = i
+			i++
+		}
 		return players
 	}
 }

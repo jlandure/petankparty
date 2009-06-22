@@ -24,6 +24,9 @@ public class BaremeResource extends DefaultResource {
 	
 	def BaremeResource(Context context, Request request, Response response) {
 		super(context, request, response)
+	}
+	
+	def prepareObjects() {
 		listBaremes = DAOManager.instance.getAll(Bareme.class)
 	}
 	

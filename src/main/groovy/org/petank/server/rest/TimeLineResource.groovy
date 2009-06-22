@@ -22,7 +22,7 @@ import org.petank.server.PetankUserUtil;
  */
 public class TimeLineResource extends DefaultGroupResource {
 
-	def playersName, players, points
+	def playersName, players, points, listMatchs
 	
 	def expireCache() {
 		return true
@@ -34,14 +34,14 @@ public class TimeLineResource extends DefaultGroupResource {
 		if(playersName == null) {
 			quit();return
 		}
+	}
+	
+	def prepareObjects() {
 		players = PetankUserUtil.instance.getUsers(playersName, groupName)
-		if(players == null || players.size() == 0) {
-			quit();return
-		}
+		listMatchs = MatchUtil.instance.getMatchByGroupName(groupName)
 	}
 	
 	def toHTML(html, writer) {
-
 		String gString = """
 		
 <!--

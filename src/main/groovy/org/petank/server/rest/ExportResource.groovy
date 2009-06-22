@@ -20,7 +20,7 @@ import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManage
  * @author jlandure
  *
  */
-public class ExportResource extends DefaultResource /*extends DefaultGroupResource*/ {
+public class ExportResource extends DefaultResource {
 
 	def expireCache() {
 		return true

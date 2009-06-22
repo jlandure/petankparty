@@ -7,7 +7,8 @@ import javax.jdo.JDOHelper
 import javax.jdo.PersistenceManagerFactory
 import javax.jdo.PersistenceManager
 import javax.jdo.Transaction
-import javax.jdo.Query;
+import javax.jdo.Query
+import org.petank.client.model.Match
 
 /**
  * @author jlandure
@@ -110,7 +111,7 @@ public class DAOManager {
 		def objects = []
 		def PersistenceManager pm = initTransaction();
 		try {
-			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam")
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by id")
 			query.declareParameters("Long idGroupParam")
 			objects = query.execute(idGroupParam)
 			commitTransaction()

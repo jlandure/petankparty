@@ -36,6 +36,10 @@ public class DefaultResource extends Resource {
 		return false
 	}
 	
+	def prepareObjects() {
+		
+	}
+	
 	def DefaultResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		
@@ -61,6 +65,7 @@ public class DefaultResource extends Resource {
 				text = (MEMCACHE.get(key) as String);
 			
 				if(text == null || expireCache()) {
+					prepareObjects()
 					//Put the value into the cache.
 					text = toHTML(prepareHtmlWriter())
 					MEMCACHE.put(key, text);
@@ -73,6 +78,7 @@ public class DefaultResource extends Resource {
 			//httpResponse.addHeader("Content-Encoding", "gzip");
 				break;
 			case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
+				prepareObjects()
 				representation = new StringRepresentation(toXML(prepareXmlWriter()), MediaType.TEXT_XML)
 				break
 			case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 

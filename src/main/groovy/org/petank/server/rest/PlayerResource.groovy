@@ -30,14 +30,16 @@ public class PlayerResource extends DefaultGroupResource {
 	def PlayerResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		playerName = (String) request.getAttributes().get("player")
+	}
+	
+	def prepareObjects() {
 		player = PetankUserUtil.instance.getUser(playerName, groupName)
-		if(player == null) {
-			quit();return
-		}
 	}
 	
     def toXML(xml, writer) {
-
+    	if(player == null) {
+			quit();return
+		}
 		int i = 1;
 
 		xml.player(name:player.petankName) {
@@ -50,7 +52,9 @@ public class PlayerResource extends DefaultGroupResource {
     }
 
 	def toHTML(html, writer) {
-
+		if(player == null) {
+			quit();return
+		}
 		int i = 1;
 		def user 
 		html.html {
@@ -90,13 +94,13 @@ public class PlayerResource extends DefaultGroupResource {
 				    		tr {
 				    			td(class:"special", "$i")
 				    			td(class:"special2") {
-				    				a(href:"${user.evolution}", target:"_blank", "${user.petankName}")
+				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
 				    			}
 				    			td(class:"special", "${user.points}")
 				    			td(class:"special", "${user.partiesJoues}")
 				    			td(class:"special", "${user.partiesGagnes}")
 				    			td(class:"special", "${user.partiesPerdus}")
-				    			td(class:"special", "${String.format('%.2f', (user.totalPoints / user.partiesJoues))}")
+				    			td(class:"special", "${String.format('%.2f', (user.totalPoints / (user.partiesJoues ?: 1)))}")
 				    			td(class:"special", "${user.fannyGagnes}")
 				    			td(class:"special", "${user.fannyPerdus}")
 				    			td(class:"special", "${user.victoireNormale}")
