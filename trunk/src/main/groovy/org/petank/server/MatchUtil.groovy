@@ -307,7 +307,6 @@ class MatchUtil {
 		play1.each { player1 << PetankUserUtil.instance.getUser(it, group)}
 		play2.each { player2 << PetankUserUtil.instance.getUser(it, group)}
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
-		match.matchOrder = DAOManager.instance.getNextMatchOrder()
 		match.idGroup = PetankGroupUtil.instance.getGroup(group).id
 		match.idPlace = PetankPlaceUtil.instance.getPlace(place).id
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
