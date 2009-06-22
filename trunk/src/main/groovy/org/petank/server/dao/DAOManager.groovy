@@ -61,7 +61,7 @@ public class DAOManager {
 		def objects
 		def PersistenceManager pm = initTransaction();
 		try {
-			Query query = pm.newQuery("select from "+clazz.name+" where name == nameParam")
+			Query query = pm.newQuery("select from "+clazz.name+" where name == nameParam order by name asc")
 			query.declareParameters("String nameParam")
 			objects = query.execute(name)
 			commitTransaction()
@@ -99,6 +99,20 @@ public class DAOManager {
 		def PersistenceManager pm = initTransaction();
 		try {
 			objects = pm.newQuery("select from "+clazz.name).execute()
+			commitTransaction()
+		} finally {
+			closeTransaction()
+		}
+		return objects
+	}
+	
+	List getAllFromIdGroup(def clazz, Long idGroupParam) {
+		def objects = []
+		def PersistenceManager pm = initTransaction();
+		try {
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam")
+			query.declareParameters("Long idGroupParam")
+			objects = query.execute(idGroupParam)
 			commitTransaction()
 		} finally {
 			closeTransaction()
