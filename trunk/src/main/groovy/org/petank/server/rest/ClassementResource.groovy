@@ -29,7 +29,6 @@ public class ClassementResource extends DefaultGroupResource {
 	
 	def prepareObjects() {
 		listUsers = PetankUserUtil.instance.getUserOrderedByGroupName(groupName)
-		listUsers = PetankUserUtil.instance.sortByPoint(listUsers)
 	}
 	
     def toXML(xml, writer) {
