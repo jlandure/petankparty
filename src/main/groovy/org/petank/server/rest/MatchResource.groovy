@@ -127,7 +127,7 @@ public class MatchResource extends DefaultGroupResource {
 								bareme = BaremeUtil.getInstance().getBaremeById(match.idBareme);
 								place = PetankPlaceUtil.getInstance().getPlaceById(match.idPlace);
 								tr {
-									td(class:"special", "${match.jour}")//"${DateUtil.instance.getDateToFrString(match.jour)}")
+									td(class:"special", "${DateUtil.instance.getDateToFrString(match.jour)}")
 									td(class:"special") {
 										ul {
 											MatchUtil.instance.getPlayers(match.player1, listUsers).each{

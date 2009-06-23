@@ -121,6 +121,20 @@ public class DAOManager {
 		return objects
 	}
 	
+	List getUserOrderedByGroupName(def clazz, Long idGroupParam) {
+		def objects = []
+		def PersistenceManager pm = initTransaction();
+		try {
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by points")
+			query.declareParameters("Long idGroupParam")
+			objects = query.execute(idGroupParam)
+			commitTransaction()
+		} finally {
+			closeTransaction()
+		}
+		return objects
+	}
+	
 	List getMatchFromIdGroup(def clazz, Long idGroupParam) {
 		def objects = []
 		def PersistenceManager pm = initTransaction();
