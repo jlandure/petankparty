@@ -41,6 +41,8 @@ class PetankUserUtil {
 		listUsers << createPetankUser("MSI", "Marouane Skouri", "euriware")
 		listUsers << createPetankUser("NHT", "Nicolas Huet", "euriware")
 		listUsers << createPetankUser("NBN", "Nicolas Bizien", "euriware")
+		listUsers << createPetankUser("BRD", "Bruno Roulland", "euriware")
+		
 		
 		listUsers << createPetankUser("JRO", "Jean-Ro", "orvault")
 		listUsers << createPetankUser("TYN", "Martine", "orvault")

@@ -223,18 +223,22 @@ class MatchUtil {
 		listMatchs << createMatch("euriware", ["RST","GBE"], ["PSR","NBN"], 13, 0, "18/06/2009")
 		listMatchs << createMatch("euriware", ["RST","GBE"], ["PSR","NBN"], 13, 10, "18/06/2009")
 		listMatchs << createMatch("euriware", ["EBT","FEE"], ["JLE","JAY"], 13, 2, "18/06/2009")
-		
 		listMatchs << createMatch("euriware", ["RST","GBE"], ["FEE","ADE"], 13, 6, "19/06/2009")
 		listMatchs << createMatch("euriware", ["RST","EBT"], ["JAY","PSR"], 10, 13, "19/06/2009")
 		listMatchs << createMatch("euriware", ["RST"], ["JAY"], 13, 1, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["RST"], ["EBT"], 13, 9, "19/06/2009", "souchais", TypeMatch.NON_OFFICIEL)
 		listMatchs << createMatch("euriware", ["PSR","GBE"], ["ADE","FEE"], 13, 11, "19/06/2009")
-		
+		listMatchs << createMatch("euriware", ["ADE"], ["GBE"], 13, 7, "19/06/2009")
+		listMatchs << createMatch("euriware", ["ADE"], ["GBE"], 5, 13, "19/06/2009")
+		listMatchs << createMatch("euriware", ["ADE"], ["GBE"], 8, 13, "19/06/2009")
 		listMatchs << createMatch("euriware", ["JAY","GBE"], ["RST","PSR"], 11, 13, "19/06/2009")
 		listMatchs << createMatch("euriware", ["JAY","GBE"], ["RST","PSR"], 11, 13, "19/06/2009")
+		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 10, "22/06/2009")
+		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 12, "22/06/2009")
 		
-		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 10, "19/06/2009")
-		listMatchs << createMatch("euriware", ["JAY","BPT"], ["EBT","MSI"], 13, 12, "19/06/2009")
+		listMatchs << createMatch("euriware", ["CLC","BPT","ADE"], ["EBT","NHT","BRD"], 13, 7, "23/06/2009")
+		listMatchs << createMatch("euriware", ["BRD","BPT","ADE"], ["EBT","NHT","CLC"], 6, 13, "23/06/2009")
+		
 		return listMatchs
 	}
 	List<Match> populate9() {
@@ -268,7 +272,12 @@ class MatchUtil {
 	
 	List getMatchByGroupName(groupName) {
 		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
-		return DAOManager.instance.getAllFromIdGroup(Match.class, petankGroup.id)
+		return DAOManager.instance.getMatchFromIdGroup(Match.class, petankGroup.id)
+	}
+	
+	List getLastMatchByGroupName(groupName, start, length) {
+		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
+		return DAOManager.instance.getLastMatchFromIdGroup(Match.class, petankGroup.id, start, length)
 	}
 	
 	def resetMatch(match) {
@@ -300,14 +309,20 @@ class MatchUtil {
 		return c
 	}
 	
+	Date getMatchDate(idGroup, dateString) {
+		def nb = DAOManager.instance.countAllMatchFromIdGroupAndDate(Match.class, idGroup, DateUtil.instance.makeDate())
+		return DateUtil.instance.makeDate(dateString, nb)
+	}
+	
 	Match createMatch(group, play1, play2, sc1, sc2, dateString=null, place="souchais", type=TypeMatch.OFFICIEL) {
-		def date = DateUtil.instance.makeDate(dateString)
+		def idGroup = PetankGroupUtil.instance.getGroup(group).id
+		def date = this.getMatchDate(idGroup, dateString)
 		def player1 = []
 		def player2 = []
 		play1.each { player1 << PetankUserUtil.instance.getUser(it, group)}
 		play2.each { player2 << PetankUserUtil.instance.getUser(it, group)}
 		def match = new Match(score1:sc1, score2:sc2, typeMatch:type, jour:date, player1:"", player2:"", point1:0, point2:0, playersWithPoints:"");
-		match.idGroup = PetankGroupUtil.instance.getGroup(group).id
+		match.idGroup = idGroup
 		match.idPlace = PetankPlaceUtil.instance.getPlace(place).id
 		//on ne créé plus les données sur les points des joueurs (et moyennes) au moment de la création mais 
 		//au moment où l'on applique les barêmes
@@ -318,6 +333,7 @@ class MatchUtil {
 		match.player1 = concatId(player1)
 		match.player2 = concatId(player2)
 		
+		DAOManager.instance.save(match)
 		return match
 	}
 	

@@ -52,37 +52,36 @@ public class PopulateResource extends DefaultResource {
 				loadObjects(PetankUserUtil.instance.populate())
 				break;
 			case 5 :
-				def listMatchs
 				switch((start as int)) {
+				//les matchs sont sauvegardés directement pour garder l'ordre
 				case 1 : 
-					listMatchs = MatchUtil.instance.populate1()
+					MatchUtil.instance.populate1()
 					break;
 				case 2 : 
-					listMatchs = MatchUtil.instance.populate2()
+					MatchUtil.instance.populate2()
 					break;
 				case 3 :
-					listMatchs = MatchUtil.instance.populate3()
+					MatchUtil.instance.populate3()
 					break;
 				case 4 :
-					listMatchs = MatchUtil.instance.populate4()
+					MatchUtil.instance.populate4()
 					break;
 				case 5 :
-					listMatchs = MatchUtil.instance.populate5()
+					MatchUtil.instance.populate5()
 					break;
 				case 6 :
-					listMatchs = MatchUtil.instance.populate6()
+					MatchUtil.instance.populate6()
 					break;
 				case 7 :
-					listMatchs = MatchUtil.instance.populate7()
+					MatchUtil.instance.populate7()
 					break;
 				case 8 :
-					listMatchs = MatchUtil.instance.populate8()
+					MatchUtil.instance.populate8()
 					break;
 				case 9 :
-					listMatchs = MatchUtil.instance.populate9()
+					MatchUtil.instance.populate9()
 					break;
 				}
-				loadObjects(listMatchs)
 				break;
 			case 6 :
 				DAOManager.instance.getAll(PetankGroup.class).each{
