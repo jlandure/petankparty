@@ -37,27 +37,27 @@ public class PetankPartyRestApplication extends Application {
 
         router.attach("/",BaseResource.class)
         
-//        Guard guard1
-//        Guard guard2
-//        Redirector redirector1
-//        Redirector redirector2
+        Guard guard1
+        Guard guard2
+        Redirector redirector1
+        Redirector redirector2
 //        PetankGroupUtil.instance.listGroups.each{
 //        	
-//        	guard1 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
-//        	guard1.getSecrets().put(it.name, it.password.toCharArray());
-//        	
-//        	guard2 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
-//        	guard2.getSecrets().put(it.name, it.password.toCharArray());
-//        	
-//        	router.attach("/"+it.name+"/c",guard1)
-//        	router.attach("/"+it.name+"/m",guard2)
-//        	redirector1 = new Redirector(getContext(), "/"+it.name+"/classement",  
-//        			Redirector.MODE_CLIENT_PERMANENT);
-//        	redirector2 = new Redirector(getContext(), "/"+it.name+"/match",  
-//        			Redirector.MODE_CLIENT_PERMANENT);
-//        	
-//        	guard1.setNext(redirector1)
-//        	guard2.setNext(redirector2)
+        	guard1 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
+        	guard1.getSecrets().put("euriware", "euriware".toCharArray());
+        	
+        	guard2 = new Guard(getContext(), ChallengeScheme.HTTP_BASIC/*HTTP_DIGEST*/, "Connexion PetankParty");
+        	guard2.getSecrets().put("orvault", "56".toCharArray());
+        	
+        	router.attach("/"+"euriware"+"/c",guard1)
+        	router.attach("/"+"orvault"+"/m",guard2)
+        	redirector1 = new Redirector(getContext(), "/"+"euriware"+"/classement",  
+        			Redirector.MODE_CLIENT_PERMANENT);
+        	redirector2 = new Redirector(getContext(), "/"+"orvault"+"/match",  
+        			Redirector.MODE_CLIENT_PERMANENT);
+        	
+        	guard1.setNext(redirector1)
+        	guard2.setNext(redirector2)
 //        }
 
         router.attach("/populate/{number}", PopulateResource.class);
