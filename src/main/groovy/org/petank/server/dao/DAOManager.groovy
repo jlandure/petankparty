@@ -125,7 +125,7 @@ public class DAOManager {
 		def objects = []
 		def PersistenceManager pm = initTransaction();
 		try {
-			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by points")
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by points desc")
 			query.declareParameters("Long idGroupParam")
 			objects = query.execute(idGroupParam)
 			commitTransaction()
