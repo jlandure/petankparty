@@ -1,0 +1,34 @@
+#GettingStarted guide
+
+= Introduction =
+
+Install Eclipse 3.4.2 with Java 1.6
+Install Elclipse Plugins : 
+ * SVN plugins : Subversive 2.0.4 with connectors
+   * Help > Software Updates > Find and Install...
+   * ’Install/Update wizard’, sélectionner ’Search for new features to install’ et cliquer          sur ’Next’
+   * Cliquer sur ’New Remote Site...’ 
+   * Indiquer un nom ’Subversive’, l’URL suivante : ’http://download.eclipse.org/technology/subversive/0.7/update-site/’ et cliquer sur ’Ok’
+   * Sélectionner ’Subversive’ et cliquer sur ’Finish’
+   * Ensuite il faut mettre les différents connecteurs
+   * Help > Software Updates > Find and Install...
+’Install/Update wizard’, sélectionner ’Search for new features to install’ et cliquer sur ’Next’
+   * Cliquer sur ’New Remote Site...’ 
+   * Indiquer un nom ’Subversive connectors’, l’URL suivante : ’http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/’ et cliquer sur ’Ok’
+   * Sélectionner tout et cliquer sur ’Finish’
+
+ * Google app engine plugin 1.2.1
+ * Groovy plugins
+
+Checkout the project
+
+
+
+= Compilation =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+= Launch =
