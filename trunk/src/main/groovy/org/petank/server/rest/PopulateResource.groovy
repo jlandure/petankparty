@@ -27,12 +27,11 @@ public class PopulateResource extends DefaultResource {
 		return true
 	}
 	
-	def number, start
+	def number
 	
 	def PopulateResource(Context context, Request request, Response response) {
 		super(context, request, response)
 		number = request.getAttributes().get("number")
-		start = (getQuery().getFirstValue('start') as int);  
 		populate()
 	}
 	
@@ -118,8 +117,11 @@ public class PopulateResource extends DefaultResource {
 					case 4 :
 						yield("PetankUserUtil.instance.populate()")
 						break;
-					case 5 :
-						yield("MatchUtil.instance.populate()/?start=$start")
+					case 5..13 :
+						yield("MatchUtil.instance.populate()/$number")
+						break;
+					case 0 :
+						yield("Remise à zéro populate()/0 Remise à zéro")
 						break;
 		    		}
 		    	}
