@@ -103,6 +103,11 @@ class PetankUserUtil {
 		return DAOManager.instance.getAllFromIdGroup(PetankUser.class, petankGroup.id)
 	}
 	
+	List getUserOrderedByGroupName(groupName) {
+		def petankGroup = PetankGroupUtil.instance.getGroup(groupName)
+		return DAOManager.instance.getUserOrderedByGroupName(PetankUser.class, petankGroup.id)
+	}
+	
 	PetankUser getUserById(id) {
 		return DAOManager.instance.get(PetankUser.class, id)
 	}
