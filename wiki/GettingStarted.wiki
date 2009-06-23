@@ -52,11 +52,11 @@ To finish the startup, just load some data by calling these REST urls :
 *ENJOY !*
 
 _Here a list of urls :_
-http://localhost:8080/{group}/classement
-http://localhost:8080/{group}/match
-http://localhost:8080/{group}/{player} (with the nickname)
-http://localhost:8080/{group}/{player}/chart (call the google chart api with the nickname)
-http://localhost:8080/{group}/timeline?players=XXX,YYY (call the google api with the nicknames)
-http://localhost:8080/place/{place} (call the google maps api)
+ * http://localhost:8080/{group}/classement
+ * http://localhost:8080/{group}/match
+ * http://localhost:8080/{group}/{player} (with the nickname)
+ * http://localhost:8080/{group}/{player}/chart (call the google chart api with the nickname)
+ * http://localhost:8080/{group}/timeline?players=XXX,YYY (call the google api with the nicknames)
+ * http://localhost:8080/place/{place} (call the google maps api)
 
 If you want to delete the database, just delete the file "war/WEB-INF/appengine-generated/local_db.bin"
