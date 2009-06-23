@@ -24,8 +24,8 @@ public class DAOManager {
         return pmfInstance;
     }
 
-    def Transaction tx
-	def PersistenceManager pm
+    Transaction tx
+	PersistenceManager pm
 	
 	def initTransaction() {
 		if(pm == null) {
@@ -35,7 +35,7 @@ public class DAOManager {
 		tx.begin();
 		return pm
 	}
-	
+    
 	def commitTransaction() {
 		tx.commit();
 	}
@@ -120,6 +120,60 @@ public class DAOManager {
 		}
 		return objects
 	}
+	
+	List getMatchFromIdGroup(def clazz, Long idGroupParam) {
+		def objects = []
+		def PersistenceManager pm = initTransaction();
+		try {
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by jour")
+			query.declareParameters("Long idGroupParam")
+			objects = query.execute(idGroupParam)
+			commitTransaction()
+		} finally {
+			closeTransaction()
+		}
+		return objects
+	}
+	
+	List getLastMatchFromIdGroup(def clazz, Long idGroupParam, start, length) {
+		def objects = []
+		def PersistenceManager pm = initTransaction();
+		try {
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by jour desc range "+start+","+length)
+			query.declareParameters("Long idGroupParam")
+			objects = query.execute(idGroupParam)
+			commitTransaction()
+		} finally {
+			closeTransaction()
+		}
+		return objects
+	}
+	
+	def countAllMatchFromIdGroupAndDate(def clazz, Long idGroupParam, date) {
+		def object = 0
+		PersistenceManager pmSpecial = initTransaction();
+		try {
+			//TODO : gérer un incrément par jour
+			//Query query = pmSpecial.newQuery("select count(id) from "+clazz.name+" where idGroup == "+idGroupParam+" and this.jour.getYear() == "+date.getYear()+" and this.jour.getMonth() == "+date.getMonth()+" and this.jour.getDay() == "+date.getDay()+" import java.util.Date ")
+//			query.declareParameters("Long idGroupParam, Date dateParam")
+//			object = query.execute(idGroupParam, date)
+			Query query = pmSpecial.newQuery("select count(id) from "+clazz.name)
+//			query.declareImports("import java.util.Date");
+//			query.setFilter("jour.getYear() == "+date.getYear())
+//			query.setFilter("jour.getMonth() == "+date.getMonth())
+//			query.setFilter("jour.getDay() == "+date.getDay())
+			query.setFilter("idGroup == "+idGroupParam)
+			//query.declareParameters("Long idGroupParam")
+			object = query.execute()
+		} finally {
+			closeTransaction()
+		}
+		return object
+	}
+	
+//	query.declareImports("import java.util.Date");
+//	query.declareParameters("Date best_before_limit");
+
 	
 	def delete(def object) {
 		def PersistenceManager pm = initTransaction();

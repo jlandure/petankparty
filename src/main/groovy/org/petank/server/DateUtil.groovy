@@ -20,11 +20,11 @@ public class DateUtil {
 		return getDateToFrString(new Date());
 	}
 	
-	def makeDate(event) {
-	    def eventDate = Calendar.getInstance()
+	def makeDate(event=null, secondes=0) {
+		def eventDate = Calendar.getInstance()
 		if (event != null) {
 			def dmy = event.split("/").collect { num -> Integer.parseInt(num.trim()) }
-			eventDate.set(dmy[2], (dmy[1] - 1), dmy[0], 0, 0, 0)
+			eventDate.set(dmy[2], (dmy[1] - 1), dmy[0], 0, 0, secondes)
 		}
 	    return eventDate.getTime()
 	}

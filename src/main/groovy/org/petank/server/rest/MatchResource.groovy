@@ -30,12 +30,7 @@ public class MatchResource extends DefaultGroupResource {
 	}
 	
 	def prepareObjects() {
-		listMatchs = MatchUtil.instance.getMatchByGroupName(groupName)
-		if(listMatchs.size() < 25) {
-			listMatchs = listMatchs[-1..0]
-		} else {
-			listMatchs = MatchUtil.instance.getMatchByGroupName(groupName)[-25..0]
-		}
+		listMatchs = MatchUtil.instance.getLastMatchByGroupName(groupName, 0, 25)
 		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
 	}
 	
@@ -132,7 +127,7 @@ public class MatchResource extends DefaultGroupResource {
 								bareme = BaremeUtil.getInstance().getBaremeById(match.idBareme);
 								place = PetankPlaceUtil.getInstance().getPlaceById(match.idPlace);
 								tr {
-									td(class:"special", "${DateUtil.instance.getDateToFrString(match.jour)}")
+									td(class:"special", "${match.jour}")//"${DateUtil.instance.getDateToFrString(match.jour)}")
 									td(class:"special") {
 										ul {
 											MatchUtil.instance.getPlayers(match.player1, listUsers).each{
