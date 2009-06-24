@@ -22,6 +22,8 @@ import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManage
  */
 public class ExportResource extends MatchResource {
 
+	private static final def ADMIN_MAIL = ["jujujuz@gmail.com"]
+	
 	def expireCache() {
 		return true
 	}
