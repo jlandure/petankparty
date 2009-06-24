@@ -20,26 +20,25 @@ import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManage
  * @author jlandure
  *
  */
-public class ExportResource extends DefaultResource {
+public class ExportResource extends MatchResource {
 
 	def expireCache() {
 		return true
 	}
 	
-	private static final def ADMIN_MAIL = ["jujujuz@gmail.com"]
-	
 	def ExportResource(Context context, Request request, Response response) {
 		super(context, request, response)
-		sendMail()
 	}
 	
 	def sendMail() {
-		String body = "...<br/><h1>TEST</h1>";
+		//String body = "...<br/><h1>TEST</h1>";
+		String body = toXML(prepareXmlWriter())
 		def subject = "Export Match Database done"
 		MailUtil.instance.sendMail(ADMIN_MAIL, subject, body)
 	}
 	
 	def toHTML(html, writer) {
+		sendMail()
 		html.html {
 			head {
 		        title "Export P\u00E9tank Party"
@@ -56,5 +55,5 @@ public class ExportResource extends DefaultResource {
 		}
 		return writer.toString();
 	}
-
+	
 }
