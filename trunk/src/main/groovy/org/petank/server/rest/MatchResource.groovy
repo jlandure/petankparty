@@ -74,11 +74,24 @@ public class MatchResource extends DefaultGroupResource {
 	
 	
 	def toXML(xml, writer) {
-		int i = 1;
-		xml.matchs(group:'euriware') {
-			listMatchs.each{ ma ->
-				match(id:i, date:DateUtil.instance.getDateToFrString(ma.jour), bareme:ma.bareme.id)
-				i++
+		def ma
+		xml.matchs(group:groupName) {
+			listMatchs.each{
+				ma = it
+				match(id:ma.id, date:DateUtil.instance.getDateToFrString(ma.jour), bareme:ma.idBareme,
+						score1:ma.score1, score2:ma.score2, typeMatch:ma.typeMatch, typeVictoire:ma.typeVictoire,
+						place:ma.idPlace, point1:ma.point1, point2:ma.point2) {
+					player1 {
+						MatchUtil.instance.getPlayers(ma.player1, listUsers).each{
+							player(id:it.id, name:it.name, points:MatchUtil.instance.getPlayerPoints(ma.playersWithPoints, it.id as String))
+						}
+					}
+					player2 {
+						MatchUtil.instance.getPlayers(ma.player2, listUsers).each{
+							player(id:it.id, name:it.name, points:MatchUtil.instance.getPlayerPoints(ma.playersWithPoints, it.id as String))
+						}
+					}
+				}
 			}
 		}
 		return writer.toString()

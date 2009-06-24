@@ -66,6 +66,7 @@ public class PetankPartyRestApplication extends Application {
         router.attach("/{group}/match", MatchResource.class);
         router.attach("/{group}/match/add", AddMatchResource.class);
         router.attach("/{group}/timeline", TimeLineResource.class).extractQuery("players", "players", true)  ;
+        router.attach("/{group}/export", ExportResource.class);
         router.attach("/{group}/{player}", PlayerResource.class);
         router.attach("/{group}/{player}/chart", ChartResource.class);
         router.attach("/bareme", BaremeResource.class);

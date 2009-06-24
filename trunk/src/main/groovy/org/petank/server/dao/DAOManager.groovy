@@ -139,7 +139,7 @@ public class DAOManager {
 		def objects = []
 		def PersistenceManager pm = initTransaction();
 		try {
-			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by jour")
+			Query query = pm.newQuery("select from "+clazz.name+" where idGroup == idGroupParam order by jour asc")
 			query.declareParameters("Long idGroupParam")
 			objects = query.execute(idGroupParam)
 			commitTransaction()
@@ -165,13 +165,13 @@ public class DAOManager {
 	
 	def countAllMatchFromIdGroupAndDate(def clazz, Long idGroupParam, date) {
 		def object = 0
-		PersistenceManager pmSpecial = initTransaction();
+		PersistenceManager pm = initTransaction();
 		try {
 			//TODO : gérer un incrément par jour
 			//Query query = pmSpecial.newQuery("select count(id) from "+clazz.name+" where idGroup == "+idGroupParam+" and this.jour.getYear() == "+date.getYear()+" and this.jour.getMonth() == "+date.getMonth()+" and this.jour.getDay() == "+date.getDay()+" import java.util.Date ")
 //			query.declareParameters("Long idGroupParam, Date dateParam")
 //			object = query.execute(idGroupParam, date)
-			Query query = pmSpecial.newQuery("select count(id) from "+clazz.name)
+			Query query = pm.newQuery("select count(id) from "+clazz.name)
 //			query.declareImports("import java.util.Date");
 //			query.setFilter("jour.getYear() == "+date.getYear())
 //			query.setFilter("jour.getMonth() == "+date.getMonth())
