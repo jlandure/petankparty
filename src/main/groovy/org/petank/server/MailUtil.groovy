@@ -37,22 +37,28 @@ public class MailUtil {
 		this.sendMail(MailUtil.FROM, to, subject, body)
 	}
 	
-	def sendMail(from, to, subject, body) {
+	def sendMail(to, subject, body, byte[] attachmentData, attachmentName, attachmentType) {
+		MimeBodyPart attachment = new MimeBodyPart()
+		attachment.setFileName(attachmentName)
+		attachment.setContent(attachmentData, attachmentType)
+		this.sendMail(MailUtil.FROM, to, subject, body, attachment)
+	}
+	
+	def sendMail(from, to, subject, body, MimeBodyPart attachment=null) {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		
 		try {
 	
-	        Multipart mp = new MimeMultipart();
+			Multipart mp = new MimeMultipart();
 	
 	        MimeBodyPart htmlPart = new MimeBodyPart();
 	        htmlPart.setContent(body, "text/html");
 	        mp.addBodyPart(htmlPart);
 	
-	        //MimeBodyPart attachment = new MimeBodyPart();
-	        //attachment.setFileName("manual.pdf");
-	        //attachment.setContent(attachmentData, "application/pdf");
-	        //mp.addBodyPart(attachment);
+	        if(attachment != null) {
+	        	mp.addBodyPart(attachment);
+	        }
 	
 	        Message msg = new MimeMessage(session);
 	        
@@ -63,6 +69,7 @@ public class MailUtil {
                         new InternetAddress(it));
 	        }
             msg.setSubject(HEAD + subject);
+            msg.setText("please use HTML");
         
             Transport.send(msg);
     

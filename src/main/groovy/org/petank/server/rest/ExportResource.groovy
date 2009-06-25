@@ -15,7 +15,7 @@ import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankUserUtil;
 import org.petank.server.PetankGroupUtil;
-import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManagerimport org.petank.server.MailUtil
+import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManagerimport org.petank.server.MailUtilimport java.io.File
 /**
  * @author jlandure
  *
@@ -33,10 +33,13 @@ public class ExportResource extends MatchResource {
 	}
 	
 	def sendMail() {
-		//String body = "...<br/><h1>TEST</h1>";
-		String body = toXML(prepareXmlWriter())
+		String body = "...<br/><h1>TEST</h1><br/>";
+		//def writer = new StringWriter()
+		//def xml = new MarkupBuilder(writer)
+		//xml.setDoubleQuotes(true)
+		byte[] contentFile = toXML(prepareXmlWriter())
 		def subject = "Export Match Database done"
-		MailUtil.instance.sendMail(ADMIN_MAIL, subject, body)
+		MailUtil.instance.sendMail(ADMIN_MAIL, subject, body, contentFile, "match.txt", "text/plain") //"application/rss+xml"
 	}
 	
 	def toHTML(html, writer) {
@@ -50,9 +53,7 @@ public class ExportResource extends MatchResource {
 		        p "${org.petank.server.rest.PetankPartyRestApplication.VERSION}"
 		        br()
 		        br()
-		        h1 {
-		    		"ok to "+ADMIN_MAIL
-		    	}
+		        h1 "ok to $ADMIN_MAIL"
 		    }
 		}
 		return writer.toString();
