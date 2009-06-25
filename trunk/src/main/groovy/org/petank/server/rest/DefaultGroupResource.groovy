@@ -31,6 +31,10 @@ public class DefaultGroupResource extends DefaultResource {
 		super(context, request, response)
 		groupName = (String) request.getAttributes().get("group")
 		group = PetankGroupUtil.instance.getGroup(groupName)
+		if(group==null) {
+			quit()
+			return
+		}
 		expire = !group.matchApplied
 		if(expire) {
 			PetankGroupUtil.instance.prepareGroup(group)

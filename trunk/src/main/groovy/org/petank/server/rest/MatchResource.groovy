@@ -73,12 +73,12 @@ public class MatchResource extends DefaultGroupResource {
 	}
 	
 	
-	def toXML(xml, writer) {
+	protected def toXML(xml, writer) {
 		def ma
 		xml.matchs(group:groupName) {
 			listMatchs.each{
 				ma = it
-				match(id:ma.id, date:DateUtil.instance.getDateToFrString(ma.jour), bareme:ma.idBareme,
+				match(id:ma.id, date:DateUtil.instance.getDateToFrString(ma.jour), jour:ma.jour, bareme:ma.idBareme,
 						score1:ma.score1, score2:ma.score2, typeMatch:ma.typeMatch, typeVictoire:ma.typeVictoire,
 						place:ma.idPlace, point1:ma.point1, point2:ma.point2) {
 					player1 {
