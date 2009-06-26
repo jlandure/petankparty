@@ -15,14 +15,15 @@ import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankUserUtil;
 import org.petank.server.PetankGroupUtil;
-import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManagerimport org.petank.server.MailUtilimport java.io.File
+import org.petank.server.PetankPlaceUtil;import org.petank.server.dao.DAOManagerimport org.petank.server.MailUtil
+import org.petank.server.DateUtilimport java.io.File
 /**
  * @author jlandure
  *
  */
 public class ExportResource extends MatchResource {
 
-	private static final def ADMIN_MAIL = ["jujujuz@gmail.com"]
+	private static final def ADMIN_MAIL = ["julien.landure@gmail.com"]
 	
 	def expireCache() {
 		return true
@@ -33,13 +34,23 @@ public class ExportResource extends MatchResource {
 	}
 	
 	def sendMail() {
-		String body = "...<br/><h1>TEST</h1><br/>";
-		//def writer = new StringWriter()
-		//def xml = new MarkupBuilder(writer)
-		//xml.setDoubleQuotes(true)
-		byte[] contentFile = toXML(prepareXmlWriter())
+		String content = ""
+		def ma
+		listMatchs.each {
+			ma = it
+			content += "listMatchs << createMatch("+groupName+", ["
+			content += MatchUtil.instance.getPlayers(ma.player1, listUsers).collect{"\""+it.name+"\""}.join(",")
+			content += "], ["
+			content += MatchUtil.instance.getPlayers(ma.player2, listUsers).collect{"\""+it.name+"\""}.join(",")
+			content += "], "+ma.score1+", "+ma.score2+", \""+DateUtil.instance.getDateToFrString(ma.jour)+"\", \""
+			content += PetankPlaceUtil.getInstance().getPlaceById(ma.idPlace).name
+			content += "\", "+ma.typeMatch+")\n"
+		}
+		println content
+		//String contenu = toXML(prepareXmlWriter())
+		//byte[] contentFile = contenu.getBytes("UTF-8")
 		def subject = "Export Match Database done"
-		MailUtil.instance.sendMail(ADMIN_MAIL, subject, body, contentFile, "match.txt", "text/plain") //"application/rss+xml"
+		MailUtil.instance.sendMail(ADMIN_MAIL, subject, content)//, contentFile, "match.txt", "text/plain") //"application/rss+xml"
 	}
 	
 	def toHTML(html, writer) {

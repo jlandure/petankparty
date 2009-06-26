@@ -47,37 +47,29 @@ public class MailUtil {
 	def sendMail(from, to, subject, body, MimeBodyPart attachment=null) {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
+		Message msg = new MimeMessage(session);
 		
-		try {
-	
-			Multipart mp = new MimeMultipart();
-	
-	        MimeBodyPart htmlPart = new MimeBodyPart();
-	        htmlPart.setContent(body, "text/html");
-	        mp.addBodyPart(htmlPart);
-	
-	        if(attachment != null) {
-	        	mp.addBodyPart(attachment);
-	        }
-	
-	        Message msg = new MimeMessage(session);
-	        
-	        msg.setContent(mp);
-	        msg.setFrom(new InternetAddress(from));
-	        to.each{
-	        	msg.addRecipient(Message.RecipientType.TO,
-                        new InternetAddress(it));
-	        }
-            msg.setSubject(HEAD + subject);
-            msg.setText("please use HTML");
-        
-            Transport.send(msg);
-    
-        } catch (AddressException e) {
-           println "AddressException>"+e
-        } catch (MessagingException e) {
-        	println "MessagingException>"+e
-        }
+		Multipart mp = new MimeMultipart();
+		
+		MimeBodyPart htmlPart = new MimeBodyPart();
+		htmlPart.setContent(body, "text/html");
+		mp.addBodyPart(htmlPart);
+		
+		if(attachment != null) {
+			mp.addBodyPart(attachment);
+		}
+		
+		
+		msg.setFrom(new InternetAddress(from));
+		to.each{
+			msg.addRecipient(Message.RecipientType.TO,
+					new InternetAddress(it));
+		}
+		msg.setSubject(HEAD + subject);
+		msg.setContent(mp);
+		
+		Transport.send(msg);
+		
 	}
 	
 }
