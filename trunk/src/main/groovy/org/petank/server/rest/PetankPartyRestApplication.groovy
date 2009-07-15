@@ -61,6 +61,7 @@ public class PetankPartyRestApplication extends Application {
 //        }
 
         router.attach("/populate/{number}", PopulateResource.class);
+        router.attach("/reset/{number}", ResetResource.class);
         router.attach("/place/{place}", PlaceResource.class);
 		router.attach("/{group}/classement", ClassementResource.class);
         router.attach("/{group}/match", MatchResource.class);

@@ -16,7 +16,9 @@ import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.DateUtil;
 import org.petank.server.PetankUserUtil;
-import org.petank.server.PetankPlaceUtil;import java.lang.Overrideimport org.petank.server.dao.DAOManager
+import org.petank.server.PetankPlaceUtil;
+import org.petank.server.StatUtil;import java.lang.Overrideimport org.petank.server.dao.DAOManager
+
 /**
  * @author jlandure
  *
@@ -41,6 +43,7 @@ public class MatchResource extends DefaultGroupResource {
 	
 	@Override
 	void acceptRepresentation(Representation entity) {
+		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
 		// Parse the given representation and retrieve pairs of  
 		// "name=value" tokens.  
 		Form form = new Form(entity)
@@ -66,10 +69,16 @@ public class MatchResource extends DefaultGroupResource {
 			}
 		}
 		
-		Match match = MatchUtil.instance.createMatch(groupName, player1, player2, score1, score2, jour, place, type)
 		// Register the new match
-		DAOManager.instance.save(match)
-		group.matchApplied = false
+		Match match = MatchUtil.instance.createMatch(groupName, player1, player2, score1, score2, jour, place, type)
+		
+		//group.matchApplied = false
+		//on ne rafraichit qu'avec le dernier match
+		listUsers = StatUtil.instance.applyMatchs([match], listUsers)
+		//DefaultResource.MEMCACHE.remove("/$groupName/classement")
+		//DefaultResource.MEMCACHE.remove("/$groupName/match")
+		DefaultResource.MEMCACHE.clear()
+		getResponse().redirectSeeOther(new Reference("/$groupName/classement"));
 	}
 	
 	
