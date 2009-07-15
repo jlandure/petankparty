@@ -87,10 +87,10 @@ public class PopulateResource extends DefaultResource {
 				MatchUtil.instance.populate12()
 				break;
 			case 0 :
-				DAOManager.instance.getAll(PetankGroup.class).each{
-					it.matchApplied = false
-				}
-				DefaultResource.MEMCACHE.clear()
+//				DAOManager.instance.getAll(PetankGroup.class).each{
+//					it.matchApplied = false
+//				}
+//				DefaultResource.MEMCACHE.clear()
 				break;
 		}
 	}
@@ -126,11 +126,11 @@ public class PopulateResource extends DefaultResource {
 					case 4 :
 						yield("PetankUserUtil.instance.populate()")
 						break;
-					case 5..13 :
+					case 5..16 :
 						yield("MatchUtil.instance.populate()/$number")
 						break;
 					case 0 :
-						yield("Remise à zéro populate()/0 Remise à zéro")
+						yield("Use /reset/0 pour la remise à zéro [[populate()/0 Remise à zéro]]")
 						break;
 		    		}
 		    	}

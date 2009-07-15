@@ -68,6 +68,7 @@ public class DefaultResource extends Resource {
 					prepareObjects()
 					//Put the value into the cache.
 					text = toHTML(prepareHtmlWriter())
+					println "put $key"
 					MEMCACHE.put(key, text);
 				}
 			
