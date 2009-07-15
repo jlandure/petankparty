@@ -38,6 +38,9 @@ class MatchUtil {
 		listMatchs.addAll(this.populate7())
 		listMatchs.addAll(this.populate8())
 		listMatchs.addAll(this.populate9())
+		listMatchs.addAll(this.populate10())
+		listMatchs.addAll(this.populate11())
+		listMatchs.addAll(this.populate12())
 		return listMatchs
 	}
 	

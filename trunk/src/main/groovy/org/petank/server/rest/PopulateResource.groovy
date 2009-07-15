@@ -91,6 +91,7 @@ public class PopulateResource extends DefaultResource {
 //					it.matchApplied = false
 //				}
 //				DefaultResource.MEMCACHE.clear()
+				MatchUtil.instance.populate()
 				break;
 		}
 	}
