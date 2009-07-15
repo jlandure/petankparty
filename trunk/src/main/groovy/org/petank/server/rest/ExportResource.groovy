@@ -36,15 +36,15 @@ public class ExportResource extends MatchResource {
 	def sendMail() {
 		String content = ""
 		def ma
-		listMatchs.each {
+		listMatchs[-1..0].each {
 			ma = it
-			content += "listMatchs << createMatch("+groupName+", ["
+			content += "listMatchs << createMatch(\""+groupName+"\", ["
 			content += MatchUtil.instance.getPlayers(ma.player1, listUsers).collect{"\""+it.name+"\""}.join(",")
 			content += "], ["
 			content += MatchUtil.instance.getPlayers(ma.player2, listUsers).collect{"\""+it.name+"\""}.join(",")
 			content += "], "+ma.score1+", "+ma.score2+", \""+DateUtil.instance.getDateToFrString(ma.jour)+"\", \""
 			content += PetankPlaceUtil.getInstance().getPlaceById(ma.idPlace).name
-			content += "\", "+ma.typeMatch+")\n"
+			content += "\", TypeMatch."+ma.typeMatch+")\n\n"
 		}
 		println content
 		//String contenu = toXML(prepareXmlWriter())

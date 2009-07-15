@@ -77,6 +77,15 @@ public class PopulateResource extends DefaultResource {
 			case 13 :
 				MatchUtil.instance.populate9()
 				break;
+			case 14 :
+				MatchUtil.instance.populate10()
+				break;
+			case 15 :
+				MatchUtil.instance.populate11()
+				break;
+			case 16 :
+				MatchUtil.instance.populate12()
+				break;
 			case 0 :
 				DAOManager.instance.getAll(PetankGroup.class).each{
 					it.matchApplied = false
