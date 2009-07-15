@@ -58,6 +58,9 @@ public class ResetResource extends DefaultResource {
 				}
 				DefaultResource.MEMCACHE.clear()
 				break;
+			case 99 :
+				
+				break;
 		}
 	}
 	
@@ -86,7 +89,10 @@ public class ResetResource extends DefaultResource {
 			        case 1 : 
 						yield("petankGroup reinitialized : need calculation")
 						break;
-		    		}
+		        	case 2 : 
+		        		yield("petankGroup calculation done")
+		        		break;
+	    			}
 		    	}
 		    }
 		}
