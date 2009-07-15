@@ -95,7 +95,7 @@ public class ClassementResource extends DefaultGroupResource {
 				    			td(class:"special") {
 				    				yield "${user.points}"
 				    				br()
-				    				yield "[${(user.points - user.pointsDayBefore)}]"
+				    				yield "[${(user.points - (user.pointsDayBefore ?: 0))}]"
 				    			}
 				    			td(class:"special", "${user.partiesJoues}")
 				    			td(class:"special", "${user.partiesGagnes}")
