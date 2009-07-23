@@ -40,8 +40,6 @@ public class PlayerResource extends DefaultGroupResource {
     	if(player == null) {
 			quit();return
 		}
-		int i = 1;
-
 		xml.player(name:player.petankName) {
 //			listUsers.each{ play ->
 //				player(place:i, nom:play.petankName, score:play.points)
@@ -55,7 +53,6 @@ public class PlayerResource extends DefaultGroupResource {
 		if(player == null) {
 			quit();return
 		}
-		int i = 1;
 		def user 
 		html.html {
 		    head {
@@ -92,7 +89,7 @@ public class PlayerResource extends DefaultGroupResource {
 		    		tbody {
 		    				user = player
 				    		tr {
-				    			td(class:"special", "$i")
+				    			td(class:"special", "${user.classement}")
 				    			td(class:"special2") {
 				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
 				    			}

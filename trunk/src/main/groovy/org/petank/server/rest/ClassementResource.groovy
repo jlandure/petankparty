@@ -44,7 +44,6 @@ public class ClassementResource extends DefaultGroupResource {
     }
 
 	def toHTML(html, writer) {
-		int i = 1;
 		def user 
 		html.html {
 		    head {
@@ -85,9 +84,9 @@ public class ClassementResource extends DefaultGroupResource {
 		    				user = it
 				    		tr {
 				    			td(class:"special") {
-				    				yield "$i"
+				    				yield "${user.classement}"
 				    				br()
-				    				yield "[${(user.placeDayBefore - i)}]"
+				    				yield "[${((user.placeDayBefore ?: 0) - user.classement)}]"
 				    			}
 				    			td(class:"special2") {
 				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
@@ -109,7 +108,6 @@ public class ClassementResource extends DefaultGroupResource {
 				    			td(class:"special", "${user.defaiteAnormale}")
 				    			td(class:"special", "${user.nbMatchOfficiel}")
 				    		}
-		    				i++
 		    			}
 		    		}
 		    	}
