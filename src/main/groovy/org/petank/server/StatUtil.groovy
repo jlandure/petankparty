@@ -146,10 +146,12 @@ public class StatUtil {
 	def applyProgression(player, jour) {
 		if(player.dayBefore == null) {
 			player.dayBefore = jour
-		} else if(player.dayBefore.before(jour)) {
-			player.pointsDayBefore = player.points
-			player.placeDayBefore = PetankUserUtil.instance.getClassementUser(player)
-			player.dayBefore = jour
+		} else {
+			if(DateUtil.instance.getDateToString(player.dayBefore) < DateUtil.instance.getDateToString(jour)) {
+				player.pointsDayBefore = player.points
+				player.placeDayBefore = PetankUserUtil.instance.getClassementUser(player)
+				player.dayBefore = jour
+			}
 		}
 	}
 	

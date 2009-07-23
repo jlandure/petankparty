@@ -88,7 +88,7 @@ public class PetankUser implements Serializable {
     @Persistent
     private Integer nbMatchOfficiel = 0;
     
-    @NotPersistent
+    @Persistent
     private Integer classement = 0;
     
 	public Long getId() {
