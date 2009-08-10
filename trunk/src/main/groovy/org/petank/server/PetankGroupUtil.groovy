@@ -56,6 +56,7 @@ class PetankGroupUtil {
 //		}
 		listUsers = StatUtil.instance.applyMatchs(listMatchs, listUsers)
 		group.matchApplied = true;
+		DAOManager.instance.save(group)
 		//return [listUsersReset, listMatchsReset]
 		return [listUsers, listMatchs]
 	}

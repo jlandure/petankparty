@@ -28,9 +28,8 @@ public class DAOManager {
 	PersistenceManager pm
 	
 	def initTransaction() {
-		if(pm == null) {
-			pm = DAOManager.get().getPersistenceManager()
-		}
+		pm = DAOManager.get().getPersistenceManager()
+		pm.setDetachAllOnCommit(true);
 		tx = pm.currentTransaction();
 		tx.begin();
 		return pm
@@ -40,10 +39,11 @@ public class DAOManager {
 		tx.commit();
 	}
 	
-	def closeTransaction() {
+	def closeTransaction(PersistenceManager pm) {
 		if (tx.isActive()) {
             tx.rollback();
         }
+        pm.close();
 	}
 	
 	def get(def clazz, def id) {
@@ -53,7 +53,7 @@ public class DAOManager {
 			object = pm.getObjectById(clazz, (id as Long))
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return object
 	}
@@ -62,12 +62,17 @@ public class DAOManager {
 		def objects
 		def PersistenceManager pm = initTransaction();
 		try {
-			Query query = pm.newQuery("select from "+clazz.name+" where name == nameParam order by name asc")
-			query.declareParameters("String nameParam")
-			objects = query.execute(name)
+			Query query = pm.newQuery("select from "+clazz.name+" where name == \""+name+"\" order by name asc")
+			//Query query = pm.newQuery(clazz)
+			//query.setFilter(" name == nameParam")
+			//query.setOrdering("name asc")
+			// order by name asc")
+			//query.declareParameters("String nameParam")
+			//objects = query.execute(name)
+			objects = query.execute()
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects[0]
 	}
@@ -79,7 +84,7 @@ public class DAOManager {
 			pm.makePersistent(object)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return object
 	}
@@ -90,7 +95,7 @@ public class DAOManager {
 			pm.makePersistentAll(objects)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -98,11 +103,12 @@ public class DAOManager {
 	List getAll(def clazz) {
 		def objects = []
 		def PersistenceManager pm = initTransaction();
+		pm.setDetachAllOnCommit(true);
 		try {
 			objects = pm.newQuery("select from "+clazz.name).execute()
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -116,7 +122,7 @@ public class DAOManager {
 			objects = query.execute(idGroupParam)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -130,7 +136,7 @@ public class DAOManager {
 			objects = query.execute(idGroupParam)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -144,7 +150,7 @@ public class DAOManager {
 			objects = query.execute(idGroupParam)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -158,7 +164,7 @@ public class DAOManager {
 			objects = query.execute(idGroupParam)
 			commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return objects
 	}
@@ -180,7 +186,7 @@ public class DAOManager {
 			//query.declareParameters("Long idGroupParam")
 			object = query.execute()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 		return object
 	}
@@ -195,7 +201,7 @@ public class DAOManager {
 			pm.deletePersistent(object);
 		    commitTransaction()
 		} finally {
-			closeTransaction()
+			closeTransaction(pm)
 		}
 	}
 	

@@ -43,8 +43,11 @@ public class ResetResource extends DefaultResource {
 			case 1 :
 				def listMatchs
 				def listUsers
+				def group
 				DAOManager.instance.getAll(PetankGroup.class).each{
-					it.matchApplied = false
+					group = it
+					group.matchApplied = false
+					DAOManager.instance.save(group)
 					listMatchs = MatchUtil.instance.getMatchByGroupName(it.name)
 					listUsers = PetankUserUtil.instance.getUserByGroupName(it.name)
 					listUsers.each{
