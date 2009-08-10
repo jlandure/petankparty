@@ -93,7 +93,7 @@ public class StatUtil {
 		
 		//récupération du bareme à appliquer
 		Bareme bareme = BaremeUtil.instance.chooseBareme(this.getBetween(match), listBaremes)
-		match.idBareme = bareme.id
+		match.idBareme = bareme.id	
 		def coefficient = BaremeUtil.instance.getCoefficient(match.typeMatch)
 		
 		if(match.point1 >= match.point2) {
@@ -141,6 +141,13 @@ public class StatUtil {
 				}
 			}
 		}
+		player1.each{
+			DAOManager.instance.save(it)
+		}
+		player2.each{
+			DAOManager.instance.save(it)
+		}
+		DAOManager.instance.save(match)
 	}
 	
 	def applyProgression(player, jour) {
@@ -155,18 +162,38 @@ public class StatUtil {
 		}
 	}
 	
-	def getPlayerEvolution(player, listMatchs=null) {
-		def point
-		def points = []
-		if(listMatchs == null) {
-			listMatchs = MatchUtil.instance.getMatchByPlayerNameAndGroupName(player.name, player.group.name)
-		}
+	def getBestTeam() {
+		def team = [:]
+		def teamtemp
+		def match
+		def listMatchs = MatchUtil.instance.getMatchs()
 		listMatchs.each{
-			point = getPlayerPoints(it.playersWithPoints, player.id as String);
-			if(point != null) points << point;
+			match = it
+			if(match.score1 > match.score2) {
+				teamtemp = team[match.player1]
+				if(teamtemp == null) {
+					team[match.player1] = 1
+				} else {
+					team[match.player1] = team[match.player1] + 1
+				}
+				println team[match.player1]
+			} else {
+				teamtemp = team[match.player2]
+				if(teamtemp == null) {
+					team[match.player2] = 1
+				} else {
+					team[match.player2] = team[match.player2] + 1
+				}
+				println team[match.player2]
+			}
 		}
-		points << player.points
-		return points;
+		println team.toMapString()
+		def keys = lang.keySet().sort {lang[it]}
+		println keys
+		//def mc= [compare:{a,b-> a.value.compareTo(b.value)}] as Comparator
+		//team.sort(mc)
+		println team.findAll{it.value > 10}
+		return team.toMapString()
 	}
 	
 }
