@@ -304,6 +304,46 @@ class MatchUtil {
 		return listMatchs
 	}
 	
+	List<Match> populate13() {
+		def listMatchs = new ArrayList<Match>()
+		listMatchs << createMatch("euriware", ["GBE","JLE","FRT"], ["JAY","SHS","RST"], 11.0, 13.0, "16/07/2009", "souchais", TypeMatch.OFFICIEL) 
+		listMatchs << createMatch("euriware", ["GBE","JLE"], ["JAY","RST"], 13.0, 12.0, "16/07/2009", "souchais", TypeMatch.OFFICIEL) 
+		listMatchs << createMatch("euriware", ["GBE","JLE"], ["JAY","RST"], 4.0, 13.0, "16/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","JLE"], ["JAY","RST"], 13.0, 8.0, "16/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["CLC","JAY"], ["JLE","FRT","SHS"], 13.0, 3.0, "29/07/2009", "souchais", TypeMatch.NON_OFFICIEL)
+		listMatchs << createMatch("euriware", ["CLC","JAY"], ["JLE","FRT","SHS"], 13.0, 7.0, "29/07/2009", "souchais", TypeMatch.NON_OFFICIEL)
+		listMatchs << createMatch("euriware", ["CLC","FEE","BPT"], ["JLE","FRT","SHS"], 13.0, 12.0, "30/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["CLC","FEE","BPT"], ["JLE","FRT","SHS"], 6.0, 13.0, "30/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["CLC","JLE"], ["FEE","BPT"], 0.0, 13.0, "31/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JAY","FRT"], ["CLC","SHS"], 13.0, 11.0, "31/07/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JLE"], ["BPT"], 13.0, 9.0, "31/07/2009", "souchais", TypeMatch.NON_OFFICIEL)
+		listMatchs << createMatch("euriware", ["JLE"], ["FEE"], 13.0, 8.0, "31/07/2009", "souchais", TypeMatch.NON_OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","EBT"], ["JLE","JAY"], 13.0, 10.0, "03/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","EBT"], ["JLE","JAY"], 13.0, 8.0, "03/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","JAY","EBT"], ["JLE","PSR","SHS"], 13.0, 8.0, "03/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","JLE","JAY"], ["PSR","EBT","SHS"], 13.0, 10.0, "03/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","PSR","EBT"], ["JLE","JAY","SHS"], 13.0, 7.0, "03/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","JAY","EBT"], ["FRT","ADE","SHS"], 13.0, 4.0, "04/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JAY","FRT","EBT"], ["GBE","ADE","SHS"], 10.0, 13.0, "04/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","PSR","EBT"], ["JLE","JAY","SHS"], 13.0, 3.0, "04/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["GBE","JLE","JAY"], ["PSR","EBT","SHS"], 13.0, 12.0, "04/08/2009", "souchais", TypeMatch.NON_OFFICIEL)
+		listMatchs << createMatch("euriware", ["ADE","JLE","FEE"], ["FRT","GBE","EBT"], 10.0, 13.0, "05/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["ADE","GBE"], ["FEE","FRT"], 13.0, 5.0, "05/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["ADE","GBE"], ["FRT","SHS"], 13.0, 6.0, "06/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JLE","EBT"], ["FEE","JAY"], 6.0, 13.0, "06/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["ADE","GBE"], ["FRT","SHS"], 13.0, 7.0, "06/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JLE","EBT"], ["FEE","JAY"], 13.0, 2.0, "06/08/2009", "souchais", TypeMatch.OFFICIEL)
+		
+		listMatchs << createMatch("euriware", ["ADE","FEE"], ["JLE","EBT"], 13.0, 8.0, "07/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["FEE","EBT"], ["JLE","ADE"], 13.0, 9.0, "07/08/2009", "souchais", TypeMatch.OFFICIEL)
+		
+		listMatchs << createMatch("euriware", ["FEE","EBT","SHS"], ["JLE","JAY","GBE"], 2.0, 13.0, "10/08/2009", "souchais", TypeMatch.OFFICIEL)
+		listMatchs << createMatch("euriware", ["JAY","EBT","SHS"], ["JLE","FEE","GBE"], 12.0, 13.0, "10/08/2009", "souchais", TypeMatch.OFFICIEL)
+		
+		listMatchs << createMatch("euriware", ["JAY","EBT"], ["JLE","PSR"], 13.0, 9.0, "10/08/2009", "souchais", TypeMatch.OFFICIEL)
+		return listMatchs
+	}
+	
 	List<Match> populate9() {
 		def listMatchs = new ArrayList<Match>()
 		listMatchs << createMatch("orvault", ["DOM"], ["JRO"], 9, 13, "22/03/2009", "56", TypeMatch.NON_OFFICIEL)

@@ -39,7 +39,6 @@ public class ClassementResource extends DefaultGroupResource {
 				i++
 			}
 		}
-		//return writer.toString()
 		return writer.toString()
     }
 
@@ -86,7 +85,7 @@ public class ClassementResource extends DefaultGroupResource {
 				    			td(class:"special") {
 				    				yield "${user.classement}"
 				    				br()
-				    				yield "[${((user.placeDayBefore ?: 0) - user.classement)}]"
+				    				yield "[${((user.classement ?: 0) - (user.placeDayBefore ?: 0))}]"
 				    			}
 				    			td(class:"special2") {
 				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
@@ -94,7 +93,7 @@ public class ClassementResource extends DefaultGroupResource {
 				    			td(class:"special") {
 				    				yield "${user.points}"
 				    				br()
-				    				yield "[${(user.points - (user.pointsDayBefore ?: 0))}]"
+				    				yield "[${((user.points ?:0) - (user.pointsDayBefore ?: 0))}]"
 				    			}
 				    			td(class:"special", "${user.partiesJoues}")
 				    			td(class:"special", "${user.partiesGagnes}")
