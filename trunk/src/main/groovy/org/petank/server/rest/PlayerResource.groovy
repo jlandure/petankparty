@@ -40,11 +40,9 @@ public class PlayerResource extends DefaultGroupResource {
     	if(player == null) {
 			quit();return
 		}
-		xml.player(name:player.petankName) {
-//			listUsers.each{ play ->
-//				player(place:i, nom:play.petankName, score:play.points)
-//				i++
-//			}
+		xml.player(name:player.petankName, points:player.points, joues:player.partiesJoues, gagnes:player.partiesGagnes, perdus:player.partiesPerdus, pointsMoyen:"${String.format('%.2f', (player.totalPoints / (player.partiesJoues ?: 1)))}") {
+			page(name:"Chart", uri:getRootUri()+"/${groupName}/${playerName}/chart")
+			
 		}
 		return writer.toString()
     }
