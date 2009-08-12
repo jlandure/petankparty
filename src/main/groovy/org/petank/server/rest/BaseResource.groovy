@@ -42,6 +42,17 @@ public class BaseResource extends DefaultResource {
 		listGroups = PetankGroupUtil.instance.getGroups()
 	}
 	
+	def toXML(xml, writer) {
+		xml.groups() {
+			group(name:"Euriware") {
+				page(name:"Classement", uri:getRootUri()+"/euriware/classement")
+				page(name:"Match", uri:getRootUri()+"/euriware/match")
+				page(name:"Ajouter un match", uri:getRootUri()+"/euriware/match/add")
+			}
+		}
+		return writer.toString()
+    }
+	
 	def toHTML(html, writer) {
 		
 		def router = this.getApplication().getRoot()

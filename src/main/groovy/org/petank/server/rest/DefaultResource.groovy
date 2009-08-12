@@ -124,4 +124,8 @@ public class DefaultResource extends Resource {
 		return;
 	}
 	
+	def getRootUri() {
+		return request.getRootRef().toString()
+	}
+	
 }

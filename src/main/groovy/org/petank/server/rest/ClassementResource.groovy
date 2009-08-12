@@ -14,6 +14,7 @@ import org.petank.client.model.PetankUser;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
 import org.petank.server.PetankUserUtil;
+import org.petank.server.DateUtil;
 
 /**
  * @author jlandure
@@ -33,9 +34,9 @@ public class ClassementResource extends DefaultGroupResource {
 	
     def toXML(xml, writer) {
 		int i = 1;
-		xml.players(date:'15/05/09') {
+		xml.players(group:groupName, date:DateUtil.instance.getDateToFrString(new Date())) {
 			listUsers.each{ play ->
-				player(place:i, nom:play.petankName, score:play.points)
+				player(place:i, name:play.petankName, score:play.points, uri:getRootUri()+"/$groupName/${play.name}")
 				i++
 			}
 		}
@@ -44,6 +45,7 @@ public class ClassementResource extends DefaultGroupResource {
 
 	def toHTML(html, writer) {
 		def user 
+		int i = 1;
 		html.html {
 		    head {
 		        title "Classement P\u00E9tank Party"
@@ -83,9 +85,12 @@ public class ClassementResource extends DefaultGroupResource {
 		    				user = it
 				    		tr {
 				    			td(class:"special") {
-				    				yield "${user.classement}"
+				    				//yield "${user.classement}"
+				    				yield "${i}"
 				    				br()
-				    				yield "[${((user.classement ?: 0) - (user.placeDayBefore ?: 0))}]"
+				    				//yield "[${((user.classement ?: 0) - (user.placeDayBefore ?: 0))}]"
+				    				yield "[${((i ?: 0) - (user.placeDayBefore ?: 0))}]"
+				    				i++
 				    			}
 				    			td(class:"special2") {
 				    				a(href:"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
