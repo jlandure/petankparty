@@ -28,6 +28,10 @@ public class ChartResource extends PlayerResource {
 	def ChartResource(Context context, Request request, Response response) {
 		super(context, request, response)
 	}
+	
+	def toXML(html, writer) {
+		return toHTML(html, writer)
+	}
 
 	def toHTML(html, writer) {
 		def points = MatchUtil.instance.getPlayerEvolution(player)
@@ -41,8 +45,8 @@ chs=500x200
 &amp;cht=lc
 &amp;chds=550,800
 &amp;chxt=y
-&amp;chxl=0:|550|600|650|700|750|800
-&amp;chxp=550,600,650,700,750,800|
+&amp;chxl=0:|550|600|650|700|750|800|850|900
+&amp;chxp=550,600,650,700,750,800,850,900|
 &amp;chtt="""+player.name+"""
 &amp;chd=t:"""+allpoints+""""
 alt="Chart """+player.name+""" " />
