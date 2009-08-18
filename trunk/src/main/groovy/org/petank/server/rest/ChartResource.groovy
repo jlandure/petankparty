@@ -39,18 +39,7 @@ public class ChartResource extends PlayerResource {
 		//def pointmin = points.min()
 		//def pointmax = points.max()
 		//String a = "http://chart.apis.google.com/chart?chs=500x200&cht=lc&chds=550,800&chxt=y&chxl=0:|550|600|650|700|750|800&chxp=550,600,650,700,750,800|&chtt=${player.name}&chd=t:${allpoints}"
-		String gString = """
-<img src="http://chart.apis.google.com/chart?
-chs=500x200
-&amp;cht=lc
-&amp;chds=550,800
-&amp;chxt=y
-&amp;chxl=0:|550|600|650|700|750|800|850|900
-&amp;chxp=550,600,650,700,750,800,850,900|
-&amp;chtt="""+player.name+"""
-&amp;chd=t:"""+allpoints+""""
-alt="Chart """+player.name+""" " />
-"""		
+		String gString = """<img src="http://chart.apis.google.com/chart?chs=500x200&amp;cht=lc&amp;chds=550,900&amp;chxt=y&amp;chxl=0:|550|600|650|700|750|800|850|900&amp;chxp=550,600,650,700,750,800,850,900|&amp;chtt=${player.name}&amp;chd=t:${allpoints}" alt="Chart ${player.name}" />"""		
 	}
 
 }
