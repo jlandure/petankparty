@@ -30,12 +30,6 @@ public class BaseResource extends DefaultResource {
 	
 	def BaseResource(Context context, Request request, Response response) {
 		super(context, request, response)
-		
-		def userAgent = request.getClientInfo().getAgent()
-		def isMobile = userAgent.contains("iPhone") || userAgent.contains("iPod") || userAgent.contains("Mobile")
-		if(isMobile) {
-			response.redirectSeeOther(new Reference("/mobile/Sampleiphoneapp.html"));
-		}
 	}
 	
 	def prepareObjects() {
