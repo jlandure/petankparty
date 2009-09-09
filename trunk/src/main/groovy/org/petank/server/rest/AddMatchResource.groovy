@@ -37,7 +37,7 @@ public class AddMatchResource extends DefaultGroupResource {
 		listPlaces << PetankPlaceUtil.instance.getPlace("souchais")
 		listPlaces << PetankPlaceUtil.instance.getPlace("mainguais")
 		listPlaces << PetankPlaceUtil.instance.getPlace("lorient1")
-		xml.match(group:groupName, jour:DateUtil.instance.getNewDateToFrString(), next:getRootUri()+"/${groupName}/classement") {
+		xml.match(group:groupName, jour:DateUtil.instance.getNewDateToFrString(), uri:getRootUri()+"/${groupName}/match/add", next:getRootUri()+"/${groupName}/classement") {
 			players {
 				listUsers.each{ user ->
 					player(name:user.name, label:user.petankName)
