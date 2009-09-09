@@ -8,25 +8,22 @@ import com.google.gwt.xml.client.Node;
 import com.google.gwt.xml.client.NodeList;
 import com.google.gwt.xml.client.XMLParser;
 
-public class ClassementPage implements IPage {
+public class MatchPage implements IPage {
 
-	
-	private static final String TITLE = "Classement";
-	
-	private ArrayList<User> mUsers = new ArrayList<User>();
+	private ArrayList<User> mMatchs = new ArrayList<User>();
 	private String date;
 	private String mGroupName;
 
-	private ClassementPage() {
+	private MatchPage() {
 
 	}
 
-	public static ClassementPage convert(String messageXml) {
+	public static MatchPage convert(String messageXml) {
 
 		// parse the XML document into a DOM
 		Document messageDom = XMLParser.parse(messageXml);
 
-		ClassementPage result = new ClassementPage();
+		MatchPage result = new MatchPage();
 		Element topGroup = messageDom.getDocumentElement();
 		result.date = topGroup.getAttribute("date");
 		result.mGroupName = topGroup.getAttribute("group");
@@ -37,7 +34,7 @@ public class ClassementPage implements IPage {
 			if (node.getNodeName().equals("player")) {
 				Element teamElement = (Element) node;
 
-				result.mUsers.add(
+				result.mMatchs.add(
 						result.new User(
 								teamElement.getAttribute("place"),
 								teamElement.getAttribute("name"),
@@ -57,11 +54,11 @@ public class ClassementPage implements IPage {
 
 	@Override
 	public String getTitle() {
-		return ClassementPage.TITLE;
+		return "Classement";
 	}
 
 	public Iterable<User> getTeams() {
-		return mUsers;
+		return mMatchs;
 	}
 
 	public class User {
