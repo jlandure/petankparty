@@ -43,6 +43,7 @@ public class BaseResource extends DefaultResource {
 				page(name:"Match", uri:getRootUri()+"/euriware/match")
 				page(name:"Ajouter un match", uri:getRootUri()+"/euriware/match/add")
 			}
+			bareme(name:"Bareme", uri:getRootUri()+"/bareme")
 		}
 		return writer.toString()
     }

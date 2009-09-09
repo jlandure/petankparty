@@ -26,8 +26,11 @@ public class BaremeResource extends DefaultResource {
 		super(context, request, response)
 	}
 	
+	static def mc= [compare:{a,b-> a?.minimum.compareTo(b?.minimum)}] as Comparator
+	
 	def prepareObjects() {
 		listBaremes = DAOManager.instance.getAll(Bareme.class)
+		listBaremes.sort(BaremeResource.mc)
 	}
 	
     def toXML(xml, writer) {

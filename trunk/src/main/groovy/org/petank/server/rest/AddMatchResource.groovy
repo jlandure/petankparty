@@ -32,6 +32,26 @@ public class AddMatchResource extends DefaultGroupResource {
 		listUsers = PetankUserUtil.instance.getUserByGroupName(groupName)
 	}
 	
+	def toXML(xml, writer) {
+		def listPlaces = []
+		listPlaces << PetankPlaceUtil.instance.getPlace("souchais")
+		listPlaces << PetankPlaceUtil.instance.getPlace("mainguais")
+		listPlaces << PetankPlaceUtil.instance.getPlace("lorient1")
+		xml.match(group:groupName, jour:DateUtil.instance.getNewDateToFrString()) {
+			players {
+				listUsers.each{ user ->
+					player(name:user.name, label:user.petankName)
+				}
+			}
+			places {
+				listPlaces.each{ pl ->
+					place(id:pl.id, label:PetankPlaceUtil.instance.getPlaceName(pl))
+				}
+			}
+		}
+		return writer.toString()
+    }
+	
 	def toHTML(html, writer) {
 		int i = 1;
 		def match
