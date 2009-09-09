@@ -16,6 +16,7 @@ public class MainPage implements IPage {
 
 	public static final String TITLE = "Petank Party";
 	private ListePage group;
+	private ListePage bareme;
 	
 	private MainPage() {
 
@@ -32,8 +33,15 @@ public class MainPage implements IPage {
 
 		result.group = new ListePage(group.getAttribute("name"), Controller.HOST_URL + Controller.FIRST_PAGE);
 		
+		Element bareme = (Element) messageDom.getElementsByTagName("bareme").item(0);
+		result.bareme = new ListePage(bareme.getAttribute("name"), bareme.getAttribute("uri"));
+		
 		return result;
 
+	}
+
+	public ListePage getBareme() {
+		return bareme;
 	}
 
 	public ListePage getGroup() {

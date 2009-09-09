@@ -36,7 +36,24 @@ public class MainPagePanel extends AbstractPagePanel {
 			}
 		});
 		li.setStyleName("group");
+		
+		GenericTextTag<String> liBareme = new GenericTextTag<String>("li",
+				mainPage.getBareme().getName());
+		liBareme.setAttachedInfo(mainPage.getBareme().getUri());
 
+		liBareme.addHandler(new TouchClickEvent.TouchClickHandler<String>() {
+			@Override
+			public void touchClick(TouchClickEvent<String> e) {
+				// attachedInfo is the relative URL
+				if (!ViewSettings.AnimationRunning) {
+					Controller.navigateToBareme(e.getTarget()
+							.getAttachedInfo(), mMainPage);
+				}
+			}
+		});
+		liBareme.setStyleName("group");
+
+		ul.add(liBareme);
 		ul.add(li);
 
 		initWidget(basePanel);

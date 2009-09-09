@@ -1,12 +1,16 @@
 package org.petank.gwt.client;
 
+import org.petank.gwt.client.model.AddMatchPage;
+import org.petank.gwt.client.model.BaremePage;
 import org.petank.gwt.client.model.ChartPage;
 import org.petank.gwt.client.model.ClassementPage;
 import org.petank.gwt.client.model.GroupPage;
 import org.petank.gwt.client.model.IPage;
 import org.petank.gwt.client.model.MainPage;
+import org.petank.gwt.client.model.MatchPage;
 import org.petank.gwt.client.model.PlayerPage;
 import org.petank.gwt.client.util.ObservableStack;
+import org.petank.gwt.client.view.AddMatchPageStep1Panel;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -57,6 +61,31 @@ public class Controller {
 		mPageStack.pop();
 	}
 	
+	public static void navigateToBareme(String uri, MainPage mainPage) {
+		if (!mIgnoreEvents) {
+			mIgnoreEvents = true;
+
+			downloadXml(URL.encode(uri),
+					new XmlHttpResponse() {
+						@Override
+						public void onSuccessfulReceive(String xmlText) {
+							BaremePage p = BaremePage.convert(xmlText);
+							mPageStack.push(p);
+							mIgnoreEvents = false;
+						}
+
+						@Override
+						public void onUnsuccessfulReceive(String error) {
+							Window.alert(error);
+
+							mIgnoreEvents = false;
+
+						}
+					});
+		}
+	}
+
+	
 	public static void navigateToGroup(String uri, IPage currentPage) {
 		if (!mIgnoreEvents) {
 			mIgnoreEvents = true;
@@ -82,6 +111,11 @@ public class Controller {
 	}
 
 	public static void navigateToGroupClassement(String uri, IPage currentPage) {
+		
+		if(currentPage instanceof AddMatchPage) {
+			mPageStack.pop();
+		}
+		
 		if (!mIgnoreEvents) {
 			mIgnoreEvents = true;
 
@@ -103,6 +137,64 @@ public class Controller {
 						}
 					});
 		}
+	}
+	
+	public static void navigateToGroupMatch(String uri, GroupPage groupPage) {
+		if (!mIgnoreEvents) {
+			mIgnoreEvents = true;
+
+			downloadXml(URL.encode(uri),
+					new XmlHttpResponse() {
+						@Override
+						public void onSuccessfulReceive(String xmlText) {
+							MatchPage p = MatchPage.convert(xmlText);
+							mPageStack.push(p);
+							mIgnoreEvents = false;
+						}
+
+						@Override
+						public void onUnsuccessfulReceive(String error) {
+							Window.alert(error);
+
+							mIgnoreEvents = false;
+
+						}
+					});
+		}
+	}
+
+	public static void navigateToAddMatch(String uri, GroupPage groupPage) {
+		if (!mIgnoreEvents) {
+			mIgnoreEvents = true;
+
+			downloadXml(URL.encode(uri),
+					new XmlHttpResponse() {
+						@Override
+						public void onSuccessfulReceive(String xmlText) {
+							AddMatchPage p = AddMatchPage.convert(xmlText);
+							mPageStack.push(p);
+							mIgnoreEvents = false;
+						}
+
+						@Override
+						public void onUnsuccessfulReceive(String error) {
+							Window.alert(error);
+
+							mIgnoreEvents = false;
+
+						}
+					});
+		}
+	}
+	
+	public static void navigateToAddMatchStep2(AddMatchPage addMatchPage) {
+		mPageStack.pop();
+		mPageStack.push(addMatchPage);
+	}
+	
+	public static void navigateToAddMatchStep3(AddMatchPage addMatchPage) {
+		mPageStack.pop();
+		mPageStack.push(addMatchPage);
 	}
 	
 	public static void navigateToPlayer(String uri, IPage currentPage) {

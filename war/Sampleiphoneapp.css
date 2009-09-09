@@ -245,4 +245,56 @@ div.landscape div.page li.group:active {
   background-position: 440px 18px, 0 0;
 }
 
+/*
+list items with the .item_checked or not_checked class are those that can be tapped to choose
+an item and therefore need an checkbox in the background to indicate that
+*/
+div.page li.item_checked {
+  background-image: url('images/checkbox_checked.gif');
+  background-repeat: no-repeat;
+  background-position: 280px 18px;
+}
+
+div.landscape div.page li.item_checked {
+  background-position: 440px 18px;
+}
+
+/* this is for the touched state of list items */
+div.page li.item_checked:active {
+  background-image: url('images/checkbox_checked.gif'), url('images/item_background_touched.png');
+  background-position: 280px 18px, 0 0;
+  background-repeat: no-repeat, repeat-x;
+  color: white;
+}
+
+div.landscape div.page li.item_checked:active {
+  background-position: 440px 18px, 0 0;
+}
+
+/*
+list items with the .item_not_checked or not_checked class are those that can be tapped to choose
+an item and therefore need an checkbox in the background to indicate that
+*/
+div.page li.item_not_checked {
+  background-image: url('images/checkbox_off.gif');
+  background-repeat: no-repeat;
+  background-position: 280px 18px;
+}
+
+div.landscape div.page li.item_not_checked {
+  background-position: 440px 18px;
+}
+
+/* this is for the touched state of list items */
+div.page li.item_not_checked:active {
+  background-image: url('images/checkbox_off.gif'), url('images/item_background_touched.png');
+  background-position: 280px 18px, 0 0;
+  background-repeat: no-repeat, repeat-x;
+  color: white;
+}
+
+div.landscape div.page li.item_not_checked:active {
+  background-position: 440px 18px, 0 0;
+}
+
 

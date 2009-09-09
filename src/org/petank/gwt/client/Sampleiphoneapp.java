@@ -35,9 +35,9 @@ public class Sampleiphoneapp implements EntryPoint,
 			}
 		});
 
-		new Image("../images/chevron_touched.png");
-		new Image("../images/item_background_touched.png");
-		new Image("../images/back_button_touched.png");
+		new Image("./images/chevron_touched.png");
+		new Image("./images/item_background_touched.png");
+		new Image("./images/back_button_touched.png");
 
 		mBrowserPanel = RootPanel.get("browser");
 
