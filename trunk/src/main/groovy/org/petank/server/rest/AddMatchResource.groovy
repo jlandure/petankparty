@@ -122,6 +122,10 @@ public class AddMatchResource extends DefaultGroupResource {
 											input(size:5, type:"text", name:"score2", id:"score2")
 										}
 										li {
+											label(for:"officiel",  "Officiel : ") 
+											input(type:"checkbox", checked:"checked", name:"officiel", id:"officiel")
+										}
+										li {
 											yield "Lieu : "
 											select(name:"place", id:"place") {
 												listPlaces.each {
@@ -130,10 +134,9 @@ public class AddMatchResource extends DefaultGroupResource {
 												}
 											}
 										}
-										li {
-											label(for:"officiel",  "Officiel : ") 
-											input(type:"checkbox", checked:"checked", name:"officiel", id:"officiel")
-										}
+										br()
+										br()
+										br()
 										li {
 											input(type:"submit", value:"sauvegarder")
 										}
