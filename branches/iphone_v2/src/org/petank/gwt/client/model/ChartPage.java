@@ -29,7 +29,7 @@ public class ChartPage implements IPage {
 
 	@Override
 	public String getBackButtonText() {
-		return name.substring(6, 10);
+		return name.substring(6, 9);
 	}
 
 	@Override
