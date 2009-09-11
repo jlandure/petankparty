@@ -26,6 +26,8 @@ public class AddMatchPage implements IPage {
 	private ArrayList<NamedValue> players2 = new ArrayList<NamedValue>();
 	
 	private TextBox jour = new TextBox();
+	private TextBox score1 = new TextBox();
+	private TextBox score2 = new TextBox();
 	public boolean officiel = true;
 
 	public int step = 1;
@@ -41,7 +43,7 @@ public class AddMatchPage implements IPage {
 
 		AddMatchPage result = new AddMatchPage();
 		Element topGroup = messageDom.getDocumentElement();
-		String date = topGroup.getAttribute("date");
+		String date = topGroup.getAttribute("jour");
 		result.jour.setText(date);
 		result.mGroupName = topGroup.getAttribute("group");
 		result.uri = topGroup.getAttribute("uri");
@@ -105,6 +107,14 @@ public class AddMatchPage implements IPage {
 	
 	public TextBox getJour() {
 		return jour;
+	}
+
+	public TextBox getScore1() {
+		return score1;
+	}
+
+	public TextBox getScore2() {
+		return score2;
 	}
 
 	public Iterable<NamedValue> getPlayers() {

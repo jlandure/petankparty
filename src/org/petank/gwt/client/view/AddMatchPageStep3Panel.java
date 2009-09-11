@@ -54,22 +54,42 @@ public class AddMatchPageStep3Panel extends AbstractPagePanel {
 		liJourLabel.setStyleName("item");
 		ul.add(liJour);
 		
+		final GenericTextTag<String> liScore1Label = new GenericTextTag<String>("li", "Score 1");
+		liScore1Label.setStyleName("item");
+		ul.add(liScore1Label);
+
+		final GenericContainerTag liScore1 = new GenericContainerTag("li");
+		liScore1.add(addMatchPage.getScore1());
+		liScore1.setStyleName("item");
+		ul.add(liScore1);
+		
+		final GenericTextTag<String> liScore2Label = new GenericTextTag<String>("li", "Score 2");
+		liScore2Label.setStyleName("item");
+		ul.add(liScore2Label);
+
+		final GenericContainerTag liScore2 = new GenericContainerTag("li");
+		liScore2.add(addMatchPage.getScore2());
+		liScore2.setStyleName("item");
+		ul.add(liScore2);
+		
 		final GenericTextTag<String> liOfficiel = new GenericTextTag<String>("li", "Officiel");
-		liOfficiel.setStyleName("item_not_checked");
+		liOfficiel.setStyleName("item_checked");
 		liOfficiel.addHandler(new TouchClickEvent.TouchClickHandler<String>() {
 			@Override
 			public void touchClick(TouchClickEvent<String> e) {
 				if (!ViewSettings.AnimationRunning) {
 					if(liOfficiel.getStyleName().equals("item_checked")) {
-						addMatchPage.officiel = true;
+						addMatchPage.officiel = false;
 						liOfficiel.setStyleName("item_not_checked");
 					} else {
-						addMatchPage.officiel = false;
+						addMatchPage.officiel = true;
 						liOfficiel.setStyleName("item_checked");
 					}
 				}
 			}
 		});
+		
+		ul.add(liOfficiel);
 		
 		final GenericTextTag<String> liToFinish = new GenericTextTag<String>("li", addMatchPage.getFinalButtonText());
 		liToFinish.setStyleName("group");
