@@ -30,7 +30,7 @@ public class GzipRepresentation extends StringRepresentation {
 			
 			gos = new GZIPOutputStream(outputStream);
 
-            byte[] buf = getText().getBytes(getCharacterSet().getName())
+            byte[] buf = getText().getBytes("UTF-8")
 			gos.write(buf, 0, buf.length)
 			gos.finish();
 		}

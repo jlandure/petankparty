@@ -72,7 +72,7 @@ public class DefaultResource extends Resource {
 					MEMCACHE.put(key, text);
 				}
 			
-				representation = new GzipRepresentation(text, MediaType.TEXT_HTML)
+				representation = new StringRepresentation(text, MediaType.TEXT_HTML)
 				break;
 			case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
 				key = getRequest().getOriginalRef().getPath()+MediaType.TEXT_XML
@@ -87,7 +87,7 @@ public class DefaultResource extends Resource {
 					MEMCACHE.put(key, text);
 				}
 			
-				representation = new GzipRepresentation(text, MediaType.TEXT_XML)
+				representation = new StringRepresentation(text, MediaType.TEXT_XML)
 				break
 			case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
 				representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
