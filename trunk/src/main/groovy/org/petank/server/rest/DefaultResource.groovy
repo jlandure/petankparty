@@ -7,6 +7,7 @@ import org.restlet.*
 import org.restlet.data.*  
 import org.restlet.resource.*
 import org.petank.server.*
+import org.petank.server.rest.representation.GzipRepresentation
 import org.restlet.representation.Representation
 import org.restlet.representation.StringRepresentation
 import org.restlet.representation.OutputRepresentation
@@ -59,7 +60,7 @@ public class DefaultResource extends Resource {
 		def key
 		switch (variant.mediaType) {
 			case [MediaType.TEXT_HTML,MediaType.APPLICATION_XHTML]  :
-				key = getRequest().getOriginalRef().getPath()
+				key = getRequest().getOriginalRef().getPath()+MediaType.TEXT_HTML
 			
 				//Get the value from the cache.
 				text = (MEMCACHE.get(key) as String);
@@ -71,15 +72,22 @@ public class DefaultResource extends Resource {
 					MEMCACHE.put(key, text);
 				}
 			
-				representation = new StringRepresentation(text, MediaType.TEXT_HTML)
-			//GZIPOutputStream GZIPStream = new GZIPOutputStream(representation)
-			//representation = new OutputRepresentation(GZIPStream)
-			//representation.setEncodings([Encoding.DEFLATE])
-			//httpResponse.addHeader("Content-Encoding", "gzip");
+				representation = new GzipRepresentation(text, MediaType.TEXT_HTML)
 				break;
 			case [MediaType.TEXT_XML,MediaType.APPLICATION_XML] : 
-				prepareObjects()
-				representation = new StringRepresentation(toXML(prepareXmlWriter()), MediaType.TEXT_XML)
+				key = getRequest().getOriginalRef().getPath()+MediaType.TEXT_XML
+				
+				//Get the value from the cache.
+				text = (MEMCACHE.get(key) as String);
+			
+				if(text == null || expireCache()) {
+					prepareObjects()
+					//Put the value into the cache.
+					text = toXML(prepareXmlWriter())
+					MEMCACHE.put(key, text);
+				}
+			
+				representation = new GzipRepresentation(text, MediaType.TEXT_XML)
 				break
 			case [MediaType.TEXT_JAVASCRIPT,MediaType.APPLICATION_JSON] : 
 				representation = new StringRepresentation(toJSON(), MediaType.APPLICATION_JSON)
