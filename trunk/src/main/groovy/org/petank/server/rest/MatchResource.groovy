@@ -82,7 +82,7 @@ public class MatchResource extends DefaultGroupResource {
 	}
 	
 	
-	protected def toXML(xml, writer) {
+	def toXML(xml, writer) {
 		def ma
 		xml.matchs(group:groupName) {
 			listMatchs.each{
