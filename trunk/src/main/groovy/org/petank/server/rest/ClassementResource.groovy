@@ -58,7 +58,7 @@ public class ClassementResource extends DefaultGroupResource {
 		    		yield " / " 
 		    		a(href:"/bareme",  "Bareme")
 		    		yield " / " 
-		    		a(href:("/${groupName}/timeline/?players="+listUsers[0].name+","+listUsers[1].name+","+listUsers[2].name), target:"_blank", "Courbes d'\u00E9volution")
+		    		a(href:("/${groupName}/timeline?players="+listUsers[0].name+","+listUsers[1].name+","+listUsers[2].name), target:"_blank", "Courbes d'\u00E9volution")
 		    	}
 		        
 		        table(border:1, cellpadding:"15px", bordercolor:"black") {
