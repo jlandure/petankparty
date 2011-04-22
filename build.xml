@@ -1,0 +1,12 @@
+<project default="buildHello">
+
+	<target name="delete">
+		<delete file="war/WEB-INF/lib/petankgroovy.jar" />
+	</target>
+	
+	<target name="jar">
+		<jar destfile="war/WEB-INF/lib/petankgroovy.jar" basedir="test-classes" includes="**/*.class" />
+	</target>
+
+	<target name="buildHello" depends="delete,jar" />
+</project>
