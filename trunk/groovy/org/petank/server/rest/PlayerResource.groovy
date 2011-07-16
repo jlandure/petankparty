@@ -139,7 +139,7 @@ public class PlayerResource extends DefaultGroupResource {
 			def allpoints = points.join(",")
 			h2 "Evolution de "+player.petankName
 			br()
-			img(src:"http://chart.apis.google.com/chart?chs=500x200&amp;cht=lc&amp;chds=0,250&amp;chxt=y&amp;chxl=0:|0|50|100|150|200|250&amp;chxp=0,50,100,150,200,250|&amp;chtt=${player.name}&amp;chd=t:100.0,${allpoints}", alt:"Chart ${player.name}")
+			img(src:"http://chart.apis.google.com/chart?chs=500x200&cht=lc&chds=0,250&chxt=y&chxl=0:|0|50|100|150|200|250&chxp=0,50,100,150,200,250|&chtt=${player.name}&chd=t:100.0,${allpoints}", alt:"Chart ${player.name}")
 			
 			br()
 			h2 "Statistiques de "+player.petankName
