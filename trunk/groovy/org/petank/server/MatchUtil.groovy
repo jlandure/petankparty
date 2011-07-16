@@ -25,7 +25,7 @@ class MatchUtil {
 		return instance
 	}
 	
-	private static String JOIN_PLAYER = ";"
+	public static String JOIN_PLAYER = ";"
 	
 	List<Match> populate() {
 		def listMatchs = new ArrayList<Match>()

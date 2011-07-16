@@ -23,7 +23,7 @@ import org.petank.server.dao.DAOManager
  */
 public class PetankPartyRestApplication extends Application {
 
-	public static String VERSION = "V2011-beta"
+	public static String VERSION = "V2011-beta2"
 	
     /**
      * Creates a root Restlet that will receive all incoming calls.
