@@ -92,9 +92,27 @@ class PetankUserUtil {
 	
 	List getUsers(names, group) {
 		def users = []
+		def userLoaded
 		names.split(",").each{
-			users << PetankUserUtil.instance.getUser(it, group)
+			userLoaded = PetankUserUtil.instance.getUser(it, group)
+			if(userLoaded != null) {
+				users << userLoaded
+			}
 		}
+		return users
+	}
+	
+	String getUsersNameFromIdInString(ids) {
+		def users = []
+		def userLoaded
+		ids.split(MatchUtil.JOIN_PLAYER).each{
+			userLoaded = PetankUserUtil.instance.getUserById(it)
+			if(userLoaded != null) {
+				users << userLoaded.petankName
+			}
+		}
+		def concatName = {players -> players.collect({id -> id}).join(" - ")}
+		users = concatName(users)
 		return users
 	}
 	

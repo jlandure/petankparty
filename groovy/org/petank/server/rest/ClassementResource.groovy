@@ -97,7 +97,8 @@ public class ClassementResource extends DefaultGroupResource {
 				    				i++
 				    			}
 				    			td(class:"special2") {
-				    				a(href:getRootUri()+"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
+									//a(href:getRootUri()+"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
+				    				a(href:getRootUri()+"/${groupName}/${user.name}", "${user.petankName}")
 				    			}
 				    			td(class:"special") {
 				    				yield "${user.points}"

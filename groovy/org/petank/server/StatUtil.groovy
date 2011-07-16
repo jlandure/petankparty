@@ -292,4 +292,65 @@ public class StatUtil {
 		println team.findAll{it.value > 10}
 		return team.toMapString()
 	}
+	
+	def getBestTeamForPlayer(player) {
+//		def c = [ compare:
+//			{a,b-> (a.value as Integer).equals((b.value as Integer))? 0: (a.value as Integer)<(b.value as Integer)? -1: 1 }
+//		  ] as Comparator
+		def teamGagnant = [:] //new TreeMap( c )
+		def teamPerdant = [:] // new TreeMap( c )
+		def idJoueurTrie
+		def teamtemp
+		def match
+		def listMatchs = MatchUtil.instance.getMatchs()
+		listMatchs.each{
+			match = it
+			//println match.player1 + " < " + player.name + " > " + match.player2  
+			if(match.player1.contains(String.valueOf(player.id))) {
+				idJoueurTrie = trieIdPlayer(match.player1)
+				if(match.score1 > match.score2) {
+					addHistoryForTeam(teamGagnant, idJoueurTrie)
+				} else {
+					addHistoryForTeam(teamPerdant, idJoueurTrie)
+				}
+			} else if(match.player2.contains(String.valueOf(player.id))) {
+				idJoueurTrie = trieIdPlayer(match.player2)
+				if(match.score1 < match.score2) {
+					addHistoryForTeam(teamGagnant, idJoueurTrie)
+				} else {
+					addHistoryForTeam(teamPerdant, idJoueurTrie)
+				}
+			}
+		}
+		println teamGagnant.toMapString()
+		println teamPerdant.toMapString()
+		//def mc= [compare:{a,b-> a.value.compareTo(b.value)}] as Comparator
+		teamGagnant.sort {it.value}
+		teamPerdant.sort {it.value}
+		//teamGagnant.sort(mc)
+		//teamPerdant.sort(mc)
+		//teamGagnant = teamGagnant.subMap([0..2])
+		//teamPerdant = teamGagnant.subMap([0..2])
+		println teamGagnant.toMapString()
+		println teamPerdant.toMapString()
+		return [teamGagnant, teamPerdant]
+		
+	}
+	
+	def addHistoryForTeam(team, idJoueurTrie) {
+		def element = team[idJoueurTrie]
+		if(element == null) {
+			team.put(idJoueurTrie, 1)
+		} else {
+			team.put(idJoueurTrie, element + 1)
+		}
+	}
+	
+	def trieIdPlayer(String listIdNonTrie) {
+		def listId = MatchUtil.instance.getPlayersId(listIdNonTrie);
+		listId.sort();
+		def concatId = {players -> players.collect({id -> id}).join(MatchUtil.JOIN_PLAYER)}
+		def listIdtriee = concatId(listId)
+		return listIdtriee;
+	}
 }

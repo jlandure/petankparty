@@ -11,6 +11,7 @@ import org.restlet.representation.*
 import groovy.xml.MarkupBuilder;
 import org.petank.server.BaremeUtil;
 import org.petank.server.MatchUtil;
+import org.petank.server.StatUtil;
 import org.petank.server.PetankUserUtil;
 import org.petank.server.dao.DAOManager
 import org.petank.server.model.Bareme;
@@ -74,7 +75,7 @@ public class PlayerResource extends DefaultGroupResource {
 		def user 
 		html.html {
 		    head {
-		        title "Détail de "+player.name+" | P\u00E9tank Party"
+		        title "Détail de "+player.petankName+" | P\u00E9tank Party"
 		    }
 		    body {
 		    	h1 "Détail de "+player.name
@@ -84,50 +85,93 @@ public class PlayerResource extends DefaultGroupResource {
 		    		yield " / " 
 		    		a(href:getRootUri()+"/${groupName}/classement",  "Classement")
 		    	}
-		        
-		        table(border:1, cellpadding:"15px", bordercolor:"black") {
-		    		thead {
-		    			tr {
-		    				td(class:"special", "Place")
-		        			td(class:"special", "Nom")
-		        			td(class:"special", "Points")
-		        			td(class:"special", "Jou\u00E9s")
-		        			td(class:"special", "Gagn\u00E9s")
-		        			td(class:"special", "Perdus")
-		        			td(class:"special", "Points par match")
-		        			td(class:"special", "Fanny gagn\u00E9s")
-		        			td(class:"special", "Fanny encaiss\u00E9s")
-		        			td(class:"special", "Nb victoire normale")
-		        			td(class:"special", "Nb victoire anormale")
-		        			td(class:"special", "Nb d\u00E9faite normale")
-		        			td(class:"special", "Nb d\u00E9faite anormale")
-		        			td(class:"special", "Nb Match officiel")
-		    			}
-		    		}
-		    		tbody {
-		    				user = player
-				    		tr {
-				    			td(class:"special", "${user.classement}")
-				    			td(class:"special2") {
-				    				a(href:getRootUri()+"/${groupName}/${user.name}/chart", target:"_blank", "${user.petankName}")
+		        br()
+				h2 "Informations générales de "+player.petankName
+		        ol {
+		    				li(style:"list-style-type:circle;") {
+		    					span "Place: "//${player.classement}"
+		        			}
+							li(style:"list-style-type:circle;") {
+								span "Nom:" 
+								span {
+				    				a(href:getRootUri()+"/${groupName}/${player.name}/chart", target:"_blank", "${player.petankName}")
 				    			}
-				    			td(class:"special", "${user.points}")
-				    			td(class:"special", "${user.partiesJoues}")
-				    			td(class:"special", "${user.partiesGagnes}")
-				    			td(class:"special", "${user.partiesPerdus}")
-				    			td(class:"special", "${String.format('%.2f', (user.totalPoints / (user.partiesJoues ?: 1)))}")
-				    			td(class:"special", "${user.fannyGagnes}")
-				    			td(class:"special", "${user.fannyPerdus}")
-				    			td(class:"special", "${user.victoireNormale}")
-				    			td(class:"special", "${user.victoireAnormale}")
-				    			td(class:"special", "${user.defaiteNormale}")
-				    			td(class:"special", "${user.defaiteAnormale}")
-				    			td(class:"special", "${user.nbMatchOfficiel}")
-				    		}
-		    		}
-		    	}//fin table
+		        			}
+							li(style:"list-style-type:circle;") {
+								span "Points: ${player.points}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Jou\u00E9s: ${player.partiesJoues}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Gagn\u00E9s: ${player.partiesGagnes}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Perdus: ${player.partiesPerdus}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Points par match: ${String.format('%.2f', (player.totalPoints / (player.partiesJoues ?: 1)))}"
+		        			}
+							 li(style:"list-style-type:circle;") { 
+								span "Fanny gagn\u00E9s: ${player.fannyGagnes}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Fanny encaiss\u00E9s: ${player.fannyPerdus}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Nb victoire normale: ${player.victoireNormale}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Nb victoire anormale: ${player.victoireAnormale}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Nb d\u00E9faite normale: ${player.defaiteNormale}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Nb d\u00E9faite anormale: ${player.defaiteAnormale}"
+		        			}
+							li(style:"list-style-type:circle;") { 
+								span "Nb Match officiel: ${player.nbMatchOfficiel}"
+		        			}
 		    }
-		}
+				
+			def points = MatchUtil.instance.getPlayerEvolution(player)
+			def allpoints = points.join(",")
+			h2 "Evolution de "+player.petankName
+			br()
+			img(src:"http://chart.apis.google.com/chart?chs=500x200&amp;cht=lc&amp;chds=0,250&amp;chxt=y&amp;chxl=0:|0|50|100|150|200|250&amp;chxp=0,50,100,150,200,250|&amp;chtt=${player.name}&amp;chd=t:100.0,${allpoints}", alt:"Chart ${player.name}")
+			
+			br()
+			h2 "Statistiques de "+player.petankName
+			br()
+			
+			//def teamGagnant, teamPerdant;
+			def (teamGagnant, teamPerdant) = StatUtil.instance.getBestTeamForPlayer(player)
+			def team
+			def users;
+			h3 "Meilleur équipe"
+			ol {
+				teamGagnant.each{
+					team = it
+					li(style:"list-style-type:circle;") {
+						span "Equipe: " + PetankUserUtil.instance.getUsersNameFromIdInString(team.key) + " : " + team.value + " victoires"
+					}
+				}
+			}
+			
+			br()
+			h3 "Mauvaise équipe"
+			ol {
+				teamPerdant.each{
+					team = it
+					li(style:"list-style-type:circle;") {
+						span "Equipe: " + PetankUserUtil.instance.getUsersNameFromIdInString(team.key) + " : " + team.value + " défaites"
+					}
+				}
+			}
+			
+		} // body
+		}//html
 		return writer.toString();
 	}
 
