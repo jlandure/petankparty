@@ -294,9 +294,6 @@ public class StatUtil {
 	}
 	
 	def getBestTeamForPlayer(player) {
-//		def c = [ compare:
-//			{a,b-> (a.value as Integer).equals((b.value as Integer))? 0: (a.value as Integer)<(b.value as Integer)? -1: 1 }
-//		  ] as Comparator
 		def teamGagnant = [:] //new TreeMap( c )
 		def teamPerdant = [:] // new TreeMap( c )
 		def teamContreGagnant = [:] //new TreeMap( c )
@@ -331,18 +328,17 @@ public class StatUtil {
 			}
 		}
 		
-		//println teamGagnant.toMapString()
 		//println teamPerdant.toMapString()
 		int numberReturn = 3;
-		teamGagnant.sort {it.value}
-		teamGagnant = teamGagnant.take(numberReturn)
-		teamPerdant.sort {it.value}
-		teamPerdant = teamPerdant.take(numberReturn)
-		teamContreGagnant.sort {it.value}
-		teamContreGagnant = teamContreGagnant.take(numberReturn)
-		teamContrePerdant.sort {it.value}
-		teamContrePerdant = teamContrePerdant.take(numberReturn)
+		teamGagnant = teamGagnant.sort {a, b -> b.value <=> a.value}
 		//println teamGagnant.toMapString()
+		teamGagnant = teamGagnant.take(numberReturn)
+		teamPerdant = teamPerdant.sort {a, b -> b.value <=> a.value}
+		teamPerdant = teamPerdant.take(numberReturn)
+		teamContreGagnant = teamContreGagnant.sort {a, b -> b.value <=> a.value}
+		teamContreGagnant = teamContreGagnant.take(numberReturn)
+		teamContrePerdant = teamContrePerdant.sort {a, b -> b.value <=> a.value}
+		teamContrePerdant = teamContrePerdant.take(numberReturn)
 		//println teamPerdant.toMapString()
 		return [teamGagnant, teamPerdant, teamContreGagnant, teamContrePerdant]
 		
