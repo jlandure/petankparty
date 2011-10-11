@@ -146,7 +146,7 @@ public class PlayerResource extends DefaultGroupResource {
 			br()
 			
 			//def teamGagnant, teamPerdant;
-			def (teamGagnant, teamPerdant) = StatUtil.instance.getBestTeamForPlayer(player)
+			def (teamGagnant, teamPerdant, teamContreGagnant, teamContrePerdant) = StatUtil.instance.getBestTeamForPlayer(player)
 			def team
 			def users;
 			h3 "Meilleur équipe"
@@ -160,7 +160,7 @@ public class PlayerResource extends DefaultGroupResource {
 			}
 			
 			br()
-			h3 "Mauvaise équipe"
+			h3 "Plus mauvais partenaires"
 			ol {
 				teamPerdant.each{
 					team = it
@@ -169,6 +169,27 @@ public class PlayerResource extends DefaultGroupResource {
 					}
 				}
 			}
+			br()
+			h3 "Equipe que tu as battu le plus"
+			ol {
+				teamContreGagnant.each{
+					team = it
+					li(style:"list-style-type:circle;") {
+						span "Equipe: " + PetankUserUtil.instance.getUsersNameFromIdInString(team.key) + " : " + team.value + " victoires"
+					}
+				}
+			}
+			br()
+			h3 "Equipe qui t'a battu le plus"
+			ol {
+				teamContrePerdant.each{
+					team = it
+					li(style:"list-style-type:circle;") {
+						span "Equipe: " + PetankUserUtil.instance.getUsersNameFromIdInString(team.key) + " : " + team.value + " défaites"
+					}
+				}
+			}
+			
 			
 		} // body
 		}//html
