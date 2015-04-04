@@ -5,7 +5,8 @@ package org.petank.server
 
 import org.petank.server.PetankUserUtil;
 import org.petank.server.StatUtil;
-import org.petank.server.dao.DAOManagerimport org.petank.server.model.PetankGroup;
+import org.petank.server.dao.DAOManager
+import org.petank.server.model.PetankGroup;
 
 /**
  * @author jlandure
@@ -21,7 +22,7 @@ class PetankGroupUtil {
 	List<PetankGroup> populate() {
 		def listGroups = new ArrayList<PetankGroup>()
 		listGroups = new ArrayList<PetankGroup>()
-		listGroups << createPetankGroup("euriware2011", "Euriware 2011", "euriware")
+		listGroups << createPetankGroup("group2011", "Group 2011", "group")
 		return listGroups
 	}
 	
