@@ -1,0 +1,61 @@
+#GettingStarted guide
+
+# Introduction #
+
+Install Eclipse 3.4.2 with Java 1.6
+Install Elclipse Plugins : http://www.eclipse.org/subversive/
+  * SVN plugins : Subversive 2.0.4
+    * Help > Software Updates > Find and Install...
+    * ’Install/Update wizard’, sélectionner ’Search for new features to install’ et cliquer          sur ’Next’
+    * Cliquer sur ’New Remote Site...’
+    * Indiquer un nom ’Subversive’, l’URL suivante : ’http://download.eclipse.org/technology/subversive/0.7/update-site/’ et cliquer sur ’Ok’
+    * Sélectionner ’Subversive’ et cliquer sur ’Finish’
+    * Ensuite il faut mettre les différents connecteurs
+  * SVN Connectors
+    * Help > Software Updates > Find and Install... ’Install/Update wizard’, sélectionner ’Search for new features to install’ et cliquer sur ’Next’
+    * Cliquer sur ’New Remote Site...’
+    * Indiquer un nom ’Subversive connectors’, l’URL suivante : ’http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/’ et cliquer sur ’Ok’
+    * Sélectionner tout et cliquer sur ’Finish’
+  * Google app engine plugin 1.2.1
+  * Groovy plugins 1.5.7
+
+Checkout the project with this url : http://petankparty.googlecode.com/svn/trunk/ petankparty-read-only
+(ask the admin for a account with full rights)
+
+# Compilation #
+
+  * Right-click on the "build.groovy" and choose "Compile"
+  * Right-click on the "build.groovy" and choose "Run As >> Groovy"
+
+Be careful, the first time, you may also compile all the groovy files doing a right-click  and choose "Compile" (all the files in src/main/groovy)
+
+# Launch #
+Right-click on the project "PetankParty" and choose "Run As >> Web Application"
+
+# Load the data #
+To finish the startup, just load some data by calling these REST urls :
+  * http://localhost:8080/populate/1 (baremes used)
+  * http://localhost:8080/populate/2 (groups used)
+  * http://localhost:8080/populate/3 (places used)
+  * http://localhost:8080/populate/4 (players used)
+  * http://localhost:8080/populate/5 (matchs used)
+  * http://localhost:8080/populate/6 (matchs used)
+  * http://localhost:8080/populate/7 (matchs used)
+  * http://localhost:8080/populate/8 (matchs used)
+  * http://localhost:8080/populate/9 (matchs used)
+  * http://localhost:8080/populate/10 (matchs used)
+  * http://localhost:8080/populate/11 (matchs used)
+  * http://localhost:8080/populate/12 (matchs used)
+  * http://localhost:8080/populate/13 (matchs used)
+  * http://localhost:8080/populate/0 (reset all the cache)
+**ENJOY !**
+
+_Here a list of urls :_
+  * http://localhost:8080/{group}/classement
+  * http://localhost:8080/{group}/match
+  * http://localhost:8080/{group}/{player} (with the nickname)
+  * http://localhost:8080/{group}/{player}/chart (call the google chart api with the nickname)
+  * http://localhost:8080/{group}/timeline?players=XXX,YYY (call the google api with the nicknames)
+  * http://localhost:8080/place/{place} (call the google maps api)
+
+If you want to delete the database, just delete the file "war/WEB-INF/appengine-generated/local\_db.bin"
