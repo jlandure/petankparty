@@ -18,7 +18,8 @@ import org.restlet.Application
 import org.restlet.Restlet
 import org.restlet.routing.Router
 import org.restlet.routing.Redirector
-import org.restlet.data.ChallengeScheme
+import org.restlet.data.ChallengeScheme
+
 /**
  * @author jlandure
  *
@@ -59,10 +60,10 @@ public class BaseResource extends DefaultResource {
 	
 	def toXML(xml, writer) {
 		xml.groups() {
-			group(name:"Euriware") {
-				page(name:"Classement", uri:getRootUri()+"/euriware2011/classement")
-				page(name:"Match", uri:getRootUri()+"/euriware2011/match")
-				page(name:"Ajouter un match", uri:getRootUri()+"/euriware2011/match/add")
+			group(name:"Group") {
+				page(name:"Classement", uri:getRootUri()+"/group2011/classement")
+				page(name:"Match", uri:getRootUri()+"/group2011/match")
+				page(name:"Ajouter un match", uri:getRootUri()+"/group2011/match/add")
 				//page(name:"Ajouter un groupe", uri:getRootUri()+"/addGroup")
 				//page(name:"Ajouter un boulodrome", uri:getRootUri()+"/addPlace")
 			}
